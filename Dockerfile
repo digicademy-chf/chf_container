@@ -1,4 +1,4 @@
-# DFD Docker Development Environment
+# DFD Docker Environment
 # Copyright (C) 2022 Jonatan Jalle Steller <jonatan.steller@adwmainz.de>
 #
 # Inspired by <https://github.com/martin-helmich/docker-typo3>
