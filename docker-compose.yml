@@ -1,0 +1,76 @@
+# DFD Docker Development Environment
+# Copyright (C) 2022 Jonatan Jalle Steller <jonatan.steller@adwmainz.de>
+#
+# Inspired by <https://github.com/martin-helmich/docker-typo3>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+version: "3"
+services:
+  dfd-typo3:
+    build: .
+    ports:
+      - "80:80"
+    image: registry.gitlab.rlp.net/adwmainz/digicademy/dfd/dfd-docker/dfd-typo3:typo3-11.5
+    container_name: dfd-typo3
+    environment:
+      VIRTUAL_HOST: namenforschung.local
+    volumes:
+      - ./composer:/var/www/html/composer
+      - ./config:/var/www/html/config
+      - ./htdocs:/var/www/html/htdocs
+      - ./vendor:/var/www/html/vendor
+    networks:
+      - dfd
+  dfd-mailhog:
+    image: mailhog/mailhog:v1.0.1
+    container_name: dfd-mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    networks:
+      - dfd
+  dfd-database:
+    image: mariadb:10.9
+    container_name: dfd-database
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --sql_mode=NO_ENGINE_SUBSTITUTION
+    environment:
+      - "MYSQL_USER=t3_dfd"
+      - "MYSQL_PASSWORD=t3_dfd"
+      - "MYSQL_DATABASE=t3_dfd"
+      - "MYSQL_ROOT_PASSWORD=password"
+    networks:
+      - dfd
+    volumes:
+      - ./mysql:/var/lib/mysql
+#  dfd-search:
+#    image: macbre/sphinxsearch:3.4.1
+#    container_name: dfd-search
+#    volumes:
+#    - ./sphinx/conf:/opt/sphinx/conf
+#    - ./sphinx/index:/opt/sphinx/index
+#    networks:
+#      - dfd
+volumes:
+  composer:
+  config:
+  htdocs:
+  vendor:
+  mysql:
+  sphinx:
+networks:
+  dfd:

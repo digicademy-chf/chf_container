@@ -1,0 +1,16 @@
+.DS_store
+.idea
+auth.json
+.gitconfig
+known_hosts
+htdocs.tgz
+t3_dfd*.sql
+htdocs/*
+!htdocs/.gitkeep
+!htdocs/.htaccess
+sphinx/index/*
+!sphinx/index/.gitkeep
+mysql/*
+!mysql/.gitkeep
+vendor/*
+!vendor/.gitkeep
