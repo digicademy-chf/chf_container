@@ -83,9 +83,6 @@
     }
   },
   "scripts":{
-      "typo3-cms-scripts": [
-          "typo3cms install:generatepackagestates"
-      ],
       "post-autoload-dump": [
           "@typo3-cms-scripts"
       ]

@@ -50,7 +50,7 @@ RUN apt-get update && \
 # Initialise composer
 RUN mkdir -p /root/.config/composer && mkdir -p /root/.ssh
 COPY composer/auth.json /root/.config/composer/auth.json
-#COPY composer/.gitconfig /root/.gitconfig
+COPY composer/.gitconfig /root/.gitconfig
 COPY composer/known_hosts /root/.ssh
 RUN chown -R 0600 /root/.ssh
 COPY composer/composer.json /var/www/html/composer.json
@@ -119,7 +119,7 @@ COPY php/typo3.ini /usr/local/etc/php/conf.d/typo3.ini
 # Install MailHog Sendmail
 RUN curl -Lsf 'https://storage.googleapis.com/golang/go1.19.1.linux-amd64.tar.gz' | tar -C '/usr/local' -xvzf -
 ENV PATH /usr/local/go/bin:$PATH
-RUN go install github.com/mailhog/mhsendmail
+RUN go install github.com/mailhog/mhsendmail@v0.2.0
 RUN cp /root/go/bin/mhsendmail /usr/bin/mhsendmail
 
 # Configure volumes

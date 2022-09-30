@@ -8,7 +8,7 @@
 
 # Updating the Docker image
 
-To update the Docker image, you need to clone this repo and add two files to the `composer` folder: `known_hosts` and `auth.json`. For the `known_hosts` file, find the same file in the SSH folder on your machine, copy it, and remove all lines that do not start with `gitlab.rlp.net`. For the `auth.json` file, acquire a personal access token by clicking on your profile icon on GitLab RLP, then `Edit profile`, `Access tokens`, provide a name for the token (such as `dfd-docker`, set the scope to `api`, clear the date, and hit `Create personal access token`. Store the token somewhere safe. Then copy and rename the `auth-template.json` file, paste the `<token>`, and save the file.
+To update the Docker image, you need to clone this repo and add three files to the `composer` folder: `known_hosts`, `auth.json`, and `.gitconfig`. For the `known_hosts` file, find the same file in the SSH folder on your machine, copy it, and remove all lines that do not start with `gitlab.rlp.net`. For the `auth.json` file, acquire a personal access token by clicking on your profile icon on GitLab RLP, then `Edit profile`, `Access tokens`, provide a name for the token (such as `dfd-docker`, set the scope to `api`, clear the date, and hit `Create personal access token`. Store the token somewhere safe. Then copy and rename the `auth-template.json` file, paste the `<token>`, and save the file. For the `.gitconfig` file, copy and rename `.gitconfig-template`, insert your GitLab RLP user name and token, and save the file.
 
 1. Commit your changes to this repo.
 2. Open a command line in the folder containing this docker image.
