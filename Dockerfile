@@ -51,8 +51,8 @@ RUN apt-get update && \
 RUN mkdir -p /root/.config/composer && mkdir -p /root/.ssh
 COPY composer/auth.json /root/.config/composer/auth.json
 #COPY composer/.gitconfig /root/.gitconfig
-#COPY composer/known_hosts /root/.ssh
-#RUN chown -R 0600 /root/.ssh
+COPY composer/known_hosts /root/.ssh
+RUN chown -R 0600 /root/.ssh
 COPY composer/composer.json /var/www/html/composer.json
 
 RUN cd /var/www/html && \
