@@ -20,7 +20,7 @@
     }
   },
   "name": "digicademy/typo3-composer-install",
-  "description": "TYPO3 11 LTS",
+  "description": "DFD based on Typo3 11",
   "license": "GPL-2.0+",
   "minimum-stability": "dev",
   "prefer-stable": true,

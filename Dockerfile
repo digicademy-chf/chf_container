@@ -14,13 +14,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-# Inspired by <https://github.com/martin-helmich/docker-typo3>
-# With further input from the PKF and CVMA Docker images
-# Certificate and locale manipulation of these images was left out
-
-# When this Docker image is updates, run the following commands
-# docker build -f Dockerfile -t registry.gitlab.rlp.net/adwmainz/digicademy/dfd/dfd-docker/dfd-typo3 .
-# docker push registry.gitlab.rlp.net/adwmainz/digicademy/dfd/dfd-docker/dfd-typo3
+# Inspired by <https://github.com/martin-helmich/docker-typo3> with
+# further input from the PKF and CVMA Docker images with the exception
+# of certificate and locale manipulation, which were left out.
 
 # MULTISTAGE 1: source image
 FROM php:8.1-apache-bullseye as source
