@@ -22,7 +22,7 @@ services:
     build: .
     ports:
       - "80:80"
-    image: registry.gitlab.rlp.net/adwmainz/digicademy/dfd/dfd-docker/dfd-typo3:typo3-11.5
+    image: registry.gitlab.rlp.net/adwmainz/digicademy/dfd/dfd-docker/dfd-typo3
     container_name: dfd-typo3
     environment:
       VIRTUAL_HOST: namenforschung.local

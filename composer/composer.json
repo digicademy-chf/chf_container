@@ -6,7 +6,7 @@
     },
     {
       "type": "vcs",
-      "url": "https://gitlab.rlp.net/adwmainz/digicademy/dfd/dfd-typo3.git/"
+      "url": "https://gitlab.rlp.net/adwmainz/digicademy/dfd/dfd-typo3.git"
     }
   ],
   "config": {
@@ -21,7 +21,7 @@
   },
   "name": "digicademy/typo3-composer-install",
   "description": "DFD based on Typo3 11",
-  "license": "GPL-2.0+",
+  "license": "GPL-3.0-or-later",
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require": {
