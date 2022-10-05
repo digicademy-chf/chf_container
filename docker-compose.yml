@@ -10,11 +10,11 @@
 #
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 version: "3"
 services:
@@ -32,7 +32,7 @@ services:
       - ./htdocs:/var/www/html/htdocs
       - ./vendor:/var/www/html/vendor
     networks:
-      - dfd
+      - backend
   dfd-mailhog:
     image: mailhog/mailhog:v1.0.1
     container_name: dfd-mailhog
@@ -40,7 +40,7 @@ services:
       - "1025:1025"
       - "8025:8025"
     networks:
-      - dfd
+      - backend
   dfd-database:
     image: mariadb:10.9
     container_name: dfd-database
@@ -54,7 +54,7 @@ services:
       - "MYSQL_DATABASE=t3_dfd"
       - "MYSQL_ROOT_PASSWORD=password"
     networks:
-      - dfd
+      - backend
     volumes:
       - ./mysql:/var/lib/mysql
 #  dfd-search:
@@ -64,7 +64,7 @@ services:
 #    - ./sphinx/conf:/opt/sphinx/conf
 #    - ./sphinx/index:/opt/sphinx/index
 #    networks:
-#      - dfd
+#      - backend
 volumes:
   composer:
   config:
@@ -73,4 +73,4 @@ volumes:
   mysql:
   sphinx:
 networks:
-  dfd:
+  backend:
