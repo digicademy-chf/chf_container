@@ -1,5 +1,4 @@
 # DFD Docker Environment
-# Copyright (C) 2022 Jonatan Jalle Steller <jonatan.steller@adwmainz.de>
 #
 # Inspired by <https://github.com/martin-helmich/docker-typo3>
 #
@@ -19,58 +18,62 @@
 version: "3"
 services:
   dfd-typo3:
-    build: .
-    ports:
-      - "80:80"
     image: registry.gitlab.rlp.net/adwmainz/digicademy/dfd/dfd-docker/dfd-typo3
-    container_name: dfd-typo3
+    container_name: dfd_typo3
+    restart: always
     environment:
-      VIRTUAL_HOST: namenforschung.local
-    volumes:
-      - ./composer:/var/www/html/composer
-      - ./config:/var/www/html/config
-      - ./htdocs:/var/www/html/htdocs
-      - ./vendor:/var/www/html/vendor
-    networks:
-      - backend
-  dfd-mailhog:
-    image: mailhog/mailhog:v1.0.1
-    container_name: dfd-mailhog
+      - "UID=${UID:-33}"
+      - "GID=${GID:-33}"
+      - "TZ=${TIMEZONE:-UTC}"
     ports:
-      - "1025:1025"
-      - "8025:8025"
+      - "${HTTP_PORT:-80}:80"
+      - "${HTTPS_PORT:-443}:443"
+    extra_hosts:
+      - "${HOSTNAME:-localhost}:127.0.0.1"
+    volumes:
+      - "./apache2/ssl:/etc/apache2/ssl"
+      - "./composer:/var/www/html/composer"
+      - "./scripts:/var/www/html/scripts"
+      - "./vendor:/var/www/html/vendor"
+      - "${HTDOCS:-./htdocs}:/var/www/html/htdocs"
     networks:
-      - backend
+      - dfd
   dfd-database:
     image: mariadb:10.9
-    container_name: dfd-database
+    container_name: dfd_database
     command:
-      - --character-set-server=utf8mb4
-      - --collation-server=utf8mb4_unicode_ci
       - --sql_mode=NO_ENGINE_SUBSTITUTION
     environment:
-      - "MYSQL_USER=t3_dfd"
-      - "MYSQL_PASSWORD=t3_dfd"
-      - "MYSQL_DATABASE=t3_dfd"
-      - "MYSQL_ROOT_PASSWORD=password"
-    networks:
-      - backend
+      - "TZ=${TIMEZONE:-UTC}"
+      - "MYSQL_USER=${DBUSER}"
+      - "MYSQL_PASSWORD=${DBPASSWORD}"
+      - "MYSQL_DATABASE=${DBNAME}"
+      - "MYSQL_ROOT_PASSWORD=${DBROOT_PASSWORD}"
     volumes:
-      - ./mysql:/var/lib/mysql
-#  dfd-search:
-#    image: macbre/sphinxsearch:3.4.1
-#    container_name: dfd-search
-#    volumes:
-#    - ./sphinx/conf:/opt/sphinx/conf
-#    - ./sphinx/index:/opt/sphinx/index
-#    networks:
-#      - backend
-volumes:
-  composer:
-  config:
-  htdocs:
-  vendor:
-  mysql:
-  sphinx:
+      - "./mysql/db:/var/lib/mysql"
+      - "./mysql/conf:/etc/mysql/conf.d"
+    networks:
+      - dfd
+  dfd-search:
+    image: macbre/sphinxsearch:3.0.1
+    container_name: dfd_search
+    volumes:
+      - ./sphinxsearch/conf:/opt/sphinx/conf
+      - ./sphinxsearch/index:/opt/sphinx/index
+    networks:
+      - dfd
+  dfd-postfix:
+    image: juanluisbaptiste/postfix:latest
+    container_name: dfd_postfix
+    restart: always
+    expose:
+      - "25"
+    env_file:
+      - .env
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+    networks:
+      - dfd
+
 networks:
-  backend:
+  dfd:

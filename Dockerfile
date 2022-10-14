@@ -1,5 +1,4 @@
 # DFD Docker Environment
-# Copyright (C) 2022 Jonatan Jalle Steller <jonatan.steller@adwmainz.de>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -14,62 +13,33 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-# Inspired by <https://github.com/martin-helmich/docker-typo3> with
-# further input from the PKF and CVMA Docker images with the exception
-# of certificate and locale manipulation, which were left out.
+# Inspired by <https://github.com/martin-helmich/docker-typo3> and
+# <https://stackoverflow.com/questions/18136389/using-ssh-keys-inside-docker-container#answer-48565025>
 
-# MULTISTAGE 1: source image
-FROM php:8.1-apache-bullseye as source
+# Get the right Apache image
+FROM php:8.0-apache-bullseye as source
 
-# Environment variables
-ENV COMPOSER_ALLOW_SUPERUSER=1
-ENV COMPOSER_NO_INTERACTION=1
+# Add Composer config
+COPY --from=composer/composer:1.10.26 /usr/bin/composer /usr/bin/composer
 
-# Update the package list
-RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install -y --no-install-recommends \
-        libzip-dev \
-        libxslt1-dev \
-        git \
-        ssh-client \
-        unzip \
-# Configure PHP libraries
-        libxml2-dev \
-        libfreetype6-dev \
-        libjpeg62-turbo-dev \
-        libmcrypt-dev \
-        libpng-dev \
-        libpq-dev \
-        libzip-dev \
-        libxslt1-dev \
-        zlib1g-dev && \
-    docker-php-ext-install -j$(nproc) zip xsl gd && \
-    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-# Initialise composer
-RUN mkdir -p /root/.config/composer && mkdir -p /root/.ssh
-COPY composer/auth.json /root/.config/composer/auth.json
-COPY composer/.gitconfig /root/.gitconfig
-COPY composer/known_hosts /root/.ssh
-RUN chown -R 0600 /root/.ssh
-COPY composer/composer.json /var/www/html/composer.json
-
-RUN cd /var/www/html && \
-    composer install --optimize-autoloader
-
-# MULTISTAGE 2: development image
-FROM php:8.1-apache-bullseye as development
+# Prepare folders
+RUN mkdir -p /root/.config/composer && \
+    mkdir -p /root/.ssh && \
+    chown -R 0600 /root/.ssh
 
 # Add Apache config
-COPY --from=source /var/www/html/ /var/www/html/
-COPY apache2/000-default.conf /etc/apache2/sites-available/000-default.conf
+COPY apache2/conf/000-default.conf /etc/apache2/sites-available/000-default.conf
 
-# Update the package list
+# Add PHP config
+COPY php/php.ini /usr/local/etc/php/conf.d/php.ini
+
+# Update CA certificates
+RUN sed -i 's/mozilla\/DST_Root_CA_X3.crt/!mozilla\/DST_Root_CA_X3.crt/g' /etc/ca-certificates.conf && \
+    update-ca-certificates
+
+# Install the basics
 RUN apt-get update && \
-    apt-get upgrade -y && \
     apt-get install -y --no-install-recommends \
-        wget \
         locales \
         git \
         ssh-client \
@@ -78,7 +48,10 @@ RUN apt-get update && \
         mc \
         htop \
         ca-certificates \
-# Configure PHP
+# Install image manipulation and metadata libraries
+        graphicsmagick \
+        ghostscript \
+# Install PHP libraries
         libxml2-dev \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
@@ -87,43 +60,24 @@ RUN apt-get update && \
         libpq-dev \
         libzip-dev \
         libxslt1-dev \
-        zlib1g-dev \
-# Install required third-party tools
-        exiv2 \
-        exiftool \
-        graphicsmagick && \
-# Configure extensions
-    docker-php-ext-configure gd --with-libdir=/usr/include/ --with-jpeg --with-freetype && \
+        zlib1g-dev && \
+# Configure PHP extensions
+    docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
     docker-php-ext-install -j$(nproc) mysqli soap gd zip opcache intl pgsql pdo_pgsql xsl && \
-# Configure Apache as needed
-    a2enmod rewrite headers && \
+# Configure Apache webserver
+    a2enmod rewrite headers ssl && \
     apt-get clean && \
     apt-get -y purge \
-        libxml2-dev \
-        libfreetype6-dev \
+        libxml2-dev libfreetype6-dev \
         libjpeg62-turbo-dev \
         libmcrypt-dev \
         libpng-dev \
         libzip-dev \
-        libxslt1-dev \
         zlib1g-dev && \
     rm -rf /var/lib/apt/lists/* /usr/src/*
 
-# Install Typo3 and extensions
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
-    rm /var/www/html/composer.json && cd /var/www/html/ && ln -s composer/composer.json
-
-# Copy files to the right places
-COPY php/typo3.ini /usr/local/etc/php/conf.d/typo3.ini
-
-# Install MailHog Sendmail
-RUN curl -Lsf 'https://storage.googleapis.com/golang/go1.19.1.linux-amd64.tar.gz' | tar -C '/usr/local' -xvzf -
-ENV PATH /usr/local/go/bin:$PATH
-RUN go install github.com/mailhog/mhsendmail@v0.2.0
-RUN cp /root/go/bin/mhsendmail /usr/bin/mhsendmail
-
-# Configure volumes
-VOLUME /var/www/html/config
-VOLUME /var/www/html/composer
-VOLUME /var/www/html/htdocs
-VOLUME /var/www/html/vendor
+# Add localisations
+RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
+    sed -i -e 's/# en_GB.UTF-8 UTF-8/en_GB.UTF-8 UTF-8/' /etc/locale.gen && \
+    sed -i -e 's/# de_DE.UTF-8 UTF-8/de_DE.UTF-8 UTF-8/' /etc/locale.gen && \
+    dpkg-reconfigure --frontend=noninteractive locales

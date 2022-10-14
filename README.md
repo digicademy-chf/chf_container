@@ -12,5 +12,5 @@ To update the Docker image, you need to clone this repo and add three files to t
 
 1. Commit your changes to this repo.
 2. Open a command line in the folder containing this docker image.
-3. Build the container via `sudo docker build -f Dockerfile -t registry.gitlab.rlp.net/adwmainz/digicademy/dfd/dfd-docker/dfd-typo3 .`
-4. Push the container to the registry via `sudo docker push registry.gitlab.rlp.net/adwmainz/digicademy/dfd/dfd-docker/dfd-typo3`
+3. Build the container via `sudo docker build -f Dockerfile -t registry.gitlab.rlp.net/adwmainz/digicademy/dfd/dfd_docker/dfd-typo3 .`
+4. Push the container to the registry via `sudo docker push registry.gitlab.rlp.net/adwmainz/digicademy/dfd/dfd_docker/dfd-typo3`
