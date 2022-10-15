@@ -29,8 +29,8 @@ This tutorial assumes that you have successfully installed [Docker Desktop](http
 Three files need to be added to the `composer` folder: `known_hosts`, `auth.json`, and `.gitconfig`.
 
 1. For `known_hosts`, find the same file in the SSH folder on your machine, copy it, and remove all lines that do not start with `gitlab.rlp.net`.
-2. For `auth.json`, acquire a project access token (if you only need access to one repo) or a personal access token by clicking on your profile icon on GitLab RLP, then `Edit profile`, `Access tokens`, provide a name for the token (such as `dfd_docker`, set the scope to `api`, clear the date, and hit `Create personal access token`. Store the token somewhere safe. Then copy and rename the `auth.example.json` file, paste the `<token>`, and save the file.
-3. For `.gitconfig`, copy and rename `.gitconfig.example`, insert the name of the project bot (in case of a project access token, listed in the members section) or your GitLab RLP user name (in case of a personal access token) and the token itself, and save the file.
+2. For `auth.json`, acquire a personal access token by clicking on your profile icon on GitLab RLP, then `Edit profile`, `Access tokens`, provide a name for the token (such as `dfd_docker`), set the scope to `api`, clear the date, and hit `Create personal access token`. Store the token somewhere safe. Then copy and rename the `auth.example.json` file, paste the `<token>`, and save the file.
+3. For `.gitconfig`, copy and rename `.gitconfig.example`, insert your GitLab RLP `<username>` and `<token>`, and save the file.
 
 ## Building the Docker image
 
