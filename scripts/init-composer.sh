@@ -1,7 +1,7 @@
 #!/bin/bash
 cd /var/www/html
 
-# Symlink files needed for config and repository authentication.
+# Symlink files needed for config and repository authentication
 if ! [ -f composer.json ];
 then
     ln -s /var/www/html/composer/composer.json
@@ -22,5 +22,5 @@ then
     ln -s /var/www/html/composer/known_hosts /root/.ssh
 fi
 
-# Install packages.
+# Install packages
 composer i -o -q --no-interaction --no-progress
