@@ -19,13 +19,17 @@
 # Get the right Apache image
 FROM php:8.0-apache-bullseye as source
 
-# Add Composer config
-COPY --from=composer/composer:1.10.26 /usr/bin/composer /usr/bin/composer
-
 # Prepare folders
 RUN mkdir -p /root/.config/composer && \
-    mkdir -p /root/.ssh && \
-    chown -R 0600 /root/.ssh
+    mkdir -p /root/.ssh
+
+# Add authentication files to download from gitlab.rlp.net
+COPY composer/auth.json /root/.config/composer/auth.json
+COPY composer/.gitconfig /root/.gitconfig
+COPY composer/known_hosts /root/.ssh
+
+# Prepare folders
+RUN chown -R 0600 /root/.ssh
 
 # Add Apache config
 COPY apache2/conf/000-default.conf /etc/apache2/sites-available/000-default.conf
