@@ -20,15 +20,18 @@
 FROM php:8.0-apache-bullseye as source
 
 # Prepare folders
-RUN mkdir -p /root/.config/composer && \
+RUN mkdir -p /root/scripts && \
+    mkdir -p /root/.config/composer && \
     mkdir -p /root/.ssh && \
     chown -R 0600 /root/.ssh
 
-# Add Apache config
+# Add Apache and PHP config
 COPY apache2/conf/000-default.conf /etc/apache2/sites-available/000-default.conf
-
-# Add PHP config
 COPY php/php.ini /usr/local/etc/php/conf.d/php.ini
+
+# Add Composer init script
+COPY scripts/init-composer.sh /root/scripts/init-composer.sh
+RUN chmod +x /root/scripts/init-composer.sh
 
 # Update CA certificates
 RUN sed -i 's/mozilla\/DST_Root_CA_X3.crt/!mozilla\/DST_Root_CA_X3.crt/g' /etc/ca-certificates.conf && \
@@ -78,3 +81,6 @@ RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
     sed -i -e 's/# en_GB.UTF-8 UTF-8/en_GB.UTF-8 UTF-8/' /etc/locale.gen && \
     sed -i -e 's/# de_DE.UTF-8 UTF-8/de_DE.UTF-8 UTF-8/' /etc/locale.gen && \
     dpkg-reconfigure --frontend=noninteractive locales
+
+# Run Composer
+RUN bash /root/scripts/init-composer.sh

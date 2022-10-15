@@ -6,7 +6,7 @@
     },
     {
       "type": "vcs",
-      "url": "https://gitlab.rlp.net/adwmainz/digicademy/dfd/dfd-typo3.git"
+      "url": "https://gitlab.rlp.net/adwmainz/digicademy/dfd/dfd.git"
     }
   ],
   "config": {
@@ -21,7 +21,7 @@
     "helhum/typo3-console": "^7.1",
     "georgringer/news": "^10.0",
     "foolz/sphinxql-query-builder": "^3.0",
-    "digicademy/dfd-typo3": "dev-main"
+    "digicademy/dfd": "dev-main"
   },
   "autoload": {
     "psr-4": {
