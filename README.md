@@ -11,16 +11,16 @@
 
 This tutorial assumes that you have successfully installed [Docker Desktop](https://docs.docker.com/get-docker/) (Windows, Mac, Linux) or [Docker Engine](https://docs.docker.com/engine/install/) (Linux).
 
-1. Check out this repo via `sudo git clone git@gitlab.rlp.net:adwmainz/digicademy/dfd/dfd_docker.git`.
+1. Check out this repo via `sudo git clone https://gitlab.rlp.net/adwmainz/digicademy/dfd/dfd_docker.git`.
 2. Copy and rename the file `.env.example` to `.env`.
-3. For a local development environment, choose your own credentials for the `DB` entries, e.g. `t3_dfd` for the first three and `password` for the fourth one. Do not use these credentials in production environments.
+3. Edit the `.env` file: for a local development environment, choose your own credentials for the `DB` entries, e.g. `t3_dfd` for the first three and `password` for the fourth one. Do not use these credentials in production environments.
 4. Open a terminal in the folder containing this repo and enter `sudo docker compose up -d`.
 
 ## Setting up a production environment
 
-1. Check out this repo via `sudo git clone git@gitlab.rlp.net:adwmainz/digicademy/dfd/dfd_docker.git`.
+1. Check out this repo via `sudo git clone https://gitlab.rlp.net/adwmainz/digicademy/dfd/dfd_docker.git`.
 2. Copy and rename the file `.env.example` to `.env`.
-3. For a production environment, choose credentials at least for the `DB` entries.
+3. Edit the `.env` file: for a production environment, choose credentials at least for the `DB` entries.
 4. In the `sphinxsearch` folder, copy the file `development.conf` and call it `production.conf`, then edit the configuration based on the credentials you added to `.env`.
 5. Open a terminal in the folder containing this repo and enter `sudo docker compose up -d`.
 
