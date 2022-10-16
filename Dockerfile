@@ -19,6 +19,9 @@
 # Get the right Apache image
 FROM php:8.0-apache-bullseye as source
 
+# Add Composer
+COPY --from=composer/composer:2.2.18 /usr/bin/composer /usr/bin/composer
+
 # Prepare folders
 RUN mkdir -p /root/scripts && \
     mkdir -p /root/.config/composer && \
