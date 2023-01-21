@@ -41,6 +41,7 @@ services:
   dfd-database:
     image: mariadb:10.9
     container_name: dfd_database
+    restart: always
     command:
       - --sql_mode=NO_ENGINE_SUBSTITUTION
     environment:
@@ -57,6 +58,7 @@ services:
   dfd-search:
     image: macbre/sphinxsearch:3.0.1
     container_name: dfd_search
+    restart: always
     volumes:
       - ./sphinxsearch/conf:/opt/sphinx/conf
       - ./sphinxsearch/index:/opt/sphinx/index
