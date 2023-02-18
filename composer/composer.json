@@ -14,13 +14,11 @@
     "preferred-install": "dist"
   },
   "name": "digicademy/typo3-composer-install",
-  "description": "DFD based on TYPO3 11 LTS",
+  "description": "DFD based on TYPO3 12",
   "license": "GPL-3.0-or-later",
   "require": {
-    "typo3/cms": "^11.5",
-    "helhum/typo3-console": "^7.1",
-    "georgringer/news": "^10.0",
-    "foolz/sphinxql-query-builder": "^3.0",
+    "typo3/cms": "^12.2.0",
+    "georgringer/news": "dev-11-12",
     "digicademy/dfd": "dev-main"
   },
   "autoload": {

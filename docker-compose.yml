@@ -1,6 +1,5 @@
 # DFD Docker Environment
-#
-# Inspired by <https://github.com/martin-helmich/docker-typo3>
+# Copyright (C) 2023 Jonatan Jalle Steller <jonatan.steller@adwmainz.de>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -15,11 +14,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 
+# Inspired by <https://github.com/martin-helmich/docker-typo3>
+
 version: "3"
 services:
   dfd-typo3:
-    image: registry.gitlab.rlp.net/adwmainz/digicademy/dfd/dfd-docker/dfd-typo3
-    container_name: dfd_typo3
+    image: registry.gitlab.rlp.net/adwmainz/digicademy/dfd/dfd_docker/dfd-webserver
+    container_name: dfd_webserver
     restart: always
     environment:
       - "UID=${UID:-33}"
@@ -39,7 +40,7 @@ services:
     networks:
       - dfd
   dfd-database:
-    image: mariadb:10.9
+    image: mariadb:10
     container_name: dfd_database
     restart: always
     command:
@@ -51,19 +52,32 @@ services:
       - "MYSQL_DATABASE=${DBNAME}"
       - "MYSQL_ROOT_PASSWORD=${DBROOT_PASSWORD}"
     volumes:
-      - "./mysql/db:/var/lib/mysql"
-      - "./mysql/conf:/etc/mysql/conf.d"
+      - "./mariadb/db:/var/lib/mysql"
+      - "./mariadb/conf:/etc/mysql/conf.d"
     networks:
       - dfd
-  dfd-search:
-    image: macbre/sphinxsearch:3.0.1
-    container_name: dfd_search
-    restart: always
-    volumes:
-      - ./sphinxsearch/conf:/opt/sphinx/conf
-      - ./sphinxsearch/index:/opt/sphinx/index
-    networks:
-      - dfd
+#  dfd-search:
+#    image: manticoresearch/manticore:6.0.2
+#    container_name: dfd_search
+#    restart: always
+#    ports:
+#      - "9306:9306"
+#      - "9308:9308"
+#    ulimits:
+#      nproc: 65535
+#      nofile:
+#         soft: 65535
+#         hard: 65535
+#      memlock:
+#        soft: -1
+#        hard: -1
+#    environment:
+#      - MCL=1
+#    volumes:
+#      - ./manticore/data:/var/lib/manticore
+#      - ./manticore/manticore.conf:/etc/manticoresearch/manticore.conf
+#    networks:
+#      - dfd
   dfd-postfix:
     image: juanluisbaptiste/postfix:latest
     container_name: dfd_postfix

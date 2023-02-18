@@ -1,11 +1,4 @@
-# DFD Docker Environment
-
-## To Do
-
-- Make the environment start
-- Add all necessary gitignore items
-- Add the SphinxSearch container with a basic config
-- Complete this document
+# DFD Development Docker
 
 ## Setting up a development environment
 
@@ -36,5 +29,12 @@ Three files need to be added to the `composer` folder: `known_hosts`, `auth.json
 
 1. Commit your changes to this repo.
 2. Open a terminal in the folder containing this repo.
-3. Build: `sudo docker build -f Dockerfile -t registry.gitlab.rlp.net/adwmainz/digicademy/dfd/dfd_docker/dfd-typo3 .`.
-4. Push: `sudo docker push registry.gitlab.rlp.net/adwmainz/digicademy/dfd/dfd_docker/dfd-typo3`.
+3. Build: `sudo docker build -f Dockerfile -t registry.gitlab.rlp.net/adwmainz/digicademy/dfd/dfd_docker/dfd-webserver .`.
+4. Push: `sudo docker push registry.gitlab.rlp.net/adwmainz/digicademy/dfd/dfd_docker/dfd-webserver`.
+
+## Roadmap
+
+- Get Typo3 12 to work
+- Check if all gitignore entries are in place
+- Revise this document
+- Add the Manticore container with a basic config

@@ -1,4 +1,5 @@
 # DFD Docker Environment
+# Copyright (C) 2023 Jonatan Jalle Steller <jonatan.steller@adwmainz.de>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -17,10 +18,10 @@
 # <https://stackoverflow.com/questions/18136389/using-ssh-keys-inside-docker-container#answer-48565025>
 
 # Get the right Apache image
-FROM php:8.0-apache-bullseye as source
+FROM php:8.2-apache-bullseye as source
 
 # Add Composer
-COPY --from=composer/composer:2.2.18 /usr/bin/composer /usr/bin/composer
+COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 # Prepare folders
 RUN mkdir -p /root/scripts && \
@@ -37,8 +38,8 @@ COPY scripts/init-composer.sh /root/scripts/init-composer.sh
 RUN chmod +x /root/scripts/init-composer.sh
 
 # Update CA certificates
-RUN sed -i 's/mozilla\/DST_Root_CA_X3.crt/!mozilla\/DST_Root_CA_X3.crt/g' /etc/ca-certificates.conf && \
-    update-ca-certificates
+#RUN sed -i 's/mozilla\/DST_Root_CA_X3.crt/!mozilla\/DST_Root_CA_X3.crt/g' /etc/ca-certificates.conf && \
+#    update-ca-certificates
 
 # Install the basics
 RUN apt-get update && \
@@ -86,4 +87,4 @@ RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
     dpkg-reconfigure --frontend=noninteractive locales
 
 # Run Composer
-RUN bash /root/scripts/init-composer.sh
+#RUN bash /root/scripts/init-composer.sh

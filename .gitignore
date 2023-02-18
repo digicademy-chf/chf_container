@@ -7,10 +7,10 @@ known_hosts
 /*.tgz
 /*.sql
 /htdocs/*
-/mysql/db/*
+/mariadb/db/*
 /apache2/ssl/*
-/sphinxsearch/index/*
-/sphinxsearch/conf/production.conf
+/manticore/data/*
+/manticore/production.conf
 /ssl/*
 /vendor/*
 !.gitkeep
