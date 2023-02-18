@@ -1,40 +1,29 @@
-# DFD Development Docker
+# DFD Docker Environment
 
-## Setting up a development environment
+- Description: DFD development (and possibly production) environment
+- Author: Jonatan Jalle Steller (jonatan.steller@adwmainz.de)
+- Requirements: Git, Docker Engine or Docker Desktop
+- Version: 1.95
 
-This tutorial assumes that you have successfully installed [Docker Desktop](https://docs.docker.com/get-docker/) (Windows, Mac, Linux) or [Docker Engine](https://docs.docker.com/engine/install/) (Linux).
+## Setup
 
-1. Check out this repo via `sudo git clone https://gitlab.rlp.net/adwmainz/digicademy/dfd/dfd_docker.git`.
-2. Copy and rename the file `.env.example` to `.env`.
-3. Edit the `.env` file: for a local development environment, choose your own credentials for the `DB` entries, e.g. `t3_dfd` for the first three and `password` for the fourth one. Do not use these credentials in production environments.
+1. Check out this repo via `git clone git@gitlab.rlp.net:adwmainz/digicademy/dfd/dfd_docker.git` (with a working SSH key for GitLab RLP) or `git clone https://gitlab.rlp.net/adwmainz/digicademy/dfd/dfd_docker.git` (requires credentials for every sync).
+2. For a development environment, copy and rename the file `.env.development` to `.env`. For a production environment, use `.env.production` instead and add the required credentials (at least for the `DB` entries).
+3. [Not implemented yet: adapt the Manticore configuration to development or production needs.]
 4. Open a terminal in the folder containing this repo and enter `sudo docker compose up -d`.
 
-## Setting up a production environment
+## Updating the image
 
-1. Check out this repo via `sudo git clone https://gitlab.rlp.net/adwmainz/digicademy/dfd/dfd_docker.git`.
-2. Copy and rename the file `.env.example` to `.env`.
-3. Edit the `.env` file: for a production environment, choose credentials at least for the `DB` entries.
-4. In the `sphinxsearch` folder, copy the file `development.conf` and call it `production.conf`, then edit the configuration based on the credentials you added to `.env`.
-5. Open a terminal in the folder containing this repo and enter `sudo docker compose up -d`.
-
-## Before you can build the Docker image
-
-Three files need to be added to the `composer` folder: `known_hosts`, `auth.json`, and `.gitconfig`.
-
-1. For `known_hosts`, find the same file in the SSH folder on your machine, copy it, and remove all lines that do not start with `gitlab.rlp.net`.
-2. For `auth.json`, acquire a personal access token by clicking on your profile icon on GitLab RLP, then `Edit profile`, `Access tokens`, provide a name for the token (such as `dfd_docker`), set the scope to `api`, clear the date, and hit `Create personal access token`. Store the token somewhere safe. Then copy and rename the `auth.example.json` file, paste the `<token>`, and save the file.
-3. For `.gitconfig`, copy and rename `.gitconfig.example`, insert your GitLab RLP `<username>` and `<token>`, and save the file.
-
-## Building the Docker image
+Before you can build a new image, three files need to be added to the `composer` folder: `known_hosts`, `auth.json`, and `.gitconfig`. For `known_hosts`, find the same file in the SSH folder on your machine, copy it, and remove all lines but the one that starts with `gitlab.rlp.net`. For `auth.json`, acquire a personal access token by clicking on your profile icon on GitLab RLP, then `Edit profile`, `Access tokens`, provide a name for the token (such as `dfd_docker`), set the scope to `api`, optionally clear the date, and hit `Create personal access token`. Store the token somewhere safe. Then copy and rename the `auth.example.json` file, paste the `<token>`, and save the file. For `.gitconfig`, copy and rename `.gitconfig.example`, insert your GitLab RLP `<username>` and `<token>`, and save the file.
 
 1. Commit your changes to this repo.
 2. Open a terminal in the folder containing this repo.
-3. Build: `sudo docker build -f Dockerfile -t registry.gitlab.rlp.net/adwmainz/digicademy/dfd/dfd_docker/dfd-webserver .`.
-4. Push: `sudo docker push registry.gitlab.rlp.net/adwmainz/digicademy/dfd/dfd_docker/dfd-webserver`.
+3. Build the image via `sudo docker build -f Dockerfile -t registry.gitlab.rlp.net/adwmainz/digicademy/dfd/dfd_docker/dfd-webserver .`.
+4. Push the image to the registry via `sudo docker push registry.gitlab.rlp.net/adwmainz/digicademy/dfd/dfd_docker/dfd-webserver`.
 
 ## Roadmap
 
-- Get Typo3 12 to work
+- Properly set up Typo3 12
 - Check if all gitignore entries are in place
-- Revise this document
 - Add the Manticore container with a basic config
+- If possible/beneficial, adapt the repo for production use
