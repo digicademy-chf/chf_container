@@ -18,8 +18,8 @@ Before you can build a new image, three files need to be added to the `composer`
 
 1. Commit your changes to this repo.
 2. Open a terminal in the folder containing this repo.
-3. Build the image via `sudo docker build -f Dockerfile -t registry.gitlab.rlp.net/adwmainz/digicademy/dfd/dfd_docker/dfd-webserver .`.
-4. Push the image to the registry via `sudo docker push registry.gitlab.rlp.net/adwmainz/digicademy/dfd/dfd_docker/dfd-webserver`.
+3. Build the image via `sudo docker build -f Dockerfile -t registry.gitlab.rlp.net/adwmainz/digicademy/dfd/dfd_docker/dfd_webserver .`.
+4. Push the image to the registry via `sudo docker push registry.gitlab.rlp.net/adwmainz/digicademy/dfd/dfd_docker/dfd_webserver`.
 
 ## Roadmap
 

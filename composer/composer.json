@@ -3,10 +3,6 @@
     {
       "type": "composer",
       "url": "https://composer.typo3.org/"
-    },
-    {
-      "type": "vcs",
-      "url": "https://gitlab.rlp.net/adwmainz/digicademy/dfd/dfd.git"
     }
   ],
   "config": {
@@ -18,8 +14,7 @@
   "license": "GPL-3.0-or-later",
   "require": {
     "typo3/cms": "^12.2.0",
-    "georgringer/news": "dev-11-12",
-    "digicademy/dfd": "dev-main"
+    "georgringer/news": "dev-11-12"
   },
   "autoload": {
     "psr-4": {

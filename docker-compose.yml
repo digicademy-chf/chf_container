@@ -19,7 +19,7 @@
 version: "3"
 services:
   dfd-typo3:
-    image: registry.gitlab.rlp.net/adwmainz/digicademy/dfd/dfd_docker/dfd-webserver
+    image: registry.gitlab.rlp.net/adwmainz/digicademy/dfd/dfd_docker/dfd_webserver
     container_name: dfd_webserver
     restart: always
     environment:

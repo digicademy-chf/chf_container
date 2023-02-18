@@ -25,7 +25,7 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 # Prepare folders
 RUN mkdir -p /root/scripts && \
-    mkdir -p /root/.config/composer && \
+#    mkdir -p /root/.config/composer && \
     mkdir -p /root/.ssh && \
     chown -R 0600 /root/.ssh
 
@@ -34,8 +34,8 @@ COPY apache2/conf/000-default.conf /etc/apache2/sites-available/000-default.conf
 COPY php/php.ini /usr/local/etc/php/conf.d/php.ini
 
 # Add Composer init script
-COPY scripts/init-composer.sh /root/scripts/init-composer.sh
-RUN chmod +x /root/scripts/init-composer.sh
+#COPY scripts/init-composer.sh /root/scripts/init-composer.sh
+#RUN chmod +x /root/scripts/init-composer.sh
 
 # Update CA certificates
 #RUN sed -i 's/mozilla\/DST_Root_CA_X3.crt/!mozilla\/DST_Root_CA_X3.crt/g' /etc/ca-certificates.conf && \
