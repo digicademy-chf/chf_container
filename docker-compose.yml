@@ -32,11 +32,11 @@ services:
     extra_hosts:
       - "${HOSTNAME:-localhost}:127.0.0.1"
     volumes:
-      - "./apache2/ssl:/etc/apache2/ssl"
-      - "./composer:/var/www/html/composer"
-      - "./scripts:/var/www/html/scripts"
-      - "./vendor:/var/www/html/vendor"
-      - "${HTDOCS:-./htdocs}:/var/www/html/htdocs"
+      #- "./apache2/ssl:/etc/apache2/ssl"
+      #- "./composer:/var/www/html/composer"
+      #- "./scripts:/var/www/html/scripts"
+      #- "./vendor:/var/www/html/vendor"
+      - "${HTDOCS:-./dfd}:/var/www/html/dfd"
     networks:
       - dfd
   dfd-database:
