@@ -7,7 +7,11 @@
   ],
   "config": {
     "process-timeout": 600,
-    "preferred-install": "dist"
+    "preferred-install": "dist",
+    "allow-plugins": {
+      "typo3/cms-composer-installers": true,
+      "typo3/class-alias-loader": true
+    }
   },
   "name": "digicademy/typo3-composer-install",
   "description": "DFD based on TYPO3 12",
