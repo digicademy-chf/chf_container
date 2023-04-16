@@ -1,2 +1,0 @@
-[url "https://<username>:<token>@gitlab.rlp.net/"]
-	insteadOf = https://gitlab.rlp.net/:

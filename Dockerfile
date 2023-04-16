@@ -1,4 +1,4 @@
-# DFD Docker Environment
+# DFD Docker Debian Image
 # Copyright (C) 2023 Jonatan Jalle Steller <jonatan.steller@adwmainz.de>
 #
 # This program is free software: you can redistribute it and/or modify
@@ -15,7 +15,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 # Inspired by <https://github.com/martin-helmich/docker-typo3> and
-# <https://stackoverflow.com/questions/18136389/using-ssh-keys-inside-docker-container#answer-48565025>
+# previous Digicademy Docker setups.
 
 # Get the right Apache image
 FROM php:8.2-apache-bullseye as source
@@ -30,8 +30,8 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 #    chown -R 0600 /root/.ssh
 
 # Add Apache and PHP config
-COPY apache2/conf/000-default.conf /etc/apache2/sites-available/000-default.conf
-COPY php/php.ini /usr/local/etc/php/conf.d/php.ini
+COPY config/apache2/conf/000-default.conf /etc/apache2/sites-available/000-default.conf
+COPY config/php/php.ini /usr/local/etc/php/conf.d/php.ini
 
 # Add Composer init script
 #COPY scripts/init-composer.sh /root/scripts/init-composer.sh
