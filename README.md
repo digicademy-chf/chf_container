@@ -43,7 +43,6 @@ If changes to the `Dockerfile` are necessary, use the following steps to update 
 
 ## Roadmap
 
-- Get the `local_packages` folder to show in the repo.
 - Add info for SQL and uploaded files.
 - Add production files locally.
 - Make sure everything is in place to re-build the environment from scratch.
