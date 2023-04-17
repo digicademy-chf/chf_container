@@ -7,7 +7,8 @@ mariadb/db/*
 config/apache2/ssl/*
 manticore/data/*
 manticore/production.conf
-dfd/**
-!dfd/composer.json
-!dfd/local_packages
-!.gitkeep
+dfd/config/system/*
+!dfd/config/system/.gitkeep
+dfd/public
+dfd/var
+dfd/vendor

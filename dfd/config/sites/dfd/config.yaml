@@ -1,0 +1,36 @@
+base: 'https://namenforschung.net'
+baseVariants:
+  -
+    base: 'http://namenforschung.local'
+    condition: 'applicationContext == "Development"'
+languages:
+  -
+    title: German
+    enabled: true
+    languageId: 0
+    base: /
+    typo3Language: de
+    locale: de_DE.utf8
+    iso-639-1: de
+    navigationTitle: German
+    hreflang: de-DE
+    direction: ltr
+    flag: de
+    websiteTitle: ''
+  -
+    title: English
+    enabled: true
+    base: /en/
+    typo3Language: default
+    locale: en_GB.utf8
+    iso-639-1: en
+    websiteTitle: 'Digital Dictionary of Surnames in Germany'
+    navigationTitle: English
+    hreflang: en-GB
+    direction: ltr
+    fallbackType: fallback
+    fallbacks: '0'
+    flag: gb
+    languageId: 1
+rootPageId: 1
+websiteTitle: 'Digitales Familiennamenwörterbuch Deutschlands'

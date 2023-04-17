@@ -10,7 +10,7 @@ Environment to run the *Portal für Namenforschung*, which also contains the Dig
 
 ## Setup
 
-If you want to set up a production environment instead of a development one, make sure you have three files that are not part of this repo: `cert.crt` and `cert.key` stored in your repo folder `config/apache2/ssl` (from `/etc/apache2/ssl` on production systems), the credentials stored in a production-level `.env` file.
+If you want to set up a production environment instead of a development one, make sure you have three files that are not part of this repo: `cert.crt` and `cert.key` to be stored in your repo folder `config/apache2/ssl` and the credentials stored in a production-level `.env` file.
 
 1. Clone this repo via `git clone git@gitlab.rlp.net:adwmainz/digicademy/dfd/dfd_docker.git` or the HTTPS equivalent.
 2. For a development environment, copy `.env.development` and rename it to `.env`. For a production environment, use `.env.production` instead and add the required credentials.
@@ -19,11 +19,13 @@ If you want to set up a production environment instead of a development one, mak
 5. Enter the webserver container via `sudo docker exec -it dfd_webserver bash`.
 6. Here, run `composer update`, wait for the result, and then `exit`.
 
+In a production environment, you may need to use the cert bot post-setup to get SSL working properly.
+
 ## Usage
 
 Open `namenforschung.local` in a browser to see the development environment. The production environment should be available at `namenforschung.net`. Add `/typo3` to enter the TYPO3 backend.
 
-If you experience issues working in the `dfd/local_packages` folder on your host system, it is safe to use `chown` on the entire folder as long as the container still has read access. File-level changes outside this folder can be made from inside the webserver container using `sudo docker exec -it dfd_webserver bash`.
+If you experience issues working in the `dfd/local_packages` folder on your host system, it is safe to use `chown -R <username>:<usergroup> local_packages` and `chmod -R 770 local_packages` as long as the container still has read access. File-level changes outside this folder can be made from inside the webserver container using `sudo docker exec -it dfd_webserver bash`.
 
 ## Maintenance
 
@@ -45,6 +47,9 @@ If changes to the `Dockerfile` are necessary, use the following steps to update 
 
 ## Roadmap
 
-- Make sure the cert file names are correct.
-- Add instructions for SQL and ZIP/TGZ files.
+- Add `dfd/config/sites` to repo.
+- Add instructions for settings, SQL and ZIP/TGZ files.
+- Add useful commands listed in RI Docker.
+- Switch packages to Git versions instead of local ones.
+- Test the revised setup in a development environment (if the Apache conf is an issue, the SSL version needs to be removed).
 - Add the Manticore container with a basic config.
