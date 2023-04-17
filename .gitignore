@@ -9,6 +9,10 @@ manticore/data/*
 manticore/production.conf
 dfd/config/system/*
 !dfd/config/system/.gitkeep
+dfd/local_packages/**
+!dfd/local_packages/.gitkeep
 dfd/public
 dfd/var
 dfd/vendor
+dfd/composer.lock
+dfd/composer.lock2
