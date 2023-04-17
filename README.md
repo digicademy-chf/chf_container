@@ -10,6 +10,8 @@ Environment to run the *Portal für Namenforschung*, which also contains the Dig
 
 ## Setup
 
+If you want to set up a production environment instead of a development one, make sure you have three files that are not part of this repo: `cert.crt` and `cert.key` stored in your repo folder `config/apache2/ssl` (from `/etc/apache2/ssl` on production systems), the credentials stored in a production-level `.env` file.
+
 1. Clone this repo via `git clone git@gitlab.rlp.net:adwmainz/digicademy/dfd/dfd_docker.git` or the HTTPS equivalent.
 2. For a development environment, copy `.env.development` and rename it to `.env`. For a production environment, use `.env.production` instead and add the required credentials.
 3. Open a terminal in the `dfd_docker` folder, enter `cd dfd/local_packages`, and then clone the repo [`namenforschung`](https://gitlab.rlp.net/adwmainz/digicademy/dfd/namenforschung).
@@ -33,7 +35,7 @@ The following steps should be performed periodically to keep an existing environ
 
 ## Development
 
-If changes to the `Dockerfile` are necessary, use the following steps to update it.
+If changes to the `Dockerfile` are necessary, use the following steps to update the image it produces and stores on GitLab RLP.
 
 1. Commit your changes to this repo.
 2. Open a terminal in the folder containing this repo.
@@ -43,7 +45,6 @@ If changes to the `Dockerfile` are necessary, use the following steps to update 
 
 ## Roadmap
 
-- Add info for SQL and uploaded files.
-- Add production files locally.
-- Make sure everything is in place to re-build the environment from scratch.
+- Make sure the cert file names are correct.
+- Add instructions for SQL and ZIP/TGZ files.
 - Add the Manticore container with a basic config.
