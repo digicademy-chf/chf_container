@@ -16,7 +16,7 @@ Before you start, make sure that you got three files from the maintainer: `setti
 2. For a development environment, copy `.env.development` and rename it to `.env`. For a production environment, use `.env.production` instead and add the required, secret credentials.
 3. Place `settings.php` into `dfd_docker/dfd/config/system`.
 4. Place `public.zip` into `dfd_docker/dfd`, unpack it to create a new folder `public`, and delete the ZIP file.
-5. Place `dfd_database.sql` into `dfd_docker/mariadb`.
+5. Place `dfd_database.sql` into `dfd_docker`.
 6. Direct your terminal to the main Docker folder `dfd_docker` and start all containers via `sudo docker compose up -d`.
 7. Import the database dump via `sudo docker exec -i dfd_database mysql -uroot -ppassword t3_dfd < dfd_database.sql`. On a production system, use the user and password from the production credentials instead.
 8. Enter the webserver container via `sudo docker exec -it dfd_webserver bash`.
