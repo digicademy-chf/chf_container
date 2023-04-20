@@ -82,6 +82,14 @@ cd dfd
 composer update
 ```
 
+Require a new Composer package (after adding the repo in `composer.json` if necessary):
+
+```
+sudo docker exec -it dfd_webserver bash
+cd dfd
+composer require digicademy/da-bib:@dev
+```
+
 Export the database (change username and password in a production environment):
 
 ```
