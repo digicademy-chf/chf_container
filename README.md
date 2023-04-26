@@ -10,7 +10,7 @@ Environment to run the *Portal für Namenforschung*, which also contains the Dig
 
 ## Setup
 
-Before you start, make sure that you got three files from the maintainer: `settings.php`, `public.zip`, and `dfd_database.sql`.
+Before you start, [download three files](https://seafile.rlp.net/smart-link/11605d5e-9276-4048-a0cf-511ae67d6468/) that cannot be part of this repo: `settings.php`, `public.zip`, and `dfd_database.sql`. Ask the maintainer(s) to grant you access or to update the files for you if necessary.
 
 1. Clone this repo via `git clone git@gitlab.rlp.net:adwmainz/digicademy/dfd/dfd_docker.git` or the HTTPS equivalent.
 2. For a development environment, copy `.env.development` and rename it to `.env`. For a production environment, use `.env.production` instead and add the required, secret credentials.
@@ -20,13 +20,20 @@ Before you start, make sure that you got three files from the maintainer: `setti
 6. Direct your terminal to the main Docker folder `dfd_docker` and start all containers via `sudo docker compose up -d`.
 7. Import the database dump via `sudo docker exec -i dfd_database mysql -uroot -ppassword t3_dfd < dfd_database.sql`. On a production system, use the user and password from the production credentials instead.
 8. Enter the webserver container via `sudo docker exec -it dfd_webserver bash`.
-9. Here, first enter `cd dfd` and then `composer update`, wait for the result, and then `exit`.
+9. Here, first enter `cd dfd` and then `composer update` to install all packages.
+10. Update the language packs via `typo3 language:update`, wait for the result, and close the connection via `exit`.
 
-For a production environment, you may need to use the cert bot to get SSL working properly after the above setup is done.
+For a development environment, set up the local domain in the host operating system. On Linux or macOS, add the following line to `/etc/hosts`. On Windows, add it to `C:\Windows\System32\Drivers\etc\hosts`.
+
+```
+127.0.0.1    namenforschung.local
+```
+
+In a production environment, you may need to use the cert bot inside the webserver container after the above setup to get SSL working properly.
 
 ## Usage
 
-Open `namenforschung.local` in a browser to see the development environment. The production environment should be available at `namenforschung.net`. Add `/typo3` to enter the TYPO3 backend.
+Open [namenforschung.local](http://namenforschung.local/) in a browser to see the development environment. Use [namenforschung.local/typo3](http://namenforschung.local/typo3) to see the TYPO3 backend. The production environment should be available at [namenforschung.net](https://namenforschung.net/) and the TYPO3 backend at [namenforschung.net/typo3](https://namenforschung.net/typo3).
 
 If you experience issues working with one of the Digicademy packages in a development environment, it is safe to use `chown -R <username>:<usergroup> <folder>` and `chmod -R 774 <folder>` as long as the container still has read access.
 
