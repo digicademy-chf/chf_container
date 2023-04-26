@@ -60,19 +60,19 @@ If changes to the `Dockerfile` are necessary, use the following steps to update 
 Start the containers:
 
 ```
-docker compose start
+sudo docker compose start
 ```
 
 Stop the containers:
 
 ```
-docker compose stop
+sudo docker compose stop
 ```
 
 Fully destroy the containers:
 
 ```
-docker compose down
+sudo docker compose down
 ```
 
 Log into a running container:
