@@ -15,28 +15,8 @@
 	},
 	"repositories": [
 		{
-			"type": "vcs",
+		"type": "vcs",
 			"url": "https://gitlab.rlp.net/adwmainz/digicademy/dfd/namenforschung.git"
-		},
-		{
-			"type": "vcs",
-			"url": "https://gitlab.rlp.net/adwmainz/digicademy/t3xdev/da-bib.git"
-		},
-		{
-			"type": "vcs",
-			"url": "https://gitlab.rlp.net/adwmainz/digicademy/t3xdev/da-ingest.git"
-		},
-		{
-			"type": "vcs",
-			"url": "https://gitlab.rlp.net/adwmainz/digicademy/t3xdev/da-lex.git"
-		},
-		{
-			"type": "vcs",
-			"url": "https://gitlab.rlp.net/adwmainz/digicademy/t3xdev/da-map.git"
-		},
-		{
-			"type": "vcs",
-			"url": "https://gitlab.rlp.net/adwmainz/digicademy/t3xdev/da-quality.git"
 		}
 	],
 	"require": {
