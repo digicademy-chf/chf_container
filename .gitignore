@@ -1,6 +1,7 @@
 .DS_store
 .env
 .idea
+.vscode
 *.tgz
 *.sql
 mariadb/db/*

@@ -20,6 +20,8 @@
 		}
 	],
 	"require": {
-		"digicademy/namenforschung": "@dev"
-	}
+		"digicademy/namenforschung": "dev-main"
+	},
+	"minimum-stability": "dev",
+	"prefer-stable": true
 }

@@ -55,7 +55,7 @@ services:
     networks:
       - dfd
 #  dfd-search:
-#    image: manticoresearch/manticore:6.0.2
+#    image: manticoresearch/manticore:6.2.12
 #    container_name: dfd_search
 #    restart: always
 #    ports:
@@ -69,8 +69,6 @@ services:
 #      memlock:
 #        soft: -1
 #        hard: -1
-#    environment:
-#      - MCL=1
 #    volumes:
 #      - ./manticore/data:/var/lib/manticore
 #      - ./manticore/manticore.conf:/etc/manticoresearch/manticore.conf
