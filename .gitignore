@@ -6,6 +6,7 @@
 *.sql
 config/apache2/ssl/*
 search/*
+!search/.gitkeep
 web/config/system/*
 !web/config/system/.gitkeep
 web/public
