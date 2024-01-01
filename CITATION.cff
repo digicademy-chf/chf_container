@@ -1,0 +1,45 @@
+cff-version: 1.2.0
+title: CHF Project Container
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Jonatan Jalle
+    family-names: Steller
+    email: jonatan.steller@adwmainz.de
+    affiliation: Academy of Sciences and Literature Mainz
+    orcid: 'https://orcid.org/0000-0002-5101-5275'
+  - name: "CHF Project Container contributors"
+repository-code: >-
+  https://github.com/digicademy-chf/chf_project_container
+abstract: >-
+  This is a template for development and production
+  environments of projects based on the Cultural Heritage
+  Framework (CHF). It may be adapted and expanded, and it
+  includes a `Containerfile` with build instructions for a
+  webserver container capable of running TYPO3 and the CHF
+  extensions. The set-up revolves around a file in
+  accordance with the Compose specification for
+  container-based applications and may be run on Linux,
+  Windows, or macOS using, for example, Podman Compose or
+  Docker Compose. The Compose file orchestrates a pod (or
+  network) consisting of standard Debian image with a few
+  added packages and config options like a PHP Composer
+  config, a MariaDB database, Manticore search, and a
+  Postfix container for email jobs.
+keywords:
+  - Podman
+  - Docker
+  - Container
+  - TYPO3
+  - Cultural Heritage
+  - Framework
+  - Web app
+  - Data
+  - Research
+  - Academia
+  - Academic
+license: GPL 3
+version: 0.9.0
+date-released: '2024-01-05'

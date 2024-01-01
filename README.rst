@@ -1,12 +1,70 @@
-# DFD Docker
+..  image:: https://img.shields.io/badge/Container-Podman-purple.svg
+    :alt: Podman
+    :target: https://podman.io
 
-- Description: Portal für Namenforschung development and production environment
-- Author: Jonatan Jalle Steller ([jonatan.steller@adwmainz.de](mailto:jonatan.steller@adwmainz.de))
-- Requirements: `git`, `docker-ce` or Docker Desktop
-- License: MIT
-- Version: 1.9.8
+..  image:: https://img.shields.io/badge/Container-Docker-blue.svg
+    :alt: Docker
+    :target: https://docker.io
 
-Environment to run the *Portal für Namenforschung*, which also contains the Digital Dictionary of Surnames in Germany (*Digitales Famieliennamenwörterbuch Deutschlands*, DFD). Contains all configuration files for a customised Debian webserver with PHP, a MariaDB database, a Manticore search engine, and a Postfix container for email jobs.
+..  image:: https://img.shields.io/badge/TYPO3-12-orange.svg
+    :alt: TYPO3 12
+    :target: https://get.typo3.org/version/12
+
+..  image:: https://img.shields.io/badge/License-MIT-blue.svg
+    :alt: License: MIT
+    :target: https://spdx.org/licenses/MIT.html
+
+=====================
+CHF Project Container
+=====================
+
+This is a template for development and production environments of projects
+based on the Cultural Heritage Framework (CHF). It may be adapted and expanded,
+and it includes a ``Containerfile`` with build instructions for a webserver
+container capable of running TYPO3 and the CHF extensions. The set-up revolves
+around a file in accordance with the `Compose specification
+<https://compose-spec.io/>`__ for container-based applications and may be run
+on Linux, Windows, or macOS using, for example, Podman Compose or Docker
+Compose. The Compose file orchestrates a pod (or network) consisting of
+standard Debian image with a few added packages and config options like a PHP
+Composer config, a MariaDB database, Manticore search, and a Postfix container
+for email jobs.
+
+:Repository:  https://github.com/digicademy-chf/chf_project_container
+:Read online: https://digicademy-chf.github.io/chf_project_container
+
+## Roadmap
+
+This is a pre-release version. The following steps are required for the software to move out of beta:
+
+- Documentation moved to subdirectory
+- Proper dev/prod switch in Apache config to avoid relying on ports to identify the right context
+- SSL instructions added
+- Namenforschung and Corpus Vitrearum use cases tested
+- Manticore search set up
+- Documentation completed
+
+---
+
+**Container template capable of running CHF-based web applications based on a Compose file**
+
+## Adapting the container template
+
+The container template at
+[chf_project_container](https://github.com/digicademy-chf/chf_project_container)
+may be adapted to other projects, whether they use the Cultural Heritage
+Framework and TYPO3 or not. To use the template as a developement and/or
+production environment, clone the original repo and adjust the items listed
+below. Then push the changes to your own repo and follow the set-up instructions.
+
+- In `compose.yml`, change all `container_name`s and `network` names to something project-specific.
+- In `config/php/php.ini`, change the server admin's email address two times.
+- If your `compose.yml` uses the base image provided by `chf_project_container`, feel free to delete the `Containerfile` as it serves no function in your own repository.
+- Adapt the readme file to your project's name and description.
+
+Please note that under production conditions, this simple container set-up is
+designed to run on a host that directs traffic towards the webserver container,
+redirects port 80 to port 443, and features more robust firewall settings.
 
 ## Setup
 
@@ -101,6 +159,13 @@ Export the database (change username and password in a production environment):
 
 ```
 sudo docker exec -i dfd_database mysqldump -uroot -ppassword t3_dfd > dfd_database.sql
+```
+
+Restart the Apache server:
+
+```
+sudo docker exec -it dfd_webserver bash
+systemctl restart apache2
 ```
 
 ## Roadmap
