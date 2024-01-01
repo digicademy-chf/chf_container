@@ -33,7 +33,8 @@ for email jobs.
 :Repository:  https://github.com/digicademy-chf/chf_project_container
 :Read online: https://digicademy-chf.github.io/chf_project_container
 
-## Roadmap
+Roadmap
+=======
 
 This is a pre-release version. The following steps are required for the software to move out of beta:
 
