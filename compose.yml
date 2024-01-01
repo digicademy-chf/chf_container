@@ -1,0 +1,77 @@
+# This file is part of the CHF Project Container environment.
+#
+# For the full copyright and license information, please read the
+# LICENSE.txt file that was distributed with this source code.
+
+services:
+  web:
+    image: ghcr.io/digicademy_chf/chf_project_container:0.9.0
+    container_name: chf_web
+    env_file: .env
+    restart: always
+    depends_on:
+      - database
+#      - search
+      - mail
+    ports:
+      - 80:80
+      - 443:443
+    extra_hosts:
+      - localhost:127.0.0.1
+    volumes:
+      - ./config/apache2/000-default.conf:/etc/apache2/sites-available/000-default.conf
+      - ./config/apache2/ssl:/etc/apache2/ssl
+      - ./config/php/php.ini:/etc/php/8.2/apache2/php.ini
+      - ./web:/var/www/html
+      GD KONFGURIEREN?
+    networks:
+      - chf
+  database:
+    image: docker.io/library/mariadb:10
+    container_name: chf_database
+    env_file: .env
+    restart: always
+    command:
+      - --sql_mode=NO_ENGINE_SUBSTITUTION
+    volumes:
+      - ./config/mariadb:/etc/mysql/conf.d
+      - ./database:/var/lib/mysql
+    networks:
+      - chf
+#  search:
+#    image: docker.io/manticoresearch/manticore:6.2.12
+#    container_name: chf_search
+#    env_file: .env
+#    environment:
+#      - EXTRA=1
+#    restart: always
+#    ports:
+#      - "9306:9306"
+#      - "9308:9308"
+#    ulimits:
+#      nproc: 65535
+#      nofile:
+#         soft: 65535
+#         hard: 65535
+#      memlock:
+#        soft: -1
+#        hard: -1
+#    volumes:
+#      - ./config/manticore/manticore.conf:/etc/manticoresearch/manticore.conf
+#      - ./search:/var/lib/manticore
+#    networks:
+#      - chf
+  mail:
+    image: docker.io/juanluisbaptiste/postfix:latest
+    container_name: chf_mail
+    env_file: .env
+    restart: always
+    expose:
+      - 25
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - chf
+
+networks:
+  chf:
