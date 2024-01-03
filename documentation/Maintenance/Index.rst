@@ -34,17 +34,19 @@ button supporting you in merging any upstream changes.
 
 If you copied the template to any other platform built around Git, such as
 GitLab, it will now funcion as your ``origin`` instead of the original repo.
-The simplest solution is to add an additional ``upstream`` to your local clone
-using the following commands.
+The simplest solution is illustrated in the following commands:
 
-..  code-block:: shell
+1. In your local clone of your repo, add an additional ``upstream``:
 
-    git remote add upstream https://github.com/digicademy-chf/chf_project_container.git
+   ..  code-block:: shell
 
-You can then merge upstream patches and push them back to your ``origin`` with
-the following two (separate) commands:
+       git remote add upstream https://github.com/digicademy-chf/chf_project_container.git
 
-..  code-block:: shell
+2. Apply upstream patches to a local branch called ``upstream/main``:
 
-    git pull upstream main
-    git push origin main
+   ..  code-block:: shell
+
+       git pull upstream main
+
+3. Merge the new branch into your main branch.
+4. Push the changes to your ``origin`` as usual.
