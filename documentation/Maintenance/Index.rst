@@ -48,5 +48,5 @@ The simplest solution is illustrated in the following commands:
 
        git pull upstream main
 
-3. Merge the new branch into your main branch.
-4. Push the changes to your ``origin`` as usual.
+3. Resolve any issues should they appear.
+4. Push the changes to your ``origin/main`` as usual.
