@@ -58,18 +58,18 @@ Docker Engine as a command-line tool. In addition, Git is highly recommended.
         host-agnostic set-up. To apply them to a new install, save the files to
         the following file paths relative to the cotainer folder:
 
-        - **settings.php**: web/config/system/settings.php
-        - **public.zip**: web/public.zip, unpacked as /web/public
-        - **TBD fileadmin**
-        - **chf_database.sql**: chf_database.sql
+        - ``settings.php``: web/config/system/settings.php
+        - ``public.zip``: web/public.zip, unpacked as /web/public
+        - ``TBD fileadmin``
+        - ``chf_database.sql``: chf_database.sql
 
         In addition, the following two files are required for production
         environments. For an entirely new production environment, you may need
         to use a cert bot to produce these two files via Let's Encrypt or
         another certificate authority.
 
-        - **000-default-ssl.pem**: config/apache2/ssl/000-default-ssl.pem
-        - **000-default-ssl.key**: config/apache2/ssl/000-default-ssl.key
+        - ``000-default-ssl.pem``: config/apache2/ssl/000-default-ssl.pem
+        - ``000-default-ssl.key``: config/apache2/ssl/000-default-ssl.key
 
 4.  Create and start the containers
 
@@ -80,22 +80,15 @@ Docker Engine as a command-line tool. In addition, Git is highly recommended.
 
         podman compose up -d
 
-    If you want to import an existing database, now is the time. Use the
-    following command and alter the root password, database name, and file name
-    to fit your data if necessary:
+5.  Optionally import an existing database
+
+    If you want to import an existing database (see ``chf_database.sql``
+    above), now is the time. Use the following command and alter the root
+    password, database name, and file name to fit your data if necessary:
 
     ..  code-block:: shell
 
         podman exec -i chf_database mysql -uroot -ppassword t3_chf < chf_database.sql
-
-5.  Install all required PHP packages
-
-    When this is done, the following command retrieves all PHP packages
-    required to run TYPO3 and the CHF.
-
-    ..  code-block:: shell
-
-        podman exec -i chf_web composer update && podman exec -i chf_web typo3 language:update
 
 6.  Optionally set an alias for ``localhost`` 
 

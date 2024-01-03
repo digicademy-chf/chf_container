@@ -108,6 +108,12 @@ container's command line first and then run the same command without
 
       podman exec -i chf_web composer require digicademy-chf/chf_bib
 
+- Update TYPO3's language packs:
+
+  ..  code-block:: shell
+
+      podman exec -i chf_web typo3 language:update
+
 - Restart the Apache server:
 
   ..  code-block:: shell

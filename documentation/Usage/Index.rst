@@ -40,8 +40,9 @@ Update all containers
 
 Alternatively, and to update all containers at the same time, destroy and
 rebuild the containers in one go. This action **includes both steps mentioned
-above**, but it will lead to a brief downtime if performed in production. Enter
-the container folder and execute the following command:
+above**, but it will lead to a brief downtime if performed in production while
+the image is being rebuilt. Enter the container folder and execute the
+following command:
 
 ..  code-block:: shell
 

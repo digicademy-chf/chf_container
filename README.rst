@@ -48,6 +48,5 @@ software to move out of beta:
 
 In addition, the following features would be nice to have:
 
-- PHP Composer actions performed automatically during ``podman compose up -d``
 - Script that automates the creation of backup files and their installation
 - Clarification on setting up SSL certificates

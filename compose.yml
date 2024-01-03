@@ -5,7 +5,9 @@
 
 services:
   web:
-    image: ghcr.io/digicademy_chf/chf_project_container:0.9.0
+    build:
+      context: .
+      dockerfile: Containerfile
     container_name: chf_web
     env_file: .env
     restart: always
@@ -23,7 +25,6 @@ services:
       - ./config/apache2/ssl:/etc/apache2/ssl
       - ./config/php/php.ini:/etc/php/8.2/apache2/php.ini
       - ./web:/var/www/html
-      GD KONFGURIEREN?
     networks:
       - chf
   database:

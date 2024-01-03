@@ -56,5 +56,9 @@ RUN apt update && \
 # Configure Apache webserver
 RUN a2enmod deflate rewrite headers mime expires ssl
 
+# Retrieve all PHP packages and TYPO3 languages
+RUN composer update && \
+    typo3 language:update
+
 # Set the working directory
-WORKDIR /var/www/html/public
+WORKDIR /var/www/html
