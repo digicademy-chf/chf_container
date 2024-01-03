@@ -40,11 +40,9 @@ This is a pre-release version. The following steps are required for the
 software to move out of beta:
 
 - Add instructions to manage folder permissions if necessary
-- Fill in fileadmin TBD in two places
-- Proper dev/prod switch in Apache config to avoid relying on ports to identify
-  the right context
+- Fill in fileadmin TBD in two places in the documentation
 - Namenforschung and Corpus Vitrearum use cases (and forks) tested
-- Manticore search set up
+- Manticore search set up and "dev" tag removed from ``composer.json``
 
 In addition, the following features would be nice to have:
 
