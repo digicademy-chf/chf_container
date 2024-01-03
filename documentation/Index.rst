@@ -30,7 +30,7 @@ CHF Project Container
 ----
 
 This is a template for development and production environments of projects
-based on the Cultural Heritage Framework (CHF). It is designed to be forked and
+based on the Cultural Heritage Framework (CHF). It is designed to be cloned and
 adapted, and it includes a ``Containerfile`` with build instructions for a
 webserver container capable of running TYPO3 and the CHF extensions. The set-up
 revolves around a file in accordance with the `Compose specification

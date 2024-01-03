@@ -10,7 +10,7 @@ The container template provided at `chf_project_container
 <https://github.com/digicademy-chf/chf_project_container>`__ may be adapted to
 other projects, whether they use the Cultural Heritage Framework and TYPO3 or
 not. To use the template as a developement and/or production environment,
-**fork the original repo**, adjust the items listed below, and then push the
+**clone/fork the original repo**, adjust the items listed below, and then push the
 changes to your own repo.
 
 ..  _items-to-adjust:
@@ -25,7 +25,7 @@ Items to adjust
    times.
 3. Adjust ``.env.development`` to your needs.
 4. Edit ``web/composer.json`` to point to the repository and name of your TYPO3
-   sitepackage. If you are just getting started, fork the boilerplate
+   sitepackage. If you are just getting started, clone/fork the boilerplate
    `CHF Project <https://github.com/digicademy-chf/chf_project>`__, adjust its
    name and settings, and provide its new credentials here.
 5. Adapt the file ``web/config/sites/chf/config.yaml`` to your needs and change
@@ -43,7 +43,7 @@ Items to adjust
    potentially public) repo.
 
 Depending on the amount of things you alter, periodically **pulling changes
-from the forked original repo** may become more cumbersome. If you make changes
+from the cloned upstream repo** may become more cumbersome. If you make changes
 that other users of the container template may also benefit from, please
 consider contributing them upstream.
 

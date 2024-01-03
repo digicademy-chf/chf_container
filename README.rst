@@ -19,7 +19,7 @@ CHF Project Container
 =====================
 
 This is a template for development and production environments of projects
-based on the Cultural Heritage Framework (CHF). It is designed to be forked and
+based on the Cultural Heritage Framework (CHF). It is designed to be cloned and
 adapted, and it includes a ``Containerfile`` with build instructions for a
 webserver container capable of running TYPO3 and the CHF extensions. The set-up
 revolves around a file in accordance with the `Compose specification
@@ -41,7 +41,7 @@ software to move out of beta:
 
 - Add instructions to manage folder permissions if necessary
 - Fill in fileadmin TBD in two places in the documentation
-- Namenforschung and Corpus Vitrearum use cases (and forks) tested
+- Namenforschung and Corpus Vitrearum use cases (and clones) tested
 - Manticore search set up and "dev" tag removed from ``composer.json``
 
 In addition, the following features would be nice to have:

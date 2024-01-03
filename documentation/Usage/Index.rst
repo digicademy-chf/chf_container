@@ -54,7 +54,7 @@ Generate files for further installations
 ========================================
 
 Make sure that you commit any important or permanent changes you make to your
-fork of this environment so you can re-install it if necessary. In addition,
+clone of the environment so you can re-install it if necessary. In addition,
 it is recommended that you periodically produce four files (in addition to the
 two SSL certificate files required for production environment) and collect them
 outside your repo as they may contain sensitive information. The collection

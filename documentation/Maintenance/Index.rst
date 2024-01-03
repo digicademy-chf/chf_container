@@ -26,9 +26,25 @@ Creating a new release
 Syncing with upstream
 =====================
 
-If you forked this repository to build a custom environment for your project,
-it may be useful to periodically sync upstream changes via
-``git fetch upstream`` and then merging the resulting branch ``upstream/main``
-into your main branch. If you use web interfaces built around Git, such as
-GitHub or GitLab, and have the right permission level, they will likely offer
-you a button like :guilabel:`Sync fork` on the main page of your repo to simplify this.
+If you cloned the container template to build a custom environment for your
+project, it may be useful to periodically sync upstream changes. If you just
+have a local clone, fetch (and merge) changes from the ``origin``. In case you
+forked the project on GitHub, you will likely see a :guilabel:`Sync fork`
+button supporting you in merging any upstream changes.
+
+If you copied the template to any other platform built around Git, such as
+GitLab, it will now funcion as your ``origin`` instead of the original repo.
+The simplest solution is to add an additional ``upstream`` to your local clone
+using the following commands.
+
+..  code-block:: shell
+
+    git remote add upstream https://github.com/digicademy-chf/chf_project_container.git
+
+You can then merge upstream patches and push them back to your ``origin`` with
+the following two (separate) commands:
+
+..  code-block:: shell
+
+    git pull upstream main
+    git push origin main
