@@ -21,8 +21,8 @@ Items to adjust
 1. In ``compose.yml``, change all ``container_name``s and ``network`` names to
    something specific to your project. This allows for installing multiple CHF
    project pods (or networks) on the same host.
-2. In ``config/php/php.ini``, change the server admin's email address two
-   times.
+2. In ``config/apache2/000-default.conf``, change the server admin's email
+   address two times.
 3. Adjust ``.env.development`` to your needs.
 4. Edit ``web/composer.json`` to point to the repository and name of your TYPO3
    sitepackage. If you are just getting started, clone/fork the boilerplate
@@ -32,8 +32,9 @@ Items to adjust
    the folder name ``chf``. If you need more orientation, simply delete the
    entire ``chf`` folder, run TYPO3's post-installation routine and use the
    ``config.yaml`` produced in the guided process.
-6. Optionally adapt ``Readme.rst`` and ``Citation.cff`` to your project's name,
-   description, and contributors to differentiate it from the template.
+6. Optionally adapt ``README.rst``, ``CITATION.cff``, and
+   ``resources/container.svg`` to your project's credentials to differentiate
+   it from the template.
 7. Optionally revise the commands provided in the ``documentation`` folder to
    fit your project's container names.
 8. Optionally, if you want to use this set-up as a production environment, fill

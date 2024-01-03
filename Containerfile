@@ -1,4 +1,4 @@
-# This file is part of the Namenforschung container configuration.
+# This file is part of the CHF Project Container configuration.
 #
 # For the full copyright and license information, please read the
 # LICENSE.txt file that was distributed with this source code.
