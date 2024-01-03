@@ -63,9 +63,9 @@ manually depending on your use case. The four files are:
 - **web/config/system/settings.php**: use file as is.
 - **web/public**: ZIP all content of this folder into ``public.zip``.
 - **TBD fileadmin**
-- **chf_database.sql**: use the following command in the container folder and
-  change root password and database name if necessary.
+- **chf_database.sql**: use this command in the container folder and change
+  root password and database name if necessary.
 
-..  code-block:: shell
+  ..  code-block:: shell
 
-    podman exec -i chf_database mysqldump -uroot -ppassword t3_chf > chf_database.sql
+      podman exec -i chf_database mysqldump -uroot -ppassword t3_chf > chf_database.sql

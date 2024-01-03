@@ -10,10 +10,11 @@ Useful commands
 
     If you are using Docker instead of Podman, replace ``podman`` with
     ``docker`` and ``podman compose`` with ``docker compose`` in all examples
-    provided below. You may need to use ``podman compose`` or
+    provided below. You may need to use ``podman-compose`` or
     ``docker-compose`` depending on your configuration.
 
-All Podman (or Docker) commands listed here work in the container folder.
+All Podman (or Docker) commands listed here work when accessing them from the
+container folder.
 
 ..  _container-lifecycle:
 
@@ -75,8 +76,8 @@ container for execution.
 
       exit
 
-- Execute a command inside the container straight from the host; replace ``ls
-  -la`` with the command you need:
+- Execute a command inside the container straight from the host; replace
+  ``ls -la`` with the command you need:
 
   ..  code-block:: shell
 
@@ -90,8 +91,8 @@ Common tasks
 The following tasks are common during development or, for example, for the 
 **host system to run** via a cron job or other scheduling services. They are
 given as abbreviated one-liners here, but you may just as well access the
-container's command line first and then run the same command without ``podman
-exec -i chf_web`` or  ``podman exec -i chf_database``, respectively.
+container's command line first and then run the same command without
+``podman exec -i chf_web`` or  ``podman exec -i chf_database``, respectively.
 
 - Update all PHP Composer packages:
 

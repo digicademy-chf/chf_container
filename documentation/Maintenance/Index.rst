@@ -38,18 +38,19 @@ update the original one. before you start, make sure you know the **new version
 number** to be used by the release.
 
 1. Make changes to the ``Containerfile``.
-2. Build the image via ``podman build -f Containerfile -t
-   ghcr.io/digicademy_chf/chf_project_container:0.9.0 .`` using the new version
-   number at the end. Alter the image name if necessary.
-3. If successful, push the image to the registry using ``podman push
-   ghcr.io/digicademy_chf/chf_project_container``. Alter the location if
-   necessary.
+2. Build the image via
+   ``podman build -f Containerfile -t ghcr.io/digicademy_chf/chf_project_container:0.9.0 .``
+   using the new version number at the end. Alter the image name if necessary.
+3. If successful, push the image to the registry using
+   ``podman push ghcr.io/digicademy_chf/chf_project_container``. Alter the
+   location if necessary.
 4. To use the new image, also change the version number tag in ``compose.yml``.
 
 After a new image is released, make sure you also **release the according
-version of the code** :ref:`as per the instructions above <>`. Make sure to
-:ref:`update any development and production environments
-<update-all-containers>` afterwards for the changes to take effect.
+version of the code** :ref:`as per the instructions above
+<creating-a-new-release>`. Make sure to :ref:`update any development and
+production environments <update-all-containers>` afterwards for the changes to
+take effect.
 
 ..  _syncing-with-upstream:
 
@@ -57,8 +58,8 @@ Syncing with upstream
 =====================
 
 If you forked this repository to build a custom environment for your project,
-it may be useful to periodically sync upstream changes via ``git fetch
-upstream`` and then merging the resulting branch ``upstream/main`` into your
-main branch. If you use web interfaces built around Git, such as GitHub or
-GitLab, and have the right permission level, they will likely offer you a
-button like ``Sync fork`` on the main page of your repo to simplify this.
+it may be useful to periodically sync upstream changes via
+``git fetch upstream`` and then merging the resulting branch ``upstream/main``
+into your main branch. If you use web interfaces built around Git, such as
+GitHub or GitLab, and have the right permission level, they will likely offer
+you a button like :guilabel:`Sync fork` on the main page of your repo to simplify this.
