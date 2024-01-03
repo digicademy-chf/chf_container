@@ -24,18 +24,19 @@ Items to adjust
 2. In ``config/php/php.ini``, change the server admin's email address two
    times.
 3. Adjust ``.env.development`` to your needs.
-4. Optionally, if you want to use this set-up as a production environment, fill
-   in and securely store the ``.env.production`` file as well as two
-   certificate files ``config/apache2/ssl/000-default-ssl.pem`` and
-   ``config/apache2/ssl/000-default-ssl.key`` outsite any public (or
-   potentially public) repo.
-5. Optionally delete the ``Containerfile`` as it serves no function in your own
-   repository if your ``compose.yml`` uses the base image provided by
-   ``chf_project_container``.
+4. Adapt the file ``web/config/sites/chf/config.yaml`` to your needs and change
+   the folder name ``chf`` to your needs. If you need more orientation, simply
+   delete the entire ``chf`` folder, run TYPO3's post-installation routine and
+   use the ``config.yaml`` produced in the process.
 6. Optionally adapt ``Readme.rst`` and ``Citation.cff`` to your project's name,
    description, and contributors to differentiate it from the template.
 7. Optionally revise the commands provided in the ``documentation`` folder to
    fit your project's container names.
+5. Optionally, if you want to use this set-up as a production environment, fill
+   in and securely store the ``.env.production`` file as well as two
+   certificate files ``config/apache2/ssl/000-default-ssl.pem`` and
+   ``config/apache2/ssl/000-default-ssl.key`` outsite any public (or
+   potentially public) repo.
 
 Depending on the amount of things you alter, periodically **pulling changes
 from the forked original repo** may become more cumbersome. If you make changes

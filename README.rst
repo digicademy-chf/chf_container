@@ -40,7 +40,6 @@ This is a pre-release version. The following steps are required for the
 software to move out of beta:
 
 - Add instructions to manage folder permissions if necessary
-- Instructions for site config.yaml in instructions on how to adapt the repo
 - Fill in fileadmin TBD in two places
 - Proper dev/prod switch in Apache config to avoid relying on ports to identify
   the right context

@@ -1,7 +1,7 @@
-base: 'https://namenforschung.net'
+base: 'https://chf.online'
 baseVariants:
   -
-    base: 'http://namenforschung.local'
+    base: 'http://chf.local'
     condition: 'applicationContext == "Development"'
 languages:
   -
@@ -24,7 +24,7 @@ languages:
     typo3Language: default
     locale: en_GB.utf8
     iso-639-1: en
-    websiteTitle: 'Digital Dictionary of Surnames in Germany'
+    websiteTitle: 'Cultural Heritage Framework'
     navigationTitle: English
     hreflang: en-GB
     direction: ltr
@@ -33,4 +33,4 @@ languages:
     flag: gb
     languageId: 1
 rootPageId: 1
-websiteTitle: 'Digitales Familiennamenwörterbuch Deutschlands'
+websiteTitle: 'Cultural Heritage Framework'
