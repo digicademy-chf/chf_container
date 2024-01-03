@@ -1,6 +1,6 @@
 {
 	"name": "digicademy/typo3-composer-install",
-	"description" : "Typo3 setup for namenforschung.net",
+	"description" : "Typo3 setup for a web app using the Cultural Heritage Framework",
 	"license": "GPL-2.0-or-later",
 	"type": "project",
 	"config": {
@@ -16,11 +16,11 @@
 	"repositories": [
 		{
 		"type": "vcs",
-			"url": "https://gitlab.rlp.net/adwmainz/digicademy/dfd/namenforschung.git"
+			"url": "https://github.com/digicademy-chf/chf_project.git"
 		}
 	],
 	"require": {
-		"digicademy/namenforschung": "dev-main"
+		"digicademy/chf_project": "dev-main@dev"
 	},
 	"minimum-stability": "dev",
 	"prefer-stable": true
