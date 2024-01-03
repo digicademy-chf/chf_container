@@ -1,0 +1,53 @@
+..  include:: /Includes.rst.txt
+
+..  _adapt-the-environment:
+
+=====================
+Adapt the environment
+=====================
+
+The container template provided at `chf_project_container
+<https://github.com/digicademy-chf/chf_project_container>`__ may be adapted to
+other projects, whether they use the Cultural Heritage Framework and TYPO3 or
+not. To use the template as a developement and/or production environment,
+**fork the original repo**, adjust the items listed below, and then push the
+changes to your own repo.
+
+..  _items-to-adjust:
+
+Items to adjust
+===============
+
+1. In ``compose.yml``, change all ``container_name``s and ``network`` names to
+   something specific to your project. This allows for installing multiple CHF
+   project pods (or networks) on the same host.
+2. In ``config/php/php.ini``, change the server admin's email address two
+   times.
+3. Adjust ``.env.development`` to your needs.
+4. Optionally, if you want to use this set-up as a production environment, fill
+   in and securely store the ``.env.production`` file as well as two
+   certificate files ``config/apache2/ssl/000-default-ssl.pem`` and
+   ``config/apache2/ssl/000-default-ssl.key`` outsite any public (or
+   potentially public) repo.
+5. Optionally delete the ``Containerfile`` as it serves no function in your own
+   repository if your ``compose.yml`` uses the base image provided by
+   ``chf_project_container``.
+6. Optionally adapt ``Readme.rst`` and ``Citation.cff`` to your project's name,
+   description, and contributors to differentiate it from the template.
+7. Optionally revise the commands provided in the ``documentation`` folder to
+   fit your project's container names.
+
+Depending on the amount of things you alter, periodically **pulling changes
+from the forked original repo** may become more cumbersome. If you make changes
+that other users of the container template may also benefit from, please
+consider contributing them upstream.
+
+..  _production-hosts:
+
+Production hosts
+================
+
+Please note that under production conditions, this simple container set-up is
+designed to **run on a host** that directs traffic towards the webserver
+container, redirects port 80 to port 443, features more robust firewall
+settings, and performs regular backups of the ``web`` folder and the database.
