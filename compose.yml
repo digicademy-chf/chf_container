@@ -40,7 +40,7 @@ services:
     networks:
       - chf
   search:
-    image: docker.io/manticoresearch/manticore:6.2.12
+    image: docker.io/manticoresearch/manticore
     container_name: chf_search
     env_file: .env
     environment:

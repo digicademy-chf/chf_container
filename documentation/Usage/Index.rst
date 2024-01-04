@@ -48,25 +48,25 @@ following command:
 
     git pull && podman compose down && podman compose up -d
 
-..  _generate-files-for-further-installations:
+..  _back-up-content-files:
 
-Generate files for further installations
-========================================
+Back up content files
+=====================
 
 Make sure that you commit any important or permanent changes you make to your
-clone of the environment so you can re-install it if necessary. In addition,
-it is recommended that you periodically produce four files (in addition to the
-two SSL certificate files required for production environment) and collect them
-outside your repo as they may contain sensitive information. The collection
-process could be automated on a host as part of a regular backup or performed
-manually depending on your use case. The four files are:
+clone of the environment so you can re-install it if necessary. Some files as
+well as the database, however, are necessary to re-install the container but
+should be collected outside this repo to avoid leaking user data, confidential
+files, or passwords.
 
-- **web/config/system/settings.php**: use file as is.
-- **web/public**: ZIP all content of this folder into ``public.zip``.
-- **TBD fileadmin**
-- **chf_database.sql**: use this command in the container folder and change
-  root password and database name if necessary.
+For this purpose, you can use a shell script and an additional command that
+compile those content files and save them in the ``content`` folder. It is
+recommended to find a good storage space for these in your organisation
+or even to periodically call the shell script as part of a backup cron job.
+The script can be called as follows from the container folder; you may need to
+alter the root password, database name, and file name:
 
-  ..  code-block:: shell
+..  code-block:: shell
 
-      podman exec -i chf_database mysqldump -uroot -ppassword t3_chf > chf_database.sql
+    sh ./contentbackup.sh && \
+    podman exec -i chf_database mysqldump -uroot -ppassword t3_chf > content/chf_database.sql

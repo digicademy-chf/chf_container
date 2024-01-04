@@ -126,4 +126,11 @@ container's command line first and then run the same command without
 
   ..  code-block:: shell
 
-      podman exec -i chf_database mysqldump -uroot -ppassword t3_chf > chf_database.sql
+      podman exec -i chf_database mysqldump -uroot -ppassword t3_chf > content/chf_database.sql
+
+- Import a database file; you may need to change the root password and the name
+  of the database to export depending on the config in your ``.env`` file:
+
+  ..  code-block:: shell
+
+      podman exec -i chf_database mysqldump -uroot -ppassword t3_chf > content/chf_database.sql
