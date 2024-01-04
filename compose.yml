@@ -13,7 +13,7 @@ services:
     restart: always
     depends_on:
       - database
-#      - search
+      - search
       - mail
     ports:
       - 80:80
@@ -39,29 +39,29 @@ services:
       - ./database:/var/lib/mysql
     networks:
       - chf
-#  search:
-#    image: docker.io/manticoresearch/manticore:6.2.12
-#    container_name: chf_search
-#    env_file: .env
-#    environment:
-#      - EXTRA=1
-#    restart: always
-#    ports:
-#      - "9306:9306"
-#      - "9308:9308"
-#    ulimits:
-#      nproc: 65535
-#      nofile:
-#         soft: 65535
-#         hard: 65535
-#      memlock:
-#        soft: -1
-#        hard: -1
-#    volumes:
+  search:
+    image: docker.io/manticoresearch/manticore:6.2.12
+    container_name: chf_search
+    env_file: .env
+    environment:
+      - EXTRA=1
+    restart: always
+    ports:
+      - "9306:9306"
+      - "9308:9308"
+    ulimits:
+      nproc: 65535
+      nofile:
+         soft: 65535
+         hard: 65535
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
 #      - ./config/manticore/manticore.conf:/etc/manticoresearch/manticore.conf
-#      - ./search:/var/lib/manticore
-#    networks:
-#      - chf
+      - ./search:/var/lib/manticore
+    networks:
+      - chf
   mail:
     image: docker.io/juanluisbaptiste/postfix:latest
     container_name: chf_mail

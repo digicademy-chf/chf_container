@@ -40,9 +40,8 @@ This is a pre-release version. The following steps are required for the
 software to move out of beta:
 
 - Add instructions to manage folder permissions if necessary
-- Fill in fileadmin TBD in two places in the documentation
-- Namenforschung and Corpus Vitrearum use cases (and clones) tested
-- Manticore search set up and "dev" tag removed from ``composer.json``
+- Fill in fileadmin TBD in two places in the docs
+- Namenforschung and Corpus Vitrearum tested, Manticore conf, "dev" removed
 
 In addition, the following features would be nice to have:
 
