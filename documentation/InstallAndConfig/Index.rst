@@ -33,64 +33,49 @@ Docker Engine as a command-line tool. In addition, Git is highly recommended.
     `.env`. For a production environment, use `.env.production` instead and
     fill in the right credentials for your production environment.
 
-3.  Start fresh or use existing data
+3.  Optionally add existing data
 
-    Pick one of the two paths listed below to either start with a new TYPO3 and
-    CHF install or to use existing TYPO3 and CHF data to populate your project.
+    If you want to use existing data, add the following files to the
+    ``content`` folder. They are supposed to be kept separate from this repo
+    because they may contain sensitive information.
+    
+        - ``settings.php``
+        - ``public.zip``
+        - ``chf_database.sql``
+        - ``000-default-ssl.pem`` (only for production environments)
+        - ``000-default-ssl.key`` (only for production environments)
 
-    ..  rst-class:: bignums
-
-    a.  Blank installation
-
-        Execute the following command to signal TYPO3 that you want to use its
-        post-installation routine after the set-up is done:
-
-        ..  code-block:: shell
-
-            touch web/public/FIRST_INSTALL
-
-    b.  Existing data
-
-        To set up an environment based on existing TYPO3 and CHF data, you need
-        a set of additional files that should not be included in public (or
-        potentially public) repos due to user data and passkeys, but need to be
-        available somewhere in your organisation to allow for a fully
-        host-agnostic set-up. To apply them to a new install, save the files to
-        the following file paths relative to the cotainer folder:
-
-        - ``settings.php``: web/config/system/settings.php
-        - ``public.zip``: web/public.zip, unpacked as /web/public
-        - ``TBD fileadmin``
-        - ``chf_database.sql``: chf_database.sql
-
-        In addition, the following two files are required for production
-        environments. For an entirely new production environment, you may need
-        to use a cert bot to produce these two files via Let's Encrypt or
-        another certificate authority.
-
-        - ``000-default-ssl.pem``: config/apache2/ssl/000-default-ssl.pem
-        - ``000-default-ssl.key``: config/apache2/ssl/000-default-ssl.key
+    For an entirely new production environment, you may need to use a cert bot
+    to produce the latter two files via Let's Encrypt or another certificate
+    authority.
 
 4.  Create and start the containers
 
-    Open a command-line interface in the container folder. Run the following
-    commands to create all containers specified in the Compose file.
+    Open a command-line interface in the container folder and run the following
+    set of commands. They move the files in the ``content`` folder to the right
+    place, create all containers specified in the Compose file, and import the
+    database. You may need to alter the root password, database name, and file
+    name. Leave out the two ``ssl`` lines if the two files are not available.
 
     ..  code-block:: shell
 
+        cp content/settings.php web/config/system/settings.php && \
+        unzip content/public.zip web && \
+        cp content/000-default-ssl.pem config/apache2/ssl/000-default-ssl.pem && \
+        cp content/000-default-ssl.key config/apache2/ssl/000-default-ssl.key && \
+        podman compose up -d && \
+        podman exec -i chf_database mysql -uroot -ppassword t3_chf < content/chf_database.sql
+    
+    If you do not want to import existing data, use the following command
+    instead. The empty file it creates signifies TYPO3 that you are doing a
+    fresh install.
+
+    ..  code-block:: shell
+
+        touch web/public/FIRST_INSTALL && \
         podman compose up -d
-
-5.  Optionally import an existing database
-
-    If you want to import an existing database (see ``chf_database.sql``
-    above), now is the time. Use the following command and alter the root
-    password, database name, and file name to fit your data if necessary:
-
-    ..  code-block:: shell
-
-        podman exec -i chf_database mysql -uroot -ppassword t3_chf < chf_database.sql
-
-6.  Optionally set an alias for ``localhost`` 
+    
+5.  Optionally set an alias for ``localhost`` 
 
     For a development environment, you may want to set up a local domain in the
     host operating system to help access the web app. On Linux or macOS, add
@@ -101,6 +86,6 @@ Docker Engine as a command-line tool. In addition, Git is highly recommended.
 
         127.0.0.1  chf.local
 
-You can **now use** your TYPO3 and CHF installation. If you specified that you
-want to start with no existing data, your first website visit will trigger the
-post-installation routine that helps you set up a new database.
+You can **now use** your TYPO3 and CHF installation. If no data was put in the
+``content`` directory, your first website visit will trigger the
+post-installation routine that helps you set up a new TYPO3 instance.

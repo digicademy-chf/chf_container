@@ -5,6 +5,8 @@
 *.tgz
 *.sql
 config/apache2/ssl/*
+content/*
+!content/.gitkeep
 database/*
 !database/.gitkeep
 search/*

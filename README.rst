@@ -40,10 +40,9 @@ This is a pre-release version. The following steps are required for the
 software to move out of beta:
 
 - Add instructions to manage folder permissions if necessary
-- Fill in fileadmin TBD in two places in the docs
+- Add fileadmin to the file backup/restore instructions
 - Namenforschung and Corpus Vitrearum tested, Manticore conf, "dev" removed
 
 In addition, the following features would be nice to have:
 
-- Script that automates the creation of backup files and their installation
 - Clarification on setting up SSL certificates
