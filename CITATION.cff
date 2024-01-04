@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-title: CHF Project Container
+title: CHF Container
 message: >-
   If you use this software, please cite it using the
   metadata from this file.
@@ -10,24 +10,26 @@ authors:
     email: jonatan.steller@adwmainz.de
     affiliation: Academy of Sciences and Literature Mainz
     orcid: 'https://orcid.org/0000-0002-5101-5275'
-  - name: "CHF Project Container contributors"
+  - name: "CHF Container contributors"
 repository-code: >-
-  https://github.com/digicademy-chf/chf_project_container
+  https://github.com/digicademy-chf/chf_container
 abstract: >-
-  This is a template for development and production
+  This is a container set-up for development and production
   environments of projects based on the Cultural Heritage
-  Framework (CHF). It is designed to be cloned and adapted,
-  and it includes a Containerfile with build instructions
-  for a webserver container capable of running TYPO3 and
-  the CHF extensions. The set-up revolves around a file in
-  accordance with the Compose specification for
-  container-based applications and may be run on Linux,
-  Windows, or macOS using, for example, Podman Compose or
-  Docker Compose. The Compose file orchestrates a pod (or
-  network) consisting of standard Debian image with a few
-  added packages and config options like a PHP Composer
-  config, a MariaDB database, Manticore search, and a
-  Postfix container for email jobs.
+  Framework (CHF). It is designed to be usable across
+  projects with a folder reserved for project-specific
+  files, which should be stored separately. The set-up
+  revolves around a file in accordance with the Compose
+  specification for container-based applications that
+  should allow you to set up your environment(s) on Linux,
+  macOS, or Windows via, for example, Podman Desktop or
+  Docker Desktop. The Compose file orchestrates a pod (or
+  network) consisting of an Apache webserver, a PHP- and
+  PHP Composer-capable Debian image that runs TYPO3, a
+  MariaDB database, Manticore search, and a Postfix
+  container for email jobs. The documentation provides
+  install instructions as well as a few pointers towards
+  how to use the container-based environment.
 keywords:
   - Podman
   - Docker
