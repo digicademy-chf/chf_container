@@ -2,12 +2,12 @@
 
 .. _start:
 
-=====================
-CHF Project Container
-=====================
+=============
+CHF Container
+=============
 
 :Package name:
-    digicademy/chf_project_container
+    digicademy/chf_container
 
 :Version:
     |release|
@@ -17,7 +17,7 @@ CHF Project Container
 
 :Author:
     `Jonatan Jalle Steller <mailto:jonatan.steller@adwmainz.de>`__,
-    CHF Project Container contributors
+    CHF Container contributors
 
 :License:
     This document is published under the
@@ -29,17 +29,18 @@ CHF Project Container
 
 ----
 
-This is a template for development and production environments of projects
-based on the Cultural Heritage Framework (CHF). It is designed to be cloned and
-adapted, and it includes a ``Containerfile`` with build instructions for a
-webserver container capable of running TYPO3 and the CHF extensions. The set-up
-revolves around a file in accordance with the `Compose specification
-<https://compose-spec.io/>`__ for container-based applications and may be run
-on Linux, Windows, or macOS using, for example, Podman Compose or Docker
-Compose. The Compose file orchestrates a pod (or network) consisting of
-standard Debian image with a few added packages and config options like a PHP
-Composer config, a MariaDB database, Manticore search, and a Postfix container
-for email jobs.
+This is a container set-up for development and production environments of
+projects based on the Cultural Heritage Framework (CHF). It is designed to be
+usable across projects with a folder reserved for project-specific files, which
+should be stored separately. The set-up revolves around a file in accordance
+with the `Compose specification <https://compose-spec.io/>`__ for
+container-based applications that should allow you to set up your
+environment(s) on Linux, macOS, or Windows via, for example, Podman Desktop or
+Docker Desktop. The Compose file orchestrates a pod (or network) consisting of
+an Apache webserver, a PHP- and PHP Composer-capable Debian image that runs
+TYPO3, a MariaDB database, Manticore search, and a Postfix container for email
+jobs. The documentation provides install instructions as well as a few pointers
+towards how to use the container-based environment.
 
 ----
 

@@ -18,26 +18,16 @@ changes to your own repo.
 Items to adjust
 ===============
 
-1. In ``compose.yml``, change all ``container_name``s and ``network`` names to
-   something specific to your project. This allows for installing multiple CHF
-   project pods (or networks) on the same host.
-2. In ``config/apache2/000-default.conf``, change the server admin's email
-   address two times.
-3. Adjust ``.env.development`` to your needs.
-4. Edit ``web/composer.json`` to point to the repository and name of your TYPO3
-   sitepackage. If you are just getting started, clone/fork the boilerplate
-   `CHF Project <https://github.com/digicademy-chf/chf_project>`__, adjust its
+1. Adjust ``.env.development`` to your needs.
+2. Edit ``web/composer.json`` to point to the repository and name of your TYPO3
+   sitepackage. If you are just getting started, clone the boilerplate `CHF
+   Project <https://github.com/digicademy-chf/chf_project>`__, adjust its
    name and settings, and provide its new credentials here.
-5. Adapt the file ``web/config/sites/chf/config.yaml`` to your needs and change
+4. Adapt the file ``web/config/sites/chf/config.yaml`` to your needs and change
    the folder name ``chf``. If you need more orientation, simply delete the
    entire ``chf`` folder, run TYPO3's post-installation routine and use the
    ``config.yaml`` produced in the guided process.
-6. Optionally adapt ``README.rst``, ``CITATION.cff``, and
-   ``resources/container.svg`` to your project's credentials to differentiate
-   it from the template.
-7. Optionally revise the commands provided in the ``documentation`` folder to
-   fit your project's container names.
-8. Optionally, if you want to use this set-up as a production environment, fill
+6. Optionally, if you want to use this set-up as a production environment, fill
    in and securely store the ``.env.production`` file as well as two
    certificate files ``config/apache2/ssl/000-default-ssl.pem`` and
    ``config/apache2/ssl/000-default-ssl.key`` outsite any public (or

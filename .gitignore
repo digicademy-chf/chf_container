@@ -5,10 +5,11 @@
 *.tgz
 *.sql
 config/apache2/ssl/*
-content/*
-!content/.gitkeep
 database/*
 !database/.gitkeep
+project/*
+!project/.gitkeep
+!project/README.md
 search/*
 !search/.gitkeep
 web/config/system/*

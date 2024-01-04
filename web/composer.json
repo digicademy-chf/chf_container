@@ -1,6 +1,6 @@
 {
-	"name": "digicademy/typo3-composer-install",
-	"description" : "Typo3 setup for a web app using the Cultural Heritage Framework",
+	"name": "digicademy/chf_container",
+	"description" : "Container set-up capable of running CHF-based web applications based on a Compose file",
 	"license": "GPL-2.0-or-later",
 	"type": "project",
 	"config": {

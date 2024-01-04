@@ -59,10 +59,10 @@ Docker Engine as a command-line tool. In addition, Git is highly recommended.
 
     ..  code-block:: shell
 
-        cp content/settings.php web/config/system/settings.php && \
-        unzip content/public.zip web && \
-        cp content/000-default-ssl.pem config/apache2/ssl/000-default-ssl.pem && \
-        cp content/000-default-ssl.key config/apache2/ssl/000-default-ssl.key && \
+        mv content/settings.php web/config/system/settings.php && \
+        unzip content/public.zip web && rm content/public.zip && \
+        mv content/000-default-ssl.pem config/apache2/ssl/000-default-ssl.pem && \
+        mv content/000-default-ssl.key config/apache2/ssl/000-default-ssl.key && \
         podman compose up -d && \
         podman exec -i chf_database mysql -uroot -ppassword t3_chf < content/chf_database.sql
     
