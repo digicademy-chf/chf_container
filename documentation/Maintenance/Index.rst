@@ -42,11 +42,11 @@ The simplest solution is illustrated in the following commands:
 
        git remote add upstream https://github.com/digicademy-chf/chf_project_container.git
 
-2. Apply upstream patches to a local branch called ``upstream/main``:
+2. Create a feature branch for the rebase, e.g., ``upstream-rebase``.
+3. Rebase the feature branch to upstream's main branch (shown below) or any release tag you need:
 
    ..  code-block:: shell
 
-       git pull upstream main
+       git pull --rebase upstream main
 
-3. Resolve any issues should they appear.
-4. Push the changes to your ``origin/main`` as usual.
+4. Merge the feature branch into your main branch to complete the rebase.
