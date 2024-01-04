@@ -52,15 +52,17 @@ Docker Engine as a command-line tool. In addition, Git is highly recommended.
 4.  Create and start the containers
 
     Open a command-line interface in the container folder and run the following
-    set of commands. They move any files in the ``content`` folder to the right
+    set of commands. They move the files in the ``content`` folder to the right
     place, create all containers specified in the Compose file, and import the
     database. You may need to alter the root password, database name, and file
-    name.
+    name. Leave out the two ``ssl`` lines if the two files are not available.
 
     ..  code-block:: shell
 
-        chmod u+x contentrestore.sh && \
-        sh ./contentrestore.sh && \
+        cp content/settings.php web/config/system/settings.php && \
+        unzip content/public.zip web && \
+        cp content/000-default-ssl.pem config/apache2/ssl/000-default-ssl.pem && \
+        cp content/000-default-ssl.key config/apache2/ssl/000-default-ssl.key && \
         podman compose up -d && \
         podman exec -i chf_database mysql -uroot -ppassword t3_chf < content/chf_database.sql
     

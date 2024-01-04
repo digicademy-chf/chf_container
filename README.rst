@@ -40,7 +40,7 @@ This is a pre-release version. The following steps are required for the
 software to move out of beta:
 
 - Add instructions to manage folder permissions if necessary
-- Add fileadmin to the file backup/restore shell scripts and install list
+- Add fileadmin to the file backup/restore instructions
 - Namenforschung and Corpus Vitrearum tested, Manticore conf, "dev" removed
 
 In addition, the following features would be nice to have:

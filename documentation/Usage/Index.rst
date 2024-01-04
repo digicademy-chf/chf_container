@@ -60,19 +60,15 @@ should be collected outside this repo to avoid leaking user data, confidential
 files, or passwords. It is recommended to find a good storage space for these
 in your organisation
 
-A shell script can help you compile the files automatically. You may even call
-it periodically via a backup cron job. You have to allow its execution once,
-though:
+The follwing commands can be called from the container folder to save the
+content files in the ``content`` subfolder. You may need to alter the root
+password of the database, its name, and its file name. Leave out the two
+``ssl`` lines if the two files are not available.
 
 ..  code-block:: shell
 
-    chmod u+x contentbackup.sh
-
-The script itself and an additional command can be called from the container
-folder to save the content files in the ``content`` subfolder. You may need to
-alter the root password of the database, its name, and its file name:
-
-..  code-block:: shell
-
-    sh ./contentbackup.sh && \
+    cp web/config/system/settings.php content/settings.php && \
+    zip -r content/public.zip web/public && \
+    cp config/apache2/ssl/000-default-ssl.pem content/000-default-ssl.pem && \
+    cp config/apache2/ssl/000-default-ssl.key content/000-default-ssl.key && \
     podman exec -i chf_database mysqldump -uroot -ppassword t3_chf > content/chf_database.sql
