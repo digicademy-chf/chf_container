@@ -59,6 +59,7 @@ Docker Engine as a command-line tool. In addition, Git is highly recommended.
 
     ..  code-block:: shell
 
+        chmod u+x contentrestore.sh && \
         sh ./contentrestore.sh && \
         podman compose up -d && \
         podman exec -i chf_database mysql -uroot -ppassword t3_chf < content/chf_database.sql

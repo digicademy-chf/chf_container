@@ -57,14 +57,20 @@ Make sure that you commit any important or permanent changes you make to your
 clone of the environment so you can re-install it if necessary. Some files as
 well as the database, however, are necessary to re-install the container but
 should be collected outside this repo to avoid leaking user data, confidential
-files, or passwords.
+files, or passwords. It is recommended to find a good storage space for these
+in your organisation
 
-For this purpose, you can use a shell script and an additional command that
-compile those content files and save them in the ``content`` folder. It is
-recommended to find a good storage space for these in your organisation
-or even to periodically call the shell script as part of a backup cron job.
-The script can be called as follows from the container folder; you may need to
-alter the root password, database name, and file name:
+A shell script can help you compile the files automatically. You may even call
+it periodically via a backup cron job. You have to allow its execution once,
+though:
+
+..  code-block:: shell
+
+    chmod u+x contentbackup.sh
+
+The script itself and an additional command can be called from the container
+folder to save the content files in the ``content`` subfolder. You may need to
+alter the root password of the database, its name, and its file name:
 
 ..  code-block:: shell
 
