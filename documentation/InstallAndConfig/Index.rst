@@ -6,86 +6,91 @@
 Install and config
 ==================
 
-To install this container set-up, your system needs either **Podman Desktop**
-with the Compose engine enabled (:guilabel:`Settings`, :guilabel:`Resources`),
-Docker Desktop, ``podman`` and ``podman-compose`` as command-line tools, or
-Docker Engine as a command-line tool. In addition, Git is highly recommended.
+To install this container set-up, your host system needs:
+
+- A container engine with Compose support, such as
+  - Podman Desktop with Compose enabled (:guilabel:`Settings`, :guilabel:`Resources`)
+  - or its command-line tools ``podman`` and ``podman-compose``
+  - or Docker Desktop
+  - or its command-line tool Docker Engine
+- Git
+
+..  _step-by-step:
+
+Step by step
+============
 
 ..  attention::
 
     If you are using Docker instead of Podman, replace ``podman`` with
-    ``docker`` and ``podman compose`` with ``docker compose`` in all examples
-    provided below. You may need to use ``podman-compose`` or
-    ``docker-compose`` depending on your configuration.
+    ``docker``. In some configurations you may need to hyphenate
+    ``podman-compose`` or ``docker-compose``.
 
 ..  rst-class:: bignums
 
 1.  Clone the repository
 
-    Clone this repo via ``git clone`` and its SSH address or the HTTPS
-    equivalent. The alternative route is not recommended as it does not allow
-    for simple ``git pull`` updates of the resulting container environment:
-    downloading the repo as a ZIP file and unpacking it.
-
-2.  Choose the right environment file
-
-    For a development environment, copy `.env.development` and rename it to
-    `.env`. For a production environment, use `.env.production` instead and
-    fill in the right credentials for your production environment.
-
-3.  Optionally add existing data
-
-    If you want to use existing data, add the following files to the
-    ``content`` folder. They are supposed to be kept separate from this repo
-    because they may contain sensitive information.
-    
-        - ``settings.php``
-        - ``public.zip``
-        - ``chf_database.sql``
-        - ``000-default-ssl.pem`` (only for production environments)
-        - ``000-default-ssl.key`` (only for production environments)
-
-    For an entirely new production environment, you may need to use a cert bot
-    to produce the latter two files via Let's Encrypt or another certificate
-    authority.
-
-4.  Create and start the containers
-
-    Open a command-line interface in the container folder and run the following
-    set of commands. They move the files in the ``content`` folder to the right
-    place, create all containers specified in the Compose file, and import the
-    database. You may need to alter the root password, database name, and file
-    name. Leave out the two ``ssl`` lines if the two files are not available.
+    Clone this repo using the command below and the actual release tag you need
+    instead of ``v0.9.0``. The alternative route is not recommended as it does
+    not allow for simple updates of the resulting container environment:
+    downloading a release package and unpacking it.
 
     ..  code-block:: shell
 
-        mv content/settings.php web/config/system/settings.php && \
-        unzip content/public.zip web && rm content/public.zip && \
-        mv content/000-default-ssl.pem config/apache2/ssl/000-default-ssl.pem && \
-        mv content/000-default-ssl.key config/apache2/ssl/000-default-ssl.key && \
-        podman compose up -d && \
-        podman exec -i chf_database mysql -uroot -ppassword t3_chf < content/chf_database.sql
-    
-    If you do not want to import existing data, use the following command
-    instead. The empty file it creates signifies TYPO3 that you are doing a
-    fresh install.
+        git clone https://github.com/digicademy-chf/chf_container.git --branch v0.9.0 && \
+        cd chf_container
+
+2.  Add your own content
+
+    If you have used this container set-up before, just copy all
+    project-specific files into the ``project`` folder. See
+    :ref:`custom file overview <custom-file-overview>` for details about which
+    files are required and which ones are only needed in production
+    environments.
+
+    If you want to set up a brand new development environment instead, copy
+    the files ``.env.development`` (renamed to ``.env``), ``FIRST_INSTALL``,
+    and ``composer.json`` from ``project.template`` to the ``project`` folder:
 
     ..  code-block:: shell
 
-        touch web/public/FIRST_INSTALL && \
+        cp project.template/.env.development project/.env && \
+        cp project.template/FIRST_INSTALL project/FIRST_INSTALL && \
+        cp project.template/composer.json project/composer.json
+
+    Change the content of the PHP Composer file (``composer.json``) to point
+    to your project's own TYPO3 sitepackage. Feel free to clone the boilerplate
+    `CHF Project <https://github.com/digicademy-chf/chf_project>`__ as a
+    template for your sitepackage to house all project-specific TYPO3 code.
+
+3.  Create and start the containers
+
+    Run this command to create all containers specified in the Compose file:
+
+    ..  code-block:: shell
+
         podman compose up -d
-    
-5.  Optionally set an alias for ``localhost`` 
 
-    For a development environment, you may want to set up a local domain in the
-    host operating system to help access the web app. On Linux or macOS, add
-    the following line to the file ``/etc/hosts``.  On Windows, add it to
-    ``C:\Windows\System32\Drivers\etc\hosts``:
+    If you added existing data to the ``project`` folder in the previous step,
+    you will also want to import the database. Alter the root password of the
+    new database if necessary:
+
+    ..  code-block:: shell
+
+        podman exec -i <project_name>_database mysql -uroot -ppassword chf < project/database.sql
+
+4.  Optionally set an alias for ``localhost`` 
+
+    For a development environment, you may want to set up an alias as a local
+    domain in the host operating system to help access the web app. On Linux
+    or macOS, add the line below the file ``/etc/hosts`` using the alias that
+    you want. On Windows, add it to ``C:\Windows\System32\Drivers\etc\hosts``.
 
     ..  code-block::
 
         127.0.0.1  chf.local
 
-You can **now use** your TYPO3 and CHF installation. If no data was put in the
-``content`` directory, your first website visit will trigger the
-post-installation routine that helps you set up a new TYPO3 instance.
+**Congratulations**, you can now use your TYPO3 and CHF installation! A
+production environment will now be available at the host's URL. A development
+environment can be found at ``127.0.0.1``, ``localhost``, ``chf.local`` or any
+other specified alias depending on whether and how you executed the last step.

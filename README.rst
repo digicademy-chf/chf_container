@@ -31,6 +31,8 @@ TYPO3, a MariaDB database, Manticore search, and a Postfix container for email
 jobs. The documentation provides install instructions as well as a few pointers
 towards how to use the container-based environment.
 
+**This version is designed for use with TYPO3 12.**
+
 :Repository:  https://github.com/digicademy-chf/chf_container
 :Read online: https://digicademy-chf.github.io/chf_container
 

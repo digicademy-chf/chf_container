@@ -51,9 +51,9 @@ towards how to use the container-based environment.
     :titlesonly:
 
     Introduction/Index
-    AdaptTheEnvironment/Index
     InstallAndConfig/Index
     Usage/Index
+    ProjectSpecificFiles/Index
     UsefulCommands/Index
     Maintenance/Index
 

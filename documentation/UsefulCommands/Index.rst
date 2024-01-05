@@ -9,9 +9,8 @@ Useful commands
 ..  attention::
 
     If you are using Docker instead of Podman, replace ``podman`` with
-    ``docker`` and ``podman compose`` with ``docker compose`` in all examples
-    provided below. You may need to use ``podman-compose`` or
-    ``docker-compose`` depending on your configuration.
+    ``docker``. In some configurations you may need to hyphenate
+    ``podman-compose`` or ``docker-compose``.
 
 All Podman (or Docker) commands listed here work when accessing them from the
 container folder.
@@ -68,7 +67,7 @@ container for execution.
 
   ..  code-block:: shell
 
-      podman exec -it chf_web bash
+      podman exec -it <project_name>_web bash
 
 - Get out of the container's command-line interface:
 
@@ -81,56 +80,54 @@ container for execution.
 
   ..  code-block:: shell
 
-      podman exec -i chf_web ls -la
+      podman exec -i <project_name>_web ls -la
 
 ..  _common-tasks:
 
 Common tasks
 ============
 
-The following tasks are common during development or, for example, for the 
-**host system to run** via a cron job or other scheduling services. They are
-given as abbreviated one-liners here, but you may just as well access the
-container's command line first and then run the same command without
-``podman exec -i chf_web`` or  ``podman exec -i chf_database``, respectively.
+The following tasks are common during development or may otherwise be **called
+from the host system**. They are given as abbreviated one-liners here, but you
+may just as well access the container's command line first and then run the
+same command without ``podman exec -i <project_name>_web``,
+``podman exec -i <project_name>_server`` or 
+``podman exec -i <project_name>_database``, respectively.
 
 - Update all PHP Composer packages:
 
   ..  code-block:: shell
 
-      podman exec -i chf_web composer update
+      podman exec -i <project_name>_web composer update
 
 - Require a new PHP Composer package; if it is in a non-standard repository
-  like your own git instance, you first need to add the repo to
-  ``web/composer.json``:
+  like your own git instance, you first need to add the repo to your
+  ``project/composer.json``:
 
   ..  code-block:: shell
 
-      podman exec -i chf_web composer require digicademy-chf/chf_bib
+      podman exec -i <project_name>_web composer require digicademy/chf_bib
 
 - Update TYPO3's language packs:
 
   ..  code-block:: shell
 
-      podman exec -i chf_web typo3 language:update
+      podman exec -i <project_name>_web typo3 language:update
 
 - Restart the Apache server:
 
   ..  code-block:: shell
 
-      podman exec -i chf_web systemctl restart apache2
+      podman exec -i <project_name>_server systemctl restart apache2
 
-- Export the database as a file; you may need to change the root password and
-  the name of the database to export depending on the config in your ``.env``
-  file:
+- Export the database as a file; you may need to change the root password:
 
   ..  code-block:: shell
 
-      podman exec -i chf_database mysqldump -uroot -ppassword t3_chf > content/chf_database.sql
+      podman exec -i <project_name>_database mysqldump -uroot -ppassword chf > project/database.sql
 
-- Import a database file; you may need to change the root password and the name
-  of the database to export depending on the config in your ``.env`` file:
+- Import a database file; you may need to change the root password:
 
   ..  code-block:: shell
 
-      podman exec -i chf_database mysqldump -uroot -ppassword t3_chf > content/chf_database.sql
+      podman exec -i <project_name>_database mysqldump -uroot -ppassword chf > project/database.sql

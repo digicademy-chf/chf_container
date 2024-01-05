@@ -6,11 +6,24 @@
 Maintenance
 ===========
 
-The web server used in this environment is a standard Debian image with a few
-additional packages. In most cases, **this image should be sufficient as is**.
-Under some circumstances, however, it may be necessary to build your own image
-with additional packages, add it to a container registry of your choice, and
-change the image path in the file ``compose.yml`` accordingly.
+The following information is primarily **intended for the further development**
+of this package, but may also be useful for those using the set-up as they
+migrate to newer TYPO3 versions and need to change their development and
+production environments accordingly.
+
+..  _update-to-a-new-typo3-version:
+
+Update to a new TYPO3 version
+=============================
+
+The main change that is required to make this set-up fit for a new TYPO3
+version is to check that all images and packages listed in ``compose.yml`` and
+the ``Containerfile`` have the **right version as per the official system
+requirements**.
+
+Please note that each Debian release includes **specific PHP versions** that
+need to match TYPO3's expectations. When you produce an update, also remember
+to indicate the new TYPO3 version in the ``README.rst``.
 
 ..  _creating-a-new-release:
 
@@ -21,32 +34,29 @@ Creating a new release
 2. Add the new version number to ``CITATION.cff``.
 3. Create a new release with the new version number, e.g. `v0.9.0`.
 
-..  _syncing-with-upstream:
+..  _updating-a-local-installation:
 
-Syncing with upstream
-=====================
+Updating a local installation
+=============================
 
-If you cloned the container template to build a custom environment for your
-project, it may be useful to periodically sync upstream changes. If you just
-have a local clone, fetch (and merge) changes from the ``origin``. In case you
-forked the project on GitHub, you will likely see a :guilabel:`Sync fork`
-button supporting you in merging any upstream changes.
+..  attention::
 
-If you copied the template to any other platform built around Git, such as
-GitLab, it will now funcion as your ``origin`` instead of the original repo.
-The simplest solution is illustrated in the following commands:
+    If you are using Docker instead of Podman, replace ``podman`` with
+    ``docker``. In some configurations you may need to hyphenate
+    ``podman-compose`` or ``docker-compose``.
 
-1. In your local clone of your repo, add an additional ``upstream``:
+**Export your database before you update** your local installation to a new
+version. Then execute the following command in your container folder to update,
+after replacing ``v0.9.0`` with the release tag you want to update to:
 
-   ..  code-block:: shell
+..  code-block:: shell
 
-       git remote add upstream https://github.com/digicademy-chf/chf_project_container.git
+    podman compose down && \
+    git clone https://github.com/digicademy-chf/chf_container.git --branch v0.9.0 && \
+    podman compose up -d
 
-2. Create a feature branch for the rebase, e.g., ``upstream-rebase``.
-3. Rebase the feature branch to upstream's main branch (shown below) or any release tag you need:
-
-   ..  code-block:: shell
-
-       git pull --rebase upstream main
-
-4. Merge the feature branch into your main branch to complete the rebase.
+If you **installed the environment without Git**, you can replace the ``git``
+step with replacing the old folder by a new download. Even if the runtime
+content of your containers is supposed to be persisted in the subfolders,
+remember not to throw away the content of ``project`` in particular. If
+something goes wrong, you may need it for a full re-install.
