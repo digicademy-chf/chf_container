@@ -18,6 +18,8 @@
 CHF Container
 =============
 
+**This version is designed for use with TYPO3 12.**
+
 This is a container set-up for development and production environments of
 projects based on the Cultural Heritage Framework (CHF). It is designed to be
 usable across projects with a folder reserved for project-specific files, which
@@ -31,8 +33,6 @@ TYPO3, a MariaDB database, Manticore search, and a Postfix container for email
 jobs. The documentation provides install instructions as well as a few pointers
 towards how to use the container-based environment.
 
-**This version is designed for use with TYPO3 12.**
-
 :Repository:  https://github.com/digicademy-chf/chf_container
 :Read online: https://digicademy-chf.github.io/chf_container
 
@@ -44,10 +44,9 @@ software to move out of beta:
 
 - Moved to FPM container and separate Apache container
 - Instructions to manage folder permissions added if necessary
-- Fileadmin added to the instructions
-- Proper Manticore conf added
-- Namenforschung and Corpus Vitrearum tested, "dev" removed
+- Proper Manticore conf added, possibly with environment variables
+- Namenforschung and Corpus Vitrearum tested, "dev" removed from template
 
 In addition, the following features would be nice to have:
 
-- Clarification on setting up SSL certificates
+- Clarification on setting up SSL certificates and using PHP Composer
