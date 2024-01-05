@@ -1,4 +1,4 @@
-# <project_name>
+# \<project_name\>
 
 The files in this folder are project-specific content for use with
 [CHF Container](https://github.com/digicademy-chf/chf_container), a standard
@@ -9,7 +9,7 @@ documentation.
 
 ## Sensitive files
 
-**Some project-spefic files are stored securely at <location>.**
+**Some project-specific files are stored securely at \<location\>.**
 
 Make sure that the following files do not get pushed into a public or
 semi-public repository as they may contain user data, passwords, and other
@@ -21,4 +21,4 @@ secret credentials:
 - `000-default-ssl.pem`
 - `000-default-ssl.key`
 
-Check the documentation of CHF Container for more information about the files.
+Check the CHF Container documentation for more information about these files.
