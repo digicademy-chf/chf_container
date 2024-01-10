@@ -16,10 +16,10 @@ services:
       - search
       - mail
     ports:
-      - 80:80
-      - 443:443
+      - ${HTTP_PORT}:80
+      - ${HTTPS_PORT}:443
     extra_hosts:
-      - localhost:127.0.0.1
+      - ${HOSTNAME}:127.0.0.1
     volumes:
       - ./config/apache2/000-default.conf:/etc/apache2/sites-available/000-default.conf
       - ./config/apache2/ssl:/etc/apache2/ssl

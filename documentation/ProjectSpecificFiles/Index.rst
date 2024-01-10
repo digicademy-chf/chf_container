@@ -38,6 +38,7 @@ Your ``project`` folder may contain the following files. Templates are stored in
 =======================  ========  ==================================================================================================
 File or folder           Template  Description
 =======================  ========  ==================================================================================================
+``.gitignore``           Yes       Optional gitignore file to avoid accidentally pushing sensitive files to public repos
 ``README.md``            Yes       Optional readme file to store additional information along with your custom files
 ``FIRST_INSTALL``        Yes       Empty file to trigger TYPO3's setup wizard
 ``.env``                 Yes       Provides environment variables, use ``.env.development`` or fill the blanks in ``.env.production``
@@ -46,8 +47,8 @@ File or folder           Template  Description
 ``sites``                Yes       Folder holding config files for all sites the instance runs, created by the setup wizard
 ``fileadmin``            No        Folder containing uploaded files
 ``database.sql``         No        Full manual export of the database, may contain user information
-``000-default-ssl.pem``  No        One of two confidential SSL certificate files, only required for production environments
-``000-default-ssl.key``  No        The second confidential SSL certificate file, only required for production environments
+``cert.crt``             No        One of two confidential SSL certificate files, only required for production environments
+``cert.key``             No        The second confidential SSL certificate file, only required for production environments
 =======================  ========  ==================================================================================================
 
 ..  _ssl-certificate-files:
@@ -56,7 +57,7 @@ SSL certificate files
 =====================
 
 For an entirely new production environment, you may need to use a cert bot to
-produce the two files ``000-default-ssl.pem`` and ``000-default-ssl.key`` via
+produce the two files ``cert.crt`` and ``cert.key`` via
 `Let's Encrypt <https://letsencrypt.org/>`__ or another certificate authority.
 They files validate secure connections to your public website and need to be
 renewed periodically.
