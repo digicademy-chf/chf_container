@@ -38,6 +38,7 @@ Your ``project`` folder may contain the following files. Templates are stored in
 =======================  ========  ==================================================================================================
 File or folder           Template  Description
 =======================  ========  ==================================================================================================
+``.gitignore``           Yes       Optional gitignore file to avoid accidentally pushing sensitive files to public repos
 ``README.md``            Yes       Optional readme file to store additional information along with your custom files
 ``FIRST_INSTALL``        Yes       Empty file to trigger TYPO3's setup wizard
 ``.env``                 Yes       Provides environment variables, use ``.env.development`` or fill the blanks in ``.env.production``
