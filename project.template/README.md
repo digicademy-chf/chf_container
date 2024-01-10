@@ -7,6 +7,10 @@ development or production environment of this project, simply drop these files
 into the set-up's `project` folder as per the installation instructions in the
 documentation.
 
+## Additional setup info
+
+- None
+
 ## Sensitive files
 
 **Some project-specific files are stored securely at \<location\>.**
