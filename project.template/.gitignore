@@ -1,5 +1,5 @@
 .env.production
 settings.php
 database.sql
-000-default-ssl.pem
-000-default-ssl.key
+cert.crt
+cert.key

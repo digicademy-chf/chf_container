@@ -22,7 +22,7 @@ secret credentials:
 - `settings.php` (except for a version with dummy password hashes)
 - `.env` or `.env.production` (`.env.development` is likely safe)
 - `database.sql` (except for a subset without user tables)
-- `000-default-ssl.pem`
-- `000-default-ssl.key`
+- `cert.crt`
+- `cert.key`
 
 Check the CHF Container documentation for more information about these files.
