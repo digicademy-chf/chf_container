@@ -41,7 +41,6 @@ services:
       - search
       - mail
     volumes:
-#      - ./config/php/php.ini:/etc/php/8.2/apache2/php.ini
       - ./app:/var/www/html
     networks:
       - frontend

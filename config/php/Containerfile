@@ -39,6 +39,19 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         xsl \
         zip
 
+# Use the production-ready default PHP config
+RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
+    && echo "expose_php = Off" >> "$PHP_INI_DIR/php.ini" \
+    && echo "html_errors = Off" >> "$PHP_INI_DIR/php.ini" \
+    && echo "log_errors = ${PHP_LOG_ERRORS}" >> "$PHP_INI_DIR/php.ini" \
+    && echo "memory_limit = ${PHP_MEMORY_LIMIT}" >> "$PHP_INI_DIR/php.ini" \
+    && echo "max_execution_time = ${PHP_MAX_EXECUTION_TIME}" >> "$PHP_INI_DIR/php.ini" \
+    && echo "upload_max_filesize = ${PHP_UPLOAD_MAX_FILESIZE}" >> "$PHP_INI_DIR/php.ini" \
+    && echo "post_max_size = ${PHP_POST_MAX_SIZE}" >> "$PHP_INI_DIR/php.ini" \
+    && echo "allow_url_fopen = ${PHP_ALLOW_URL_FOPEN}" >> "$PHP_INI_DIR/php.ini" \
+    && echo "max_input_vars = 3000" >> "$PHP_INI_DIR/php.ini" \
+    && echo "always_populate_raw_post_data = -1" >> "$PHP_INI_DIR/php.ini"
+
 # Install PHP Composer
 COPY --from=docker.io/composer/composer:2-bin /composer /usr/bin/composer
 
