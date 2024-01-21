@@ -71,14 +71,6 @@ Step by step
 
         podman compose up -d
 
-    Alternatively, and only on a development system, you may want to start a
-    phpMyAdmin (usually on port ``8081``) to be able to inspect the database.
-    Use the ``debug`` profile for this:
-
-    ..  code-block:: shell
-
-        podman compose --profile=debug up -d
-
     If you added existing data to the ``project`` folder in the previous step,
     you will also want to import the database. Alter the root password of the
     new database if necessary:
@@ -103,3 +95,20 @@ production environment will now be available at the host's URL. A development
 environment can be found at ``127.0.0.1:8080``, ``localhost:8080``,
 ``chf.local:8080`` or any other specified alias depending on whether and how
 you executed the last step.
+
+..  _add-phpmyadmin:
+
+Add phpMyAdmin
+==============
+
+On a development system (not in production), you may want to be able to inspect
+the database. You can create a phpMyAdmin container along with the regular
+containers using the ``debug`` profile. Use this command instead of the one
+listed in step 3:
+
+    ..  code-block:: shell
+
+        podman compose --profile=debug up -d
+
+When the installation is done, phpMyAdmin is available on port ``8081`` or any
+other port you specified in your ``.env`` file.
