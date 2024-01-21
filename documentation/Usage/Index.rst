@@ -28,8 +28,8 @@ web server and also incorporates any changes made to the required PHP packages.
 
 ..  code-block:: shell
 
-    podman exec -i <project_name>_web apt update && \
-    podman exec -i <project_name>_web composer update
+    podman exec -i <project_name>_server apt update && \
+    podman exec -i <project_name>_server composer update
 
 ..  _update-all-containers:
 
