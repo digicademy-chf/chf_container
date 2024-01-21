@@ -7,14 +7,14 @@ Usage
 =====
 
 On a production system, the frontend is available from your browser at the URL
-provided by the host. In a development environment, enter ``127.0.0.1``,
-``localhost``, or any other **host alias** such as ``chf.local`` to see the
-frontend. Add ``/typo3`` to the URL to access the TYPO3 backend.
+provided by the host. In a development environment, enter ``127.0.0.1:8080``,
+``localhost:8080``, or any other **host alias** such as ``chf.local:8080`` to
+see the frontend. Add ``/typo3`` to the URL to access the TYPO3 backend.
 
-..  _periodical-updates:
+..  _quick-periodical-updates:
 
-Periodical updates
-==================
+Quick periodical updates
+========================
 
 ..  attention::
 
@@ -23,28 +23,26 @@ Periodical updates
     ``podman-compose`` or ``docker-compose``.
 
 The following steps should be performed periodically to **keep an existing
-environment up to date**. This updates all Debian packages inside the virtual
-web server and also incorporates any changes made to the required PHP packages.
+environment up to date**. This only updates the PHP packages inside the virtual
+PHP environment.
 
 ..  code-block:: shell
 
-    podman exec -i <project_name>_web apt update && \
-    podman exec -i <project_name>_web composer update
+    podman exec -i <project_name>_php composer update
 
 ..  _update-all-containers:
 
 Update all containers
 =====================
 
-Alternatively, and to update all containers at the same time, destroy and
-rebuild the containers in one go. This action **includes both steps mentioned
-above**, but it will lead to a brief downtime if performed in production while
-the image is being rebuilt. Enter the container folder and execute the
+Alternatively, and to update all containers at the same time including the
+various Debian packages they contain, destroy and rebuild the containers in one
+go. This action **includes the PHP Composer update mentioned above** and is
+thus ideal to update the entire stack, but it leads to a brief downtime while
+the images are being rebuilt. Enter the container folder and execute the
 following command:
 
 ..  code-block:: shell
 
     podman compose down && \
     podman compose up -d
-
-..  _back-up-content-files:
