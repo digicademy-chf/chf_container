@@ -27,7 +27,7 @@ services:
       - ./config/apache/ssl:/usr/local/apache2/ssl
       - ./app:/var/www/html
     networks:
-      - typo3-with-chf
+      - frontend
 
   php:
     build:
@@ -44,7 +44,7 @@ services:
 #      - ./config/php/php.ini:/etc/php/8.2/apache2/php.ini
       - ./app:/var/www/html
     networks:
-      - typo3-with-chf
+      - frontend
 
   database:
     image: docker.io/library/mariadb:10
@@ -57,7 +57,8 @@ services:
       - ./config/mariadb:/etc/mysql/conf.d
       - ./database:/var/lib/mysql
     networks:
-      - typo3-with-chf
+      - frontend
+      - debug
 
   search:
     image: docker.io/manticoresearch/manticore
@@ -83,7 +84,7 @@ services:
       - ./config/manticore/manticore.conf:/etc/manticoresearch/manticore.conf
       - ./search:/var/lib/manticore
     networks:
-      - typo3-with-chf
+      - frontend
 
   mail:
     image: docker.io/juanluisbaptiste/postfix:latest
@@ -95,7 +96,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
     networks:
-      - typo3-with-chf
+      - frontend
 
   phpmyadmin:
     image: docker.io/phpmyadmin/phpmyadmin
@@ -104,6 +105,11 @@ services:
       - database
     ports:
       - ${PMA_PORT}:80
+    profiles:
+      - debug
+    networks:
+      - debug
 
 networks:
-  typo3-with-chf:
+  frontend:
+  debug:

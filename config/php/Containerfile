@@ -41,3 +41,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Install PHP Composer
 COPY --from=docker.io/composer/composer:2-bin /composer /usr/bin/composer
+
+# Retrieve PHP packages and TYPO3 languages
+#RUN composer update && \
+#    typo3 language:update

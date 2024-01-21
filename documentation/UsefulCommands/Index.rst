@@ -33,6 +33,13 @@ pod (or network) can be **safely destroyed and re-created**.
 
       podman compose up -d
 
+- Create and start all containers; not suitable for production as it makes
+  available a phpMyAdmin for database administration:
+
+  ..  code-block:: shell
+
+      podman compose --profile=debug up -d
+
 - Destroy containers:
 
   ..  code-block:: shell
@@ -67,7 +74,7 @@ container for execution.
 
   ..  code-block:: shell
 
-      podman exec -it <project_name>_server bash
+      podman exec -it <project_name>_php bash
 
 - Get out of the container's command-line interface:
 
@@ -80,7 +87,7 @@ container for execution.
 
   ..  code-block:: shell
 
-      podman exec -i <project_name>_server ls -la
+      podman exec -i <project_name>_php ls -la
 
 ..  _common-tasks:
 

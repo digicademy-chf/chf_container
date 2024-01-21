@@ -8,7 +8,7 @@ Project-specific files
 
 This container set-up may be **adapted to custom projects** via a set of files
 that live in the ``project`` subfolder. It is recommended that you store these
-files and keep that storage up to date so you can always use this set of files,
+files and keep that storage up to date so you can always use the set of files,
 drop it into the subfolder of this repo, and re-create the container
 environment on a new host. Make sure you do not store files containing secret
 credentials or user data in public or semi-public repositories, though.
@@ -19,10 +19,10 @@ Database file
 =============
 
 While the files and folders in ``project`` are automatically connected to the
-right location via symlinks and are thus always up to date, the **database file
-first needs to be generated** before it can be copied. This is achieved via the
-following command, which may require you to adjust the current root password of
-the database first:
+right location via symlinks and are thus always the versions you will want to
+back up, the **database file first needs to be generated** before it can be
+backed up. This is achieved via the following command, which may require you
+to adjust the current root password of the database first:
 
 ..  code-block:: shell
 
@@ -59,5 +59,5 @@ SSL certificate files
 For an entirely new production environment, you may need to use a cert bot to
 produce the two files ``cert.crt`` and ``cert.key`` via
 `Let's Encrypt <https://letsencrypt.org/>`__ or another certificate authority.
-They files validate secure connections to your public website and need to be
+The files validate secure connections to your public website and need to be
 renewed periodically.

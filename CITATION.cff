@@ -27,9 +27,10 @@ abstract: >-
   network) consisting of an Apache webserver, a PHP- and
   PHP Composer-capable Debian image that runs TYPO3, a
   MariaDB database, Manticore search, and a Postfix
-  container for email jobs. The documentation provides
-  install instructions as well as a few pointers towards
-  how to use the container-based environment.
+  container for email jobs. A debug profile adds phpMyAdmin
+  to this set-up. The documentation provides install
+  instructions as well as a few pointers towards how to use
+  the container-based environment.
 keywords:
   - Podman
   - Docker
@@ -43,5 +44,5 @@ keywords:
   - Academia
   - Academic
 license: GPL 3
-version: 0.9.0
-date-released: '2024-01-05'
+version: 0.9.1
+date-released: '2024-01-26'

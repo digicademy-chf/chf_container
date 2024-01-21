@@ -37,7 +37,3 @@ RUN sed -i \
 
 # Include custom virtual host configuration file in main Apache config
 RUN echo "Include /usr/local/apache2/conf/extra/apache.vhost.conf" >> /usr/local/apache2/conf/httpd.conf
-
-# Retrieve PHP packages and TYPO3 languages
-#RUN composer update && \
-#    typo3 language:update

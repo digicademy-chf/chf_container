@@ -1,7 +1,7 @@
 base: 'https://chf.online'
 baseVariants:
   -
-    base: 'http://chf.local'
+    base: 'http://chf.local:8080'
     condition: 'applicationContext == "Development"'
 languages:
   -

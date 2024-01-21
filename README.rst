@@ -30,8 +30,9 @@ environment(s) on Linux, macOS, or Windows via, for example, Podman Desktop or
 Docker Desktop. The Compose file orchestrates a pod (or network) consisting of
 an Apache webserver, a PHP- and PHP Composer-capable Debian image that runs
 TYPO3, a MariaDB database, Manticore search, and a Postfix container for email
-jobs. The documentation provides install instructions as well as a few pointers
-towards how to use the container-based environment.
+jobs. A ``debug`` profile adds phpMyAdmin to this set-up. The documentation
+provides install instructions as well as a few pointers towards how to use the
+container-based environment.
 
 :Repository:  https://github.com/digicademy-chf/chf_container
 :Read online: https://digicademy-chf.github.io/chf_container
@@ -42,7 +43,6 @@ Roadmap
 This is a pre-release version. The following steps are required for the
 software to move out of beta:
 
-- Moved to FPM container and separate Apache container
 - Instructions to manage folder permissions added if necessary
 - Proper Manticore conf added, possibly with environment variables
 - Namenforschung and Corpus Vitrearum tested, "dev" removed from template
