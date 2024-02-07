@@ -1,4 +1,4 @@
-.env.production
+.env
 settings.php
 database.sql
 cert.crt
