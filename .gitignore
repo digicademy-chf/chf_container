@@ -1,6 +1,8 @@
 .DS_store
 .idea
 .vscode
+Config/apache/ssl/*
+!Config/apache/ssl/.gitkeep
 Database/*
 !Database/.gitkeep
 Project/*
@@ -9,8 +11,8 @@ Search/*
 !Search/.gitkeep
 App/composer.lock
 App/config/sites/*
+App/config/system/*
 !App/public/*
-!App/public/FIRST_INSTALL
 !App/public/fileadmin
 App/public/fileadmin/*
 App/var
