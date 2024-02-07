@@ -63,6 +63,10 @@ Step by step
     `CHF Project <https://github.com/digicademy-chf/chf_project>`__ as a
     template for your sitepackage to house all project-specific TYPO3 code.
 
+    On Debian-based hosts and on Docker Desktop, permissions of mounted files
+    and folders should not be an issue. On other hosts,
+    :ref:`manage permissions <manage-permissions>` before you continue.
+
 3.  Create and start the containers
 
     Run this command to create all containers specified in the Compose file:
@@ -112,3 +116,41 @@ listed in step 3:
 
 When the installation is done, phpMyAdmin is available on port ``8081`` or any
 other port you specified in your ``.env`` file.
+
+..  _manage-permissions:
+
+Manage permissions
+==================
+
+To grant the containers access to the volumes they mount, you need to make sure
+that the permissions are correct. If you use Podman, non-root users inside the
+container will be mapped to a subset of user IDs that the non-root host user
+has access to. Use the following commands in the container folder on the host
+to grant the correct permissions:
+
+```
+podman unshare chown 33:33 -R app && \
+podman unshare chown 33:33 -R config/apache/apache.vhost.conf && \
+podman unshare chown 33:33 -R config/apache/ssl && \
+podman unshare chown 33:33 -R project/composer.json && \
+podman unshare chown 33:33 -R project/fileadmin && \
+podman unshare chown 33:33 -R project/settings.php && \
+podman unshare chown 33:33 -R project/sites && \
+podman unshare chown 33:33 -R project/cert.key && \
+podman unshare chown 33:33 -R project/cert.crt && \
+podman unshare chown 33:33 -R project/FIRST_INSTALL && \
+podman unshare chown 999:999 -R database && \
+podman unshare chown 999:999 -R config/manticore/manticore.conf && \
+podman unshare chown 999:999 -R search
+```
+
+project/.env -> .env
+project/composer.json -> app/composer.json
+project/sites -> app/config/sites
+project/settings.php -> app/config/system/settings.php
+project/FIRST_INSTALL -> app/public/FIRST_INSTALL
+project/fileadmin -> app/public/fileadmin
+project/cert.key -> config/apache/ssl/cert.key
+project/cert.crt -> config/apache/ssl/cert.crt
+AND database.sql
+DANN project und project.template weg?
