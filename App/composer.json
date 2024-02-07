@@ -1,0 +1,27 @@
+{
+	"name": "digicademy/namenforschung_container",
+	"description" : "Container set-up capable of running the Portal für Namenforschung based on a Compose file",
+	"license": "GPL-2.0-or-later",
+	"type": "project",
+	"config": {
+		"allow-plugins": {
+			"typo3/class-alias-loader": true,
+			"typo3/cms-composer-installers": true
+		},
+		"platform": {
+			"php": "8.2"
+		},
+		"sort-packages": true
+	},
+	"repositories": [
+		{
+		"type": "vcs",
+			"url": "https://gitlab.rlp.net/adwmainz/digicademy/dfd/namenforschung.git"
+		}
+	],
+	"require": {
+		"digicademy/namenforschung": "dev-main@dev"
+	},
+	"minimum-stability": "dev",
+	"prefer-stable": true
+}

@@ -3,8 +3,8 @@
 # For the full copyright and license information, please read the
 # LICENSE.txt file that was distributed with this source code.
 
-# Get slim Debian with PHP 8.2 FPM
-FROM docker.io/library/php:8.2-fpm
+# Get slim Debian with PHP 8.3 FPM
+FROM docker.io/library/php:8.3-fpm
 
 # Install extra packages
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -46,5 +46,6 @@ RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
     && echo "always_populate_raw_post_data = -1" >> "$PHP_INI_DIR/php.ini"
 
 # Retrieve PHP packages and TYPO3 languages
+#WORKDIR /var/www/html
 #RUN composer update && \
 #    typo3 language:update
