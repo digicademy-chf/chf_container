@@ -17,9 +17,10 @@ Update to a new TYPO3 version
 =============================
 
 The main change that is required to make this set-up fit for a new TYPO3
-version is to check that all images and packages listed in ``compose.yml`` and
-the ``Containerfile``s have the **right version as per the official system
-requirements**.
+version is to check that all images and packages listed in :file:`compose.yml`
+and the :file:`Containerfile` files have the **right PHP and MariaDB versions
+as per the official system requirements**. In addition, :file:`composer.json`
+needs to indicate the PHP version being used.
 
 When you produce an update, also remember to indicate the new TYPO3 version in
 the ``README.rst``.

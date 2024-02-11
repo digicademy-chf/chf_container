@@ -92,7 +92,7 @@ Step by step
 
     ..  code-block::
 
-        127.0.0.1  chf.local
+        127.0.0.1  chf.internal
 
 **Congratulations**, you can now use your TYPO3 and CHF installation! A
 production environment will now be available at the host's URL. A development
