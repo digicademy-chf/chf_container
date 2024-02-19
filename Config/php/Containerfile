@@ -38,8 +38,3 @@ RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 # Create config folder for PHP Composer owned by user www-data
 RUN mkdir -p /var/www/.composer && \
     chown 33:33 /var/www/.composer
-
-# Set up entry-point script to run when container is created
-RUN mv "Config/php/init.sh" "/var/www/html/init.sh" && \
-    chown 33:33 /var/www/html/init.sh
-ENTRYPOINT ["init.sh"]
