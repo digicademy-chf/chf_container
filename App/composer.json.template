@@ -55,8 +55,7 @@
         "typo3/cms-tstemplate": "^13",
         "typo3/cms-viewpage": "^13",
         "typo3/cms-webhooks": "^13",
-        "typo3/cms-workspaces": "^13",
-        "digicademy/chf_project": "dev-main@dev"
+        "typo3/cms-workspaces": "^13"
 	},
     "scripts": {
         "post-install-cmd": [
