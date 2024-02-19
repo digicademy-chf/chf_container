@@ -10,6 +10,7 @@ Project/*
 !Project/.gitkeep
 Search/*
 !Search/.gitkeep
+App/composer.json
 App/composer.lock
 App/config/*
 !App/config/.gitkeep
