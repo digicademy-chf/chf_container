@@ -17,13 +17,12 @@ Update to a new TYPO3 version
 =============================
 
 The main change that is required to make this set-up fit for a new TYPO3
-version is to check that all images and packages listed in :file:`compose.yml`
-and the :file:`Containerfile` files have the **right PHP and MariaDB versions
-as per the official system requirements**. In addition, :file:`composer.json`
-needs to indicate the PHP version being used.
+version is to check that all images and packages listed in :file:`compose.yml`,
+the :file:`Containerfile` files, and :file:`composer.json` adhere to the
+**right PHP and MariaDB versions as per the official system requirements**.
 
 When you produce an update, also remember to indicate the new TYPO3 version in
-the ``README.rst``.
+the file :file:`README.rst`.
 
 ..  _creating-a-new-release:
 
@@ -31,7 +30,7 @@ Creating a new release
 ======================
 
 1. Commit all changes to the repo's main branch.
-2. Add the new version number to ``CITATION.cff``.
+2. Add the new version number and release date to ``CITATION.cff``.
 3. Create a new release with the new version number, e.g. `v1.0.0`.
 
 ..  _updating-a-local-installation:
@@ -45,9 +44,10 @@ Updating a local installation
     ``docker``. In some configurations you may need to hyphenate
     ``podman-compose`` or ``docker-compose``.
 
-**Export your database before you update** your local installation to a new
-version. Then execute the following command in your container folder to update,
-but replace ``v1.0.0`` with the release tag you want to update to:
+**Export your database and back up the ``App`` folder** before you update your
+local installation to a new version, just to be safe. Then execute the
+following command in your container folder to update, but replace ``v1.0.0``
+with the release tag you want to update to:
 
 ..  code-block:: shell
 
@@ -57,8 +57,5 @@ but replace ``v1.0.0`` with the release tag you want to update to:
 
 If you **installed the environment without Git**, you can replace the ``git``
 step with replacing the old folder by a new download. Remeber that the runtime
-content of your containers is supposed to be persisted in the subfolders, and
-the content of ``project`` is essential to be able to set up the environment on
-a new host. If something goes wrong, you may need the latter content in
-particular for a full re-install, so make sure you back it up before you
-proceed with deleting the parent folder and replacing it with a new one.
+content of your containers is persisted in the subfolders and needs to be added
+back to the newly created folder.

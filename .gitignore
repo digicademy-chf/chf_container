@@ -2,6 +2,7 @@
 .idea
 .vscode
 .env
+database.sql
 Config/apache/ssl/*
 !Config/apache/ssl/.gitkeep
 Database/*

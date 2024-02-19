@@ -9,19 +9,21 @@ Introduction
 This container set-up may be used as a development **environment to build
 custom projects** based on the Cultural Heritage Framework (CHF). Depending on
 whether you have a container-ready host with a solid firewall and a routine to
-back up your data available, the set-up may even serve as a production
-environment.
+back up your data, the set-up may even serve as a production environment.
 
-The **subfolder** ``project`` is designed to hold your project-specific content
-as files that you can move from one host to anoter. The other subfolders
-``config``, ``database``, ``search``, and ``app`` keep the runtime content of
-your container available ("persistent") as you start, stop, destroy, or
-re-create the containers using them.
+The **subfolder** ``Config`` contains set-up information while ``App``,
+``Database``, and ``Search`` keep the runtime content of your container
+available (persistent) on the host as you start, stop, destroy, or re-create
+the containers accessing them. The environment ignores project-specific files
+such as an :file:`.env` file and a :file:`composer.json`. These should be
+stored in a separate location as files that you simply add to this repo to set
+up an environment on a new host.
 
-If you want to use PHP-capable web space with a database instead, refer to the
+If you want to set up a CHF-capable environment with a hoster that does not
+allow further containerisation but provides PHP-capable web space and a
+database, the most relevant file you need is :file:`composer.json`. Check the
 `TYPO3 system requirements <https://docs.typo3.org/m/typo3/tutorial-getting-started/main/en-us/SystemRequirements/Index.html>`__
-directly to see if the host fits the bill. In this case, the only relevant part
-of CHF Container may be the ``composer.json`` template.
+to see if the hoster ticks all required boxes.
 
 ..  _screenshots:
 
@@ -38,4 +40,4 @@ Production hosts
 Please note that under production conditions, this simple container set-up is
 designed to **run on a host** that directs traffic towards the webserver
 container, manages its ports, features more robust firewall settings, and
-performs regular backups of the ``app`` folder and the database, at least.
+performs regular backups of, at least, the ``App`` folder and the database.

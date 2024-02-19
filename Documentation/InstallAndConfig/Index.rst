@@ -9,7 +9,7 @@ Install and config
 To install this container set-up, your host system needs:
 
 - A container engine with Compose support, such as
-  - Podman Desktop with Compose enabled (:guilabel:`Settings`, :guilabel:`Resources`)
+  - Podman Desktop
   - or its command-line tools ``podman`` and ``podman-compose``
   - or Docker Desktop
   - or its command-line tool Docker Engine
@@ -31,41 +31,26 @@ Step by step
 1.  Clone the repository
 
     Clone this repo using the command below and the actual release tag you need
-    instead of ``v1.0.0``. The alternative route is not recommended as it does
-    not allow for simple updates of the resulting container environment: just
-    download a release package and unpack it.
+    instead of ``v1.0.0``.
 
     ..  code-block:: shell
 
         git clone https://github.com/digicademy-chf/chf_container.git --branch v1.0.0 && \
         cd chf_container
 
-2.  Add your own content
+2.  Prepare custom content or a fresh install
 
-    If you have used this container set-up before, just copy all
-    project-specific files into the ``project`` folder. See
-    :ref:`custom file overview <custom-file-overview>` for details about which
-    files are required and which ones are only needed in production
-    environments.
+    If you have custom, projects-specific files, copy them into this folder.
+    See :ref:`custom file overview <custom-file-overview>` for further details.
 
-    If you want to set up a brand new development environment instead, copy
-    the files ``.env.development`` (renamed to ``.env``), ``FIRST_INSTALL``,
-    and ``composer.json`` from ``project.template`` to the ``project`` folder:
+    If you want to set up a fresh install instead, execute the following
+    command to use template files for the environment file and
+    :file:`composer.json`:
 
     ..  code-block:: shell
 
-        cp project.template/.env.development project/.env && \
-        cp project.template/FIRST_INSTALL project/FIRST_INSTALL && \
-        cp project.template/composer.json project/composer.json
-
-    Change the content of the PHP Composer file (``composer.json``) to point
-    to your project's own TYPO3 sitepackage. Feel free to clone the boilerplate
-    `CHF Project <https://github.com/digicademy-chf/chf_project>`__ as a
-    template for your sitepackage to house all project-specific TYPO3 code.
-
-    On Debian-based hosts and on Docker Desktop, permissions of mounted files
-    and folders should not be an issue. On other hosts,
-    :ref:`manage permissions <manage-permissions>` before you continue.
+        cp template.development.env .env && \
+        cp App/composer.template.json App/composer.json
 
 3.  Create and start the containers
 
@@ -75,13 +60,12 @@ Step by step
 
         podman compose up -d
 
-    If you added existing data to the ``project`` folder in the previous step,
-    you will also want to import the database. Alter the root password of the
-    new database if necessary:
+    If you added existing data in the previous step, you will also want to
+    import your existing database. Alter the root password if necessary:
 
     ..  code-block:: shell
 
-        podman exec -i <project_name>_database mysql -uroot -ppassword chf < project/database.sql
+        podman exec -i <project_name>_database mysql -uroot -ppassword chf < database.sql
 
 4.  Optionally set an alias for ``localhost`` 
 
@@ -94,7 +78,7 @@ Step by step
 
         127.0.0.1  chf.internal
 
-**Congratulations**, you can now use your TYPO3 and CHF installation! A
+**Congratulations**, you can now use your TYPO3 and CHF installation. A
 production environment will now be available at the host's URL. A development
 environment can be found at ``127.0.0.1:8080``, ``localhost:8080``,
 ``chf.local:8080`` or any other specified alias depending on whether and how
@@ -116,41 +100,3 @@ listed in step 3:
 
 When the installation is done, phpMyAdmin is available on port ``8081`` or any
 other port you specified in your ``.env`` file.
-
-..  _manage-permissions:
-
-Manage permissions
-==================
-
-To grant the containers access to the volumes they mount, you need to make sure
-that the permissions are correct. If you use Podman, non-root users inside the
-container will be mapped to a subset of user IDs that the non-root host user
-has access to. Use the following commands in the container folder on the host
-to grant the correct permissions:
-
-```
-podman unshare chown 33:33 -R app && \
-podman unshare chown 33:33 -R config/apache/apache.vhost.conf && \
-podman unshare chown 33:33 -R config/apache/ssl && \
-podman unshare chown 33:33 -R project/composer.json && \
-podman unshare chown 33:33 -R project/fileadmin && \
-podman unshare chown 33:33 -R project/settings.php && \
-podman unshare chown 33:33 -R project/sites && \
-podman unshare chown 33:33 -R project/cert.key && \
-podman unshare chown 33:33 -R project/cert.crt && \
-podman unshare chown 33:33 -R project/FIRST_INSTALL && \
-podman unshare chown 999:999 -R database && \
-podman unshare chown 999:999 -R config/manticore/manticore.conf && \
-podman unshare chown 999:999 -R search
-```
-
-project/.env -> .env
-project/composer.json -> app/composer.json
-project/sites -> app/config/sites
-project/settings.php -> app/config/system/settings.php
-project/FIRST_INSTALL -> app/public/FIRST_INSTALL
-project/fileadmin -> app/public/fileadmin
-project/cert.key -> config/apache/ssl/cert.key
-project/cert.crt -> config/apache/ssl/cert.crt
-AND database.sql
-DANN project und project.template weg?

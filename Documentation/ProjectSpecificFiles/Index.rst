@@ -6,58 +6,61 @@
 Project-specific files
 ======================
 
-This container set-up may be **adapted to custom projects** via a set of files
-that live in the ``project`` subfolder. It is recommended that you store these
-files and keep that storage up to date so you can always use the set of files,
-drop it into the subfolder of this repo, and re-create the container
-environment on a new host. Make sure you do not store files containing secret
-credentials or user data in public or semi-public repositories, though.
+This container set-up may be **adapted to custom projects** via a set of
+additional files that should be stored and regularly updated in an independent
+storage. You can re-create your custom container environment by dropping them
+into a local clone of this repo and creating the containers. Please make sure
+that you do not store files containing secret credentials or user data in
+public or semi-public repositories.
 
 ..  _database-file:
 
 Database file
 =============
 
-While the files and folders in ``project`` are automatically connected to the
-right location via symlinks and are thus always the versions you will want to
-back up, the **database file first needs to be generated** before it can be
-backed up. This is achieved via the following command, which may require you
-to adjust the current root password of the database first:
+While most files can be backed up as they are, it is recommended that you back
+up your database periodically instead of relying on the runtime files stored in
+the :file:`Database` folder. Use this command to **generate a database file**,
+and adjust the root password of the database as required:
 
 ..  code-block:: shell
 
-    podman exec -i <project_name>_database mysqldump -uroot -ppassword chf > project/database.sql
+    podman exec -i <project_name>_database mysqldump -uroot -ppassword chf > database.sql
 
 ..  _custom-file-overview:
 
 Custom file overview
 ====================
 
-Your ``project`` folder may contain the following files. Templates are stored in ``project.template``.
+==================================  ==========================================================================================================================
+File                                Description
+==================================  ==========================================================================================================================
+:file:`.env`                        Provides environment variables; use :file:`template.development.env` or fill the blanks in :file:`template.production.env`
+:file:`App/composer.json`           Configuration for PHP Composer to get the right PHP packages; use :file:`composer.template.json`
+:file:`App/*`                       Contains custom file content of your project, may contain sensitive content or uploads
+:file:`Config/apache/ssl/cert.crt`  One of two confidential SSL certificate files, only required for production environments
+:file:`Config/apache/ssl/cert.key`  The second confidential SSL certificate file, only required for production environments
+:file:`database.sql`                Full manual export of the database, may contain user information
+==================================  ==========================================================================================================================
 
-=======================  ========  ==================================================================================================
-File or folder           Template  Description
-=======================  ========  ==================================================================================================
-``.gitignore``           Yes       Optional gitignore file to avoid accidentally pushing sensitive files to public repos
-``README.md``            Yes       Optional readme file to store additional information along with your custom files
-``FIRST_INSTALL``        Yes       Empty file to trigger TYPO3's setup wizard
-``.env``                 Yes       Provides environment variables, use ``.env.development`` or fill the blanks in ``.env.production``
-``composer.json``        Yes       Configuration for PHP Composer to retrieve the PHP packages listed here and their dependencies
-``settings.php``         No        Contains basic TYPO3 config including a few password hashes, created by the setup wizard
-``sites``                Yes       Folder holding config files for all sites the instance runs, created by the setup wizard
-``fileadmin``            No        Folder containing uploaded files
-``database.sql``         No        Full manual export of the database, may contain user information
-``cert.crt``             No        One of two confidential SSL certificate files, only required for production environments
-``cert.key``             No        The second confidential SSL certificate file, only required for production environments
-=======================  ========  ==================================================================================================
+..  _typo3-sitepackage:
+
+TYPO3 sitepackage
+=================
+
+When you are producing a new TYPO3 and CHF instance, you may want your **own
+sitepackage** to store your configuration, overrides, and additional code. Feel
+free to clone and use the boilerplate
+`CHF Project <https://github.com/digicademy-chf/chf_project>`__ as a
+template.
 
 ..  _ssl-certificate-files:
 
 SSL certificate files
 =====================
 
-For an entirely new production environment, you may need to use a cert bot to
-produce the two files ``cert.crt`` and ``cert.key`` via
+For an entirely new production environment, you may need to use a **cert bot**
+to produce the two files :file:`cert.crt` and :file:`cert.key` via
 `Let's Encrypt <https://letsencrypt.org/>`__ or another certificate authority.
 The files validate secure connections to your public website and need to be
 renewed periodically.

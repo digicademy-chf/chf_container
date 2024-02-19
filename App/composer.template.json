@@ -1,28 +1,28 @@
 {
-	"name": "digicademy/chf_container",
-	"description" : "Container set-up based on a Compose file to run CHF-based web applications",
-	"license": "GPL-2.0-or-later",
-	"type": "project",
-	"config": {
-		"allow-plugins": {
-			"typo3/class-alias-loader": true,
-			"typo3/cms-composer-installers": true
-		}
-	},
-	"repositories": [
-		{
-			"type": "path",
-			"url": "./packages/*/"
-		},
-		{
-		"type": "vcs",
-			"url": "https://github.com/digicademy-chf/chf_project.git"
-		}
-	],
-	"minimum-stability": "dev",
-	"prefer-stable": true,
-	"require": {
-		"doctrine/dbal": "4.0.0-RC2@rc",
+    "name": "digicademy/chf_container",
+    "description": "Container set-up based on a Compose file to run CHF-based web applications",
+    "license": "GPL-2.0-or-later",
+    "type": "project",
+    "config": {
+        "allow-plugins": {
+            "typo3/class-alias-loader": true,
+            "typo3/cms-composer-installers": true
+        }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "./packages/*/"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/digicademy-chf/chf_project.git"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "doctrine/dbal": "4.0.0-RC2@rc",
         "typo3/cms-adminpanel": "^13",
         "typo3/cms-backend": "^13",
         "typo3/cms-belog": "^13",
@@ -55,7 +55,7 @@
         "typo3/cms-viewpage": "^13",
         "typo3/cms-webhooks": "^13",
         "typo3/cms-workspaces": "^13"
-	},
+    },
     "scripts": {
         "post-install-cmd": [
             "./vendor/bin/typo3 setup --force --password --admin-user-password"

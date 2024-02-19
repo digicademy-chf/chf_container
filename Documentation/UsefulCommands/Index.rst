@@ -33,8 +33,8 @@ pod (or network) can be **safely destroyed and re-created**.
 
       podman compose up -d
 
-- Create and start all containers; not suitable for production as it makes
-  available a phpMyAdmin for database administration:
+- Create and start containers including ``debug`` ones; not suitable for
+  production as it makes available phpMyAdmin for database administration:
 
   ..  code-block:: shell
 
@@ -97,9 +97,7 @@ Common tasks
 The following tasks are common during development or may otherwise be **called
 from the host system**. They are given as abbreviated one-liners here, but you
 may just as well access the container's command line first and then run the
-same command without ``podman exec -i <project_name>_server``,
-``podman exec -i <project_name>_php`` or 
-``podman exec -i <project_name>_database``, respectively.
+actual commands.
 
 - Update all PHP Composer packages:
 
@@ -131,10 +129,10 @@ same command without ``podman exec -i <project_name>_server``,
 
   ..  code-block:: shell
 
-      podman exec -i <project_name>_database mysqldump -uroot -ppassword chf > project/database.sql
+      podman exec -i <project_name>_database mysqldump -uroot -ppassword chf > database.sql
 
 - Import a database file; you may need to change the root password:
 
   ..  code-block:: shell
 
-      podman exec -i <project_name>_database mysqldump -uroot -ppassword chf > project/database.sql
+      podman exec -i <project_name>_database mysql -uroot -ppassword chf < database.sql
