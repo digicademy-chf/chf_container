@@ -9,10 +9,12 @@ Install and config
 To install this container set-up, your host system needs:
 
 - A container engine with Compose support, such as
+
   - Podman Desktop
   - or its command-line tools ``podman`` and ``podman-compose``
   - or Docker Desktop
   - or its command-line tool Docker Engine
+
 - Git
 
 ..  _quick-install:
@@ -20,41 +22,45 @@ To install this container set-up, your host system needs:
 Quick install
 =============
 
-All commands for a **fresh install** with ``v1.0.0`` replaced by the release
-tag you need:
-
-    ..  code-block:: shell
-
-        git clone https://github.com/digicademy-chf/chf_container.git --branch v1.0.0 && \
-        cd chf_container && \
-        cp template.development.env .env && \
-        cp App/composer.template.json App/composer.json && \
-        podman compose up -d && \
-        podman exec -i <project_name>_php composer install
-
-And all commands for a custom install with ``v1.0.0`` replaced by the release
-tag you need, ``password`` replaced by the actual root password of the database
-and ``chf`` replaced by the name of your database:
-
-    ..  code-block:: shell
-
-        git clone https://github.com/digicademy-chf/chf_container.git --branch v1.0.0 && \
-        cd chf_container
-        <add custom files>
-        podman compose up -d && \
-        podman exec -i <project_name>_database mysql -uroot -ppassword chf < database.sql && \
-        podman exec -i <project_name>_php composer install
-
-..  _step-by-step:
-
-Step by step
-============
-
 ..  attention::
 
     If you are using Docker instead of Podman, replace ``podman`` with
     ``docker``. In some configurations you may need to hyphenate
     ``podman-compose`` or ``docker-compose``.
+
+All commands for a **fresh install** with ``v1.0.0`` replaced by the release
+tag you need:
+
+..  code-block:: shell
+
+    git clone https://github.com/digicademy-chf/chf_container.git --branch v1.0.0 && \
+    cd chf_container && \
+    cp template.development.env .env && \
+    cp App/composer.template.json App/composer.json && \
+    podman compose up -d && \
+    podman exec -i <project_name>_php composer install
+
+And two sets of commands for a **custom install**:
+
+..  code-block:: shell
+
+    git clone https://github.com/digicademy-chf/chf_container.git --branch v1.0.0 && \
+    cd chf_container
+
+Now add project-specific files and replace ``v1.0.0`` by the release tag you
+need, ``password`` by the actual root password of the database and ``chf`` by
+the name of your database:
+
+..  code-block:: shell
+
+    podman compose up -d && \
+    podman exec -i <project_name>_database mysql -uroot -ppassword chf < database.sql && \
+    podman exec -i <project_name>_php composer install
+
+..  _step-by-step:
+
+Step by step
+============
 
 ..  rst-class:: bignums
 
@@ -113,7 +119,7 @@ Step by step
     For a development environment, you may want to set up an alias as a local
     domain in the host operating system to help access the web app. On Linux
     or macOS, add the line below to the file :file:`/etc/hosts` using the alias that
-    you want. On Windows, add it to :file:`C:\Windows\System32\Drivers\etc\hosts`.
+    you want. On Windows, add it to :file:`C:\\Windows\\System32\\Drivers\\etc\\hosts`.
 
     ..  code-block::
 
