@@ -15,6 +15,36 @@ To install this container set-up, your host system needs:
   - or its command-line tool Docker Engine
 - Git
 
+..  _quick-install:
+
+Quick install
+=============
+
+All commands for a **fresh install** with ``v1.0.0`` replaced by the release
+tag you need:
+
+    ..  code-block:: shell
+
+        git clone https://github.com/digicademy-chf/chf_container.git --branch v1.0.0 && \
+        cd chf_container && \
+        cp template.development.env .env && \
+        cp App/composer.template.json App/composer.json && \
+        podman compose up -d && \
+        podman exec -i <project_name>_php composer install
+
+And all commands for a custom install with ``v1.0.0`` replaced by the release
+tag you need, ``password`` replaced by the actual root password of the database
+and ``chf`` replaced by the name of your database:
+
+    ..  code-block:: shell
+
+        git clone https://github.com/digicademy-chf/chf_container.git --branch v1.0.0 && \
+        cd chf_container
+        <add custom files>
+        podman compose up -d && \
+        podman exec -i <project_name>_database mysql -uroot -ppassword chf < database.sql && \
+        podman exec -i <project_name>_php composer install
+
 ..  _step-by-step:
 
 Step by step
@@ -28,7 +58,7 @@ Step by step
 
 ..  rst-class:: bignums
 
-1.  Clone the repository
+1.  Clone repository
 
     Clone this repo using the command below and the actual release tag you need
     instead of ``v1.0.0``.
@@ -38,7 +68,7 @@ Step by step
         git clone https://github.com/digicademy-chf/chf_container.git --branch v1.0.0 && \
         cd chf_container
 
-2.  Prepare custom content or a fresh install
+2.  Prepare custom content or fresh install
 
     If you have custom, projects-specific files, copy them into this folder.
     See :ref:`custom file overview <custom-file-overview>` for further details.
@@ -52,7 +82,7 @@ Step by step
         cp template.development.env .env && \
         cp App/composer.template.json App/composer.json
 
-3.  Create and start the containers
+3.  Create and start containers
 
     Run this command to create all containers specified in the Compose file:
 
@@ -67,12 +97,23 @@ Step by step
 
         podman exec -i <project_name>_database mysql -uroot -ppassword chf < database.sql
 
-4.  Optionally set an alias for ``localhost`` 
+4.  Install PHP packages
+
+    The last required step is to install the PHP packages via PHP Composer. In
+    a development environment, and to avoid issues with ``composer update``
+    down the line, packages you want to work on locally can go into the
+    :file:`App/packages` folder.
+
+    ..  code-block::
+
+        podman exec -i <project_name>_php composer install
+
+5.  Optionally set an alias for ``localhost``
 
     For a development environment, you may want to set up an alias as a local
     domain in the host operating system to help access the web app. On Linux
-    or macOS, add the line below to the file ``/etc/hosts`` using the alias that
-    you want. On Windows, add it to ``C:\Windows\System32\Drivers\etc\hosts``.
+    or macOS, add the line below to the file :file:`/etc/hosts` using the alias that
+    you want. On Windows, add it to :file:`C:\Windows\System32\Drivers\etc\hosts`.
 
     ..  code-block::
 
