@@ -9,6 +9,7 @@ services:
     build:
       context: .
       dockerfile: ./Config/apache/Containerfile
+    image: localhost/digicademy/chf_server
     env_file: .env
     container_name: ${PROJECT_NAME}_server
     restart: always
@@ -33,6 +34,7 @@ services:
     build:
       context: .
       dockerfile: ./Config/php/Containerfile
+    image: localhost/digicademy/chf_php
     env_file: .env
     userns_mode: "keep-id:uid=33,gid=33"
     container_name: ${PROJECT_NAME}_php
@@ -113,12 +115,9 @@ services:
   phpmyadmin:
     image: docker.io/phpmyadmin/phpmyadmin
     env_file: .env
-    user: "${UID}:${GID}"
     container_name: ${PROJECT_NAME}_phpmyadmin
-    links:
-      - database
     ports:
-      - ${PMA_PORT}:80
+      - ${HTTP_PMA_PORT}:80
     profiles:
       - debug
     networks:

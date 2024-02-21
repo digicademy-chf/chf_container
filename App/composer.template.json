@@ -55,10 +55,5 @@
         "typo3/cms-viewpage": "^13",
         "typo3/cms-webhooks": "^13",
         "typo3/cms-workspaces": "^13"
-    },
-    "scripts": {
-        "post-update-cmd": [
-            "./vendor/bin/typo3 setup --force"
-        ]
     }
 }

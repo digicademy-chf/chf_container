@@ -125,14 +125,16 @@ actual commands.
 
       podman exec -i <project_name>_server systemctl restart apache2
 
-- Export the database as a file; you may need to change the root password:
+- Export the database as a file; you may need to change the root password and
+  the name of the database:
 
   ..  code-block:: shell
 
-      podman exec -i <project_name>_database mysqldump -uroot -ppassword chf > database.sql
+      podman exec -i <project_name>_database mariadb-dump -uroot -ppassword chf_t3 > database.sql
 
-- Import a database file; you may need to change the root password:
+- Import a database file; you may need to change the root password and the
+  name of the database:
 
   ..  code-block:: shell
 
-      podman exec -i <project_name>_database mysql -uroot -ppassword chf < database.sql
+      podman exec -i <project_name>_database mariadb -uroot -ppassword chf_t3 < database.sql

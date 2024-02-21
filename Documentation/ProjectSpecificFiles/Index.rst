@@ -21,11 +21,11 @@ Database file
 While most files can be backed up as they are, it is recommended that you back
 up your database periodically instead of relying on the runtime files stored in
 the :file:`Database` folder. Use this command to **generate a database file**,
-and adjust the root password of the database as required:
+and adjust the root password and the name of the database as required:
 
 ..  code-block:: shell
 
-    podman exec -i <project_name>_database mysqldump -uroot -ppassword chf > database.sql
+    podman exec -i <project_name>_database mariadb-dump -uroot -ppassword chf_t3 > database.sql
 
 ..  _custom-file-overview:
 

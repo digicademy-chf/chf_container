@@ -17,50 +17,16 @@ To install this container set-up, your host system needs:
 
 - Git
 
-..  _quick-install:
+..  _step-by-step:
 
-Quick install
-=============
+Step by step
+============
 
 ..  attention::
 
     If you are using Docker instead of Podman, replace ``podman`` with
     ``docker``. In some configurations you may need to hyphenate
     ``podman-compose`` or ``docker-compose``.
-
-All commands for a **fresh install** with ``v1.0.0`` replaced by the release
-tag you need:
-
-..  code-block:: shell
-
-    git clone https://github.com/digicademy-chf/chf_container.git --branch v1.0.0 && \
-    cd chf_container && \
-    cp template.development.env .env && \
-    cp App/composer.template.json App/composer.json && \
-    podman compose up -d && \
-    podman exec -i <project_name>_php composer install
-
-And two sets of commands for a **custom install** with ``v1.0.0`` replaced by
-the release tag you need:
-
-..  code-block:: shell
-
-    git clone https://github.com/digicademy-chf/chf_container.git --branch v1.0.0 && \
-    cd chf_container
-
-Now add project-specific files and replace ``password`` by the actual root
-password of the database and ``chf`` by the name of your database:
-
-..  code-block:: shell
-
-    podman compose up -d && \
-    podman exec -i <project_name>_database mysql -uroot -ppassword chf < database.sql && \
-    podman exec -i <project_name>_php composer install
-
-..  _step-by-step:
-
-Step by step
-============
 
 ..  rst-class:: bignums
 
@@ -76,17 +42,17 @@ Step by step
 
 2.  Prepare custom content or fresh install
 
-    If you have custom, projects-specific files, copy them into this folder.
-    See :ref:`custom file overview <custom-file-overview>` for further details.
-
-    If you want to set up a fresh install instead, execute the following
-    command to use template files for the environment file and
-    :file:`composer.json`:
+    If you want to set up a fresh install, execute the following command to use
+    template files for the environment file and :file:`composer.json`:
 
     ..  code-block:: shell
 
         cp template.development.env .env && \
         cp App/composer.template.json App/composer.json
+
+    If you want to use custom, projects-specific files instead, copy them into
+    the :file:`chf_container` folder. See
+    :ref:`custom file overview <custom-file-overview>` for further details.
 
 3.  Create and start containers
 
@@ -96,23 +62,25 @@ Step by step
 
         podman compose up -d
 
-    If you added existing data in the previous step, you will also want to
-    import your existing database. Alter the root password if necessary:
-
-    ..  code-block:: shell
-
-        podman exec -i <project_name>_database mysql -uroot -ppassword chf < database.sql
-
 4.  Install PHP packages
 
-    The last required step is to install the PHP packages via PHP Composer. In
-    a development environment, and to avoid issues with ``composer update``
-    down the line, packages you want to work on locally can go into the
-    :file:`App/packages` folder.
+    The last required step is to install the PHP packages via PHP Composer.
+    The following commands set up a fresh environment:
 
     ..  code-block::
 
-        podman exec -i <project_name>_php composer install
+        podman exec -i <project_name>_php composer install && \
+        podman exec -i <project_name>_database mariadb-admin -uroot -ppassword drop information_schema && \
+        podman exec -i <project_name>_php ./vendor/bin/typo3 setup --force
+
+    To set up an environment using existing data, retrieve the PHP packages
+    and import an existing database instead:
+
+    ..  code-block::
+
+        podman exec -i <project_name>_php composer update && \
+        podman exec -i <project_name>_database mariadb-admin -uroot -ppassword drop information_schema && \
+        podman exec -i <project_name>_database mariadb -uroot -ppassword chf_t3 < database.sql
 
 5.  Optionally set an alias for ``localhost``
 
