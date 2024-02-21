@@ -57,8 +57,8 @@
         "typo3/cms-workspaces": "^13"
     },
     "scripts": {
-        "post-install-cmd": [
-            "./vendor/bin/typo3 setup --force --password --admin-user-password"
+        "post-update-cmd": [
+            "./vendor/bin/typo3 setup --force"
         ]
     }
 }

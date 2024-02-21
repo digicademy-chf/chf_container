@@ -40,16 +40,16 @@ tag you need:
     podman compose up -d && \
     podman exec -i <project_name>_php composer install
 
-And two sets of commands for a **custom install**:
+And two sets of commands for a **custom install** with ``v1.0.0`` replaced by
+the release tag you need:
 
 ..  code-block:: shell
 
     git clone https://github.com/digicademy-chf/chf_container.git --branch v1.0.0 && \
     cd chf_container
 
-Now add project-specific files and replace ``v1.0.0`` by the release tag you
-need, ``password`` by the actual root password of the database and ``chf`` by
-the name of your database:
+Now add project-specific files and replace ``password`` by the actual root
+password of the database and ``chf`` by the name of your database:
 
 ..  code-block:: shell
 
