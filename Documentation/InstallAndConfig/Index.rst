@@ -70,7 +70,6 @@ Step by step
     ..  code-block::
 
         podman exec -i <project_name>_php composer install && \
-        podman exec -i <project_name>_database mariadb-admin -uroot -ppassword drop information_schema && \
         podman exec -i <project_name>_php ./vendor/bin/typo3 setup --force
 
     To set up an environment using existing data, retrieve the PHP packages
@@ -79,7 +78,6 @@ Step by step
     ..  code-block::
 
         podman exec -i <project_name>_php composer update && \
-        podman exec -i <project_name>_database mariadb-admin -uroot -ppassword drop information_schema && \
         podman exec -i <project_name>_database mariadb -uroot -ppassword chf_t3 < database.sql
 
 5.  Optionally set an alias for ``localhost``
@@ -96,7 +94,7 @@ Step by step
 **Congratulations**, you can now use your TYPO3 and CHF installation. A
 production environment will now be available at the host's URL. A development
 environment can be found at ``127.0.0.1:8080``, ``localhost:8080``,
-``chf.local:8080`` or any other specified alias depending on whether and how
+``chf.internal:8080`` or any other specified alias depending on whether and how
 you executed the last step.
 
 ..  _add-phpmyadmin:
@@ -109,9 +107,9 @@ the database. You can create a phpMyAdmin container along with the regular
 containers using the ``debug`` profile. Use this command instead of the one
 listed in step 3:
 
-    ..  code-block:: shell
+..  code-block:: shell
 
-        podman compose --profile=debug up -d
+    podman compose --profile=debug up -d
 
 When the installation is done, phpMyAdmin is available on port ``8081`` or any
 other port you specified in your ``.env`` file.
