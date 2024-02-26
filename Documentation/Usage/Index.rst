@@ -24,13 +24,13 @@ Quick periodical updates
 
 The following steps may be performed periodically to **keep an existing
 environment up to date**. This only updates the Debian and the PHP packages
-inside the server and PHP containers.
+inside the server and PHP containers. Adjust ``chf`` as required:
 
 ..  code-block:: shell
 
-    podman exec -i <project_name>_server apt-get update && \
-    podman exec -i <project_name>_php apt-get update && \
-    podman exec -i <project_name>_php composer update
+    podman exec -i chf_server apt-get update && \
+    podman exec -i chf_php apt-get update && \
+    podman exec -i chf_php composer update
 
 ..  _update-all-containers:
 

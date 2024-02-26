@@ -69,16 +69,17 @@ Step by step
 
     ..  code-block::
 
-        podman exec -i <project_name>_php composer install && \
-        podman exec -i <project_name>_php ./vendor/bin/typo3 setup --force
+        podman exec -i chf_php composer install && \
+        podman exec -i chf_php ./vendor/bin/typo3 setup --force
 
     To set up an environment using existing data, retrieve the PHP packages
-    and import an existing database instead:
+    and import an existing database instead. Replace ``chf`` and ``password``
+    with the actual data of your customised set-up:
 
     ..  code-block::
 
-        podman exec -i <project_name>_php composer update && \
-        podman exec -i <project_name>_database mariadb -uroot -ppassword chf_t3 < database.sql
+        podman exec -i chf_php composer update && \
+        podman exec -i chf_database mariadb -uroot -ppassword chf_t3 < database.sql
 
 5.  Optionally set an alias for ``localhost``
 

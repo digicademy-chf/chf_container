@@ -68,13 +68,13 @@ While **files can be edited on the host system** if you follow the
 require you to enter a specific container and perform a command-line action.
 You can either access the command line inside the container and enter your
 commands there, or use Podman (or Docker) to pass the command on to the
-container for execution.
+container for execution. Adjust ``chf`` as required.
 
 - Access the command line to run any command you need:
 
   ..  code-block:: shell
 
-      podman exec -it <project_name>_php bash
+      podman exec -it chf_php bash
 
 - Get out of the container's command-line interface:
 
@@ -87,7 +87,7 @@ container for execution.
 
   ..  code-block:: shell
 
-      podman exec -i <project_name>_php ls -la
+      podman exec -i chf_php ls -la
 
 ..  _common-tasks:
 
@@ -97,13 +97,13 @@ Common tasks
 The following tasks are common during development or may otherwise be **called
 from the host system**. They are given as abbreviated one-liners here, but you
 may just as well access the container's command line first and then run the
-actual commands.
+actual commands. Adjust ``chf`` and ``password`` as required.
 
 - Update all PHP Composer packages:
 
   ..  code-block:: shell
 
-      podman exec -i <project_name>_php composer update
+      podman exec -i chf_php composer update
 
 - Require a new PHP Composer package; if it is in a non-standard repository
   like your own git instance, you first need to add the repo to your
@@ -111,30 +111,28 @@ actual commands.
 
   ..  code-block:: shell
 
-      podman exec -i <project_name>_php composer require digicademy/chf_bib
+      podman exec -i chf_php composer require digicademy/chf_bib
 
 - Update TYPO3's language packs:
 
   ..  code-block:: shell
 
-      podman exec -i <project_name>_php typo3 language:update
+      podman exec -i chf_php typo3 language:update
 
 - Restart the Apache server:
 
   ..  code-block:: shell
 
-      podman exec -i <project_name>_server systemctl restart apache2
+      podman exec -i chf_server systemctl restart apache2
 
-- Export the database as a file; you may need to change the root password and
-  the name of the database:
-
-  ..  code-block:: shell
-
-      podman exec -i <project_name>_database mariadb-dump -uroot -ppassword chf_t3 > database.sql
-
-- Import a database file; you may need to change the root password and the
-  name of the database:
+- Export the database as a file:
 
   ..  code-block:: shell
 
-      podman exec -i <project_name>_database mariadb -uroot -ppassword chf_t3 < database.sql
+      podman exec -i chf_database mariadb-dump -uroot -ppassword chf_t3 > database.sql
+
+- Import a database file:
+
+  ..  code-block:: shell
+
+      podman exec -i chf_database mariadb -uroot -ppassword chf_t3 < database.sql
