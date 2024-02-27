@@ -107,17 +107,18 @@ actual commands. Adjust ``chf`` and ``password`` as required.
 
 - Require a new PHP Composer package; if it is in a non-standard repository
   like your own git instance, you first need to add the repo to your
-  ``project/composer.json``:
+  ``project/composer.json``. The following command also works for custom
+  packages placed in the ``packages`` folder:
 
   ..  code-block:: shell
 
-      podman exec -i chf_php composer require digicademy/chf_bib
+      podman exec -i chf_php composer require digicademy/chf_bib:@dev
 
 - Update TYPO3's language packs:
 
   ..  code-block:: shell
 
-      podman exec -i chf_php typo3 language:update
+      podman exec -i chf_php ./vendor/bin/typo3 language:update
 
 - Restart the Apache server:
 

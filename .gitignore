@@ -18,7 +18,7 @@ App/config/*
 App/packages/*
 !App/packages/.gitkeep
 App/public/*
-!App/public/.gitkeep
+!App/public/robots.txt
 App/var/*
 !App/var/.gitkeep
 App/vendor/*
