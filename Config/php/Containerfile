@@ -9,6 +9,7 @@ FROM docker.io/library/php:8.3-fpm
 # Install extra packages
 RUN apt-get update && apt-get install -y --no-install-recommends \
         curl \
+        cron \
         git \
         gnupg \
         htop \
@@ -38,3 +39,7 @@ RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 # Create config folder for PHP Composer owned by user www-data
 RUN mkdir -p /var/www/.composer && \
     chown 33:33 /var/www/.composer
+
+# Enable TYPO3 scheduler via cron
+RUN echo "* * * * * www-data /var/www/html/vendor/bin/typo3 scheduler:run" > /etc/cron.d/typo3_scheduler && \
+    service cron start
