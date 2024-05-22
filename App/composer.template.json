@@ -22,7 +22,6 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "doctrine/dbal": "4.0.0-RC2@rc",
         "typo3/cms-adminpanel": "^13",
         "typo3/cms-backend": "^13",
         "typo3/cms-belog": "^13",
