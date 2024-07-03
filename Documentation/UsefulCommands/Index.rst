@@ -120,6 +120,12 @@ actual commands. Adjust ``chf`` and ``password`` as required.
 
       podman exec -i chf_php ./vendor/bin/typo3 language:update
 
+- Update TYPO3's reference index:
+
+  ..  code-block:: shell
+
+      podman exec -i chf_php ./vendor/bin/typo3 referenceindex:update
+
 - Restart the Apache server:
 
   ..  code-block:: shell
