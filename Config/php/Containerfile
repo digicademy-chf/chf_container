@@ -37,14 +37,20 @@ RUN chmod +x /usr/local/bin/install-php-extensions \
 # Use production-ready default PHP config
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
-# Create config folder for PHP Composer owned by user www-data
+# Create empty config folder for PHP Composer owned by user www-data
 RUN mkdir -p /var/www/.composer && \
     chown 33:33 /var/www/.composer
 
-# Add ImageMagick config to handle PDF and Illustrator files
+# Add ImageMagick config for user www-data to handle PDF and Illustrator files
 RUN echo '<policymap>\n    <policy domain="coder" rights="read" pattern="{PDF,AI}" />\n</policymap>' > /var/www/.config/ImageMagick/policy.xml && \
+    chmod 0644 /var/www/.config/ImageMagick/policy.xml && \
     chown -r 33:33 /var/www/.config
 
-# Enable TYPO3 scheduler via cron
+# Add TYPO3 scheduler cron job
 RUN echo "* * * * * www-data /var/www/html/vendor/bin/typo3 scheduler:run" > /etc/cron.d/typo3_scheduler && \
-    service cron start
+    chmod 0644 /etc/cron.d/typo3_scheduler && \
+    crontab /etc/cron.d/typo3_scheduler
+
+# Pipe cron log into container log and run cron when container starts
+RUN ln -s /dev/stdout /var/log/cron && \
+    sed -i 's/^exec /service cron start\n\nexec /' /usr/local/bin/docker-php-entrypoint
