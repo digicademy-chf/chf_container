@@ -44,7 +44,9 @@ Roadmap
 This is a pre-release version. The following steps are required for the
 software to move out of beta:
 
-- Proper Manticore conf added, possibly with environment variables
+- $GLOBALS[TYPO3_CONF_VARS][SYS][systemLocale] is not set
+- Ghostscript may need a path indicator to work automatically
+- Replace Manticore with Meilisearch with a proper conf, possibly via environment variables
 - Namenforschung and Corpus Vitrearum tested, "dev" stuff removed from template
 
 In addition, the following features would be nice to have:
