@@ -41,6 +41,10 @@ RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 RUN mkdir -p /var/www/.composer && \
     chown 33:33 /var/www/.composer
 
+# Add ImageMagick config to handle PDF and Illustrator files
+RUN echo '<policymap>\n    <policy domain="coder" rights="read" pattern="{PDF,AI}" />\n</policymap>' > /var/www/.config/ImageMagick/policy.xml && \
+    chown -r 33:33 /var/www/.config
+
 # Enable TYPO3 scheduler via cron
 RUN echo "* * * * * www-data /var/www/html/vendor/bin/typo3 scheduler:run" > /etc/cron.d/typo3_scheduler && \
     service cron start
