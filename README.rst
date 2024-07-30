@@ -44,9 +44,9 @@ Roadmap
 This is a pre-release version. The following steps are required for the
 software to move out of beta:
 
-- Replace Manticore with Meilisearch with a proper conf, possibly via environment variables
-- Namenforschung and Corpus Vitrearum tested, "dev" stuff removed from template
+- Removed "dev" indicators to only use public packages
 
-In addition, the following features would be nice to have:
+In addition, the following features are nice to have:
 
+- Apache rewrites for Meilisearch and Oxigraph as required
 - Clarification on setting up SSL certificates

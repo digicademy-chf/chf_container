@@ -7,6 +7,8 @@ Config/apache/ssl/*
 !Config/apache/ssl/.gitkeep
 Database/*
 !Database/.gitkeep
+Graph/*
+!Graph/.gitkeep
 Project/*
 !Project/.gitkeep
 Search/*

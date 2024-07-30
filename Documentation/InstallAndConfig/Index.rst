@@ -98,6 +98,32 @@ environment can be found at ``127.0.0.1:8080``, ``localhost:8080``,
 ``chf.internal:8080`` or any other specified alias depending on whether and how
 you executed the last step.
 
+In a fresh install, you may want to log in to TYPO3 as admin, navigate to
+:guilabel:`Settings`, :guilabel:`Configure Installation-Wide Options`, and
+:guilabel:`[SYS][systemLocale]`. Here you may set the locale for system-wide
+actions such as setting file names by entering the name of a Linux locale to
+use, such as ``en_US.UTF-8`` or ``de_DE.UTF-8``.
+
+..  _add-cron:
+
+Add a cron job
+==============
+
+TYPO3 has a scheduler that allows you to clear caches and perform other regular
+tasks. For the scheduler to run properly, add the following cron job on the
+host. This is especially important in a production environment. On a regular
+Linux system, you may add a file ``/etc/cron.d/chf-scheduler`` with the
+following content:
+
+..  code-block:: cron
+
+* * * * * www-data podman exec -i chf_php /var/www/html/vendor/bin/typo3 scheduler:run
+
+You may need to replace ``www-data`` with the user running the container,
+``podman`` with ``docker``, and ``chf_php`` with the actual name of your
+project's PHP container. In Kubernetes environments, the command may be adapted
+for use with ``CronJob``.
+
 ..  _add-phpmyadmin:
 
 Add phpMyAdmin
