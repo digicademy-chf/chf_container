@@ -21,7 +21,7 @@
     <project
         title="CHF Container"
         version="0.9"
-        release="0.9.0"
+        release="0.9.1"
         copyright="since 2023 by Jonatan Jalle Steller and CHF Container contributors"
     />
 </guides>

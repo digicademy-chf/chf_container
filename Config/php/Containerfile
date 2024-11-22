@@ -3,8 +3,8 @@
 # For the full copyright and license information, please read the
 # LICENSE.txt file that was distributed with this source code.
 
-# Get slim Debian with PHP 8.3 FPM
-FROM docker.io/library/php:8.3-fpm
+# Get slim Debian with PHP 8.4 FPM
+FROM docker.io/library/php:8.4-fpm
 
 # Install extra packages
 RUN apt-get update && apt-get install -y --no-install-recommends \

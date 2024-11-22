@@ -28,12 +28,12 @@ revolves around a file in accordance with the
 `Compose specification <https://compose-spec.io/>`__ for container-based
 applications that should allow you to set up your environment(s) on Linux,
 macOS, or Windows via, for example, Podman Desktop or Docker Desktop. The
-Compose file orchestrates a pod (or network) consisting of an Apache webserver,
-a PHP- and PHP Composer-capable Debian image that runs TYPO3, a MariaDB
-database, Manticore search, and a Postfix container for email jobs. A ``debug``
-profile adds phpMyAdmin to this set-up. The documentation provides install
-instructions as well as a few pointers towards how to use the container-based
-environment.
+Compose file orchestrates a network consisting of an Apache webserver, a PHP-
+and PHP Composer-capable Debian image that runs TYPO3, a MariaDB database,
+Manticore search, Oxigraph triple store, and a Postfix container for email
+jobs. An optional ``debug`` profile adds phpMyAdmin to this set-up. The
+documentation provides install instructions as well as a few pointers towards
+how to use the container-based environment.
 
 :Repository:  https://github.com/digicademy-chf/chf_container
 :Read online: https://digicademy-chf.github.io/chf_container

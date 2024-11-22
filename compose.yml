@@ -51,7 +51,7 @@ services:
       - frontend
 
   database:
-    image: docker.io/library/mariadb:10
+    image: docker.io/library/mariadb:11
     env_file: .env
     userns_mode: "keep-id:uid=999,gid=999"
     container_name: ${PROJECT_NAME}_database
@@ -66,7 +66,7 @@ services:
       - debug
 
   search:
-    image: docker.io/getmeili/meilisearch:v1.9
+    image: docker.io/getmeili/meilisearch:v1.11
     env_file: .env
     depends_on:
       - database

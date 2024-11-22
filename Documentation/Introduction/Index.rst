@@ -14,15 +14,15 @@ back up your data, the set-up may even serve as a production environment.
 The **subfolder** ``Config`` contains set-up information while ``App``,
 ``Database``, and ``Search`` keep the runtime content of your container
 available (persistent) on the host as you start, stop, destroy, or re-create
-the containers accessing them. The environment ignores project-specific files
-such as an :file:`.env` file and a :file:`composer.json`. These should be
-stored in a separate location as files that you simply add to this repo to set
-up an environment on a new host.
+the containers accessing them. Please note that the environment ignores
+project-specific files such as an :file:`.env` file and a :file:`composer.json`:
+These should be stored in a separate location as files that you simply add to
+the content of this repo to set up your environment on a new host.
 
 If you want to set up a CHF-capable environment with a hoster that does not
 allow further containerisation but provides PHP-capable web space and a
 database, the most relevant file you need is :file:`composer.json`. Check the
-`TYPO3 system requirements <https://docs.typo3.org/m/typo3/tutorial-getting-started/main/en-us/SystemRequirements/Index.html>`__
+`TYPO3 system requirements <https://get.typo3.org/version/13#system-requirements>`__
 to see if the hoster ticks all required boxes.
 
 ..  _screenshots:
