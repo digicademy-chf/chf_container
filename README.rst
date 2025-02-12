@@ -44,7 +44,7 @@ Roadmap
 This is a pre-release version. The following steps are required for the
 software to move out of beta:
 
-- Removed "dev" indicators to only use public packages
+- Remove "dev" indicators to only use public packages
 
 In addition, the following features are nice to have:
 
