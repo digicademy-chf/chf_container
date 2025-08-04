@@ -42,7 +42,6 @@ services:
     depends_on:
       - database
       - search
-      - graph
       - mail
     volumes:
       - ./Config/php/php.ini:/usr/local/etc/php/conf.d/x-php-custom-chf.ini:ro,Z
@@ -78,18 +77,6 @@ services:
       - ./Search:/meili_data:rw,Z
     networks:
       - frontend
-  
-  graph:
-    image: ghcr.io/oxigraph/oxigraph:latest
-    env_file: .env
-    container_name: ${PROJECT_NAME}_graph
-    restart: always
-    ports:
-      - ${HTTP_OXI_PORT}:7878
-    volumes:
-      - ./Graph:/data:rw,Z
-    networks:
-      - frontend
 
   mail:
     image: docker.io/juanluisbaptiste/postfix:latest
@@ -100,6 +87,20 @@ services:
       - 25
     volumes:
       - /etc/localtime:/etc/localtime:ro
+    networks:
+      - frontend
+  
+  graph:
+    image: ghcr.io/oxigraph/oxigraph:latest
+    env_file: .env
+    container_name: ${PROJECT_NAME}_graph
+    restart: always
+    ports:
+      - ${HTTP_OXI_PORT}:7878
+    volumes:
+      - ./Graph:/data:rw,Z
+    profiles:
+      - sparql
     networks:
       - frontend
 

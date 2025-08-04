@@ -33,6 +33,12 @@ pod (or network) can be **safely destroyed and re-created**.
 
       podman compose up -d
 
+- Create and start containers including a default ``sparql`` endpoint:
+
+  ..  code-block:: shell
+
+      podman compose --profile=sparql up -d
+
 - Create and start containers including ``debug`` ones; not suitable for
   production as it makes available phpMyAdmin for database administration:
 
