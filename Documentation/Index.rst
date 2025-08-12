@@ -38,11 +38,11 @@ revolves around a file in accordance with the
 applications that should allow you to set up your environment(s) on Linux,
 macOS, or Windows via, for example, Podman Desktop or Docker Desktop. The
 Compose file orchestrates a network consisting of an Apache webserver, a PHP-
-and PHP Composer-capable Debian image that runs TYPO3, a MariaDB database,
-Manticore search, Oxigraph triple store, and a Postfix container for email
-jobs. An optional ``debug`` profile adds phpMyAdmin to this set-up. The
-documentation provides install instructions as well as a few pointers towards
-how to use the container-based environment.
+and Composer-capable Debian image that runs TYPO3, a MariaDB database, a
+Meilisearch search engine, an optional Oxigraph ``sparql`` endpoint, and a
+Postfix container for email jobs. An optional ``debug`` profile adds phpMyAdmin
+to this set-up. The documentation provides install instructions as well as a
+few pointers towards how to use the container-based environment.
 
 ----
 

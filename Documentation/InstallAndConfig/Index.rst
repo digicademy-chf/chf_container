@@ -48,11 +48,14 @@ Step by step
     ..  code-block:: shell
 
         cp template.development.env .env && \
-        cp App/composer.template.json App/composer.json
+        cp App/composer.development.json App/composer.json
 
     If you want to use custom, projects-specific files instead, copy them into
     the :file:`chf_container` folder. See
     :ref:`custom file overview <custom-file-overview>` for further details.
+
+    For production environments, replace ``development`` with ``production`` in
+    the two commands listed above.
 
 3.  Create and start containers
 

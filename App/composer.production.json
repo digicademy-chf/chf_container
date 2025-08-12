@@ -19,8 +19,6 @@
             "url": "https://github.com/digicademy-chf/chf_project.git"
         }
     ],
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "require": {
         "typo3/cms-adminpanel": "^13",
         "typo3/cms-backend": "^13",
@@ -53,6 +51,7 @@
         "typo3/cms-tstemplate": "^13",
         "typo3/cms-viewpage": "^13",
         "typo3/cms-webhooks": "^13",
-        "typo3/cms-workspaces": "^13"
+        "typo3/cms-workspaces": "^13",
+        "digicademy/chf_project": "^2"
     }
 }

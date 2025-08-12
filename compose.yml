@@ -65,7 +65,7 @@ services:
       - debug
 
   search:
-    image: docker.io/getmeili/meilisearch:v1.11
+    image: docker.io/getmeili/meilisearch:v1
     env_file: .env
     depends_on:
       - database
