@@ -33,19 +33,6 @@ pod (or network) can be **safely destroyed and re-created**.
 
       podman compose up -d
 
-- Create and start containers including a default ``sparql`` endpoint:
-
-  ..  code-block:: shell
-
-      podman compose --profile=sparql up -d
-
-- Create and start containers including ``debug`` ones; not suitable for
-  production as it makes available phpMyAdmin for database administration:
-
-  ..  code-block:: shell
-
-      podman compose --profile=debug up -d
-
 - Destroy containers:
 
   ..  code-block:: shell
@@ -80,7 +67,7 @@ container for execution. Adjust ``chf`` as required.
 
   ..  code-block:: shell
 
-      podman exec -it chf_php bash
+      podman exec -it chf_app bash
 
 - Get out of the container's command-line interface:
 
@@ -93,7 +80,7 @@ container for execution. Adjust ``chf`` as required.
 
   ..  code-block:: shell
 
-      podman exec -i chf_php ls -la
+      podman exec -i chf_app ls -la
 
 ..  _common-tasks:
 
@@ -109,7 +96,7 @@ actual commands. Adjust ``chf`` and ``password`` as required.
 
   ..  code-block:: shell
 
-      podman exec -i chf_php composer update
+      podman exec -i chf_app composer update
 
 - Require a new PHP Composer package; if it is in a non-standard repository
   like your own git instance, you first need to add the repo to your
@@ -118,19 +105,19 @@ actual commands. Adjust ``chf`` and ``password`` as required.
 
   ..  code-block:: shell
 
-      podman exec -i chf_php composer require digicademy/chf_bib:@dev
+      podman exec -i chf_app composer require digicademy/chf_bib:@dev
 
 - Update TYPO3's language packs:
 
   ..  code-block:: shell
 
-      podman exec -i chf_php ./vendor/bin/typo3 language:update
+      podman exec -i chf_app ./vendor/bin/typo3 language:update
 
 - Update TYPO3's reference index:
 
   ..  code-block:: shell
 
-      podman exec -i chf_php ./vendor/bin/typo3 referenceindex:update
+      podman exec -i chf_app ./vendor/bin/typo3 referenceindex:update
 
 - Restart the Apache server:
 
@@ -138,14 +125,26 @@ actual commands. Adjust ``chf`` and ``password`` as required.
 
       podman exec -i chf_server systemctl restart apache2
 
-- Export the database as a file:
+- Export the TYPO3 database as a file:
 
   ..  code-block:: shell
 
       podman exec -i chf_database mariadb-dump -uroot -ppassword chf_t3 > database.sql
 
-- Import a database file:
+- Import a TYPO3 database file:
 
   ..  code-block:: shell
 
       podman exec -i chf_database mariadb -uroot -ppassword chf_t3 < database.sql
+
+- Export the NoCoDB database as a file:
+
+  ..  code-block:: shell
+
+      podman exec -i chf_tablebase mariadb-dump -uroot -ppassword chf_nc > tablebase.sql
+
+- Import a NoCoDB database file:
+
+  ..  code-block:: shell
+
+      podman exec -i chf_tablebase mariadb -uroot -ppassword chf_nc < tablebase.sql

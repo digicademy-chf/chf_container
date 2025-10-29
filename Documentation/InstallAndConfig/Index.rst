@@ -32,8 +32,8 @@ Step by step
 
 1.  Clone repository
 
-    Clone this repo using the command below and the actual release tag you need
-    instead of ``v1.0.0``.
+    Clone this repo using the command below and, optionally, the actual release
+    tag you need instead of ``v1.0.0``.
 
     ..  code-block:: shell
 
@@ -72,8 +72,8 @@ Step by step
 
     ..  code-block::
 
-        podman exec -i chf_php composer install && \
-        podman exec -i chf_php ./vendor/bin/typo3 setup --force
+        podman exec -i chf_app composer install && \
+        podman exec -i chf_app ./vendor/bin/typo3 setup --force
 
     To set up an environment using existing data, retrieve the PHP packages
     and import an existing database instead. Replace ``chf`` and ``password``
@@ -81,7 +81,7 @@ Step by step
 
     ..  code-block::
 
-        podman exec -i chf_php composer update && \
+        podman exec -i chf_app composer update && \
         podman exec -i chf_database mariadb -uroot -ppassword chf_t3 < database.sql
 
 5.  Optionally set an alias for ``localhost``
@@ -120,26 +120,53 @@ following content:
 
 ..  code-block:: cron
 
-* * * * * www-data podman exec -i chf_php /var/www/html/vendor/bin/typo3 scheduler:run
+* * * * * www-data podman exec -i chf_app /var/www/html/vendor/bin/typo3 scheduler:run
 
 You may need to replace ``www-data`` with the user running the container,
-``podman`` with ``docker``, and ``chf_php`` with the actual name of your
+``podman`` with ``docker``, and ``chf_app`` with the actual name of your
 project's PHP container. In Kubernetes environments, the command may be adapted
 for use with ``CronJob``.
 
+..  _add-oxigraph:
+
+Add a SPARQL endpoint
+=====================
+
+You can create an Oxigraph container along with the regular containers by
+adding the ``graph`` profile name to the ``COMPOSE_PROFILES`` variable of your
+``.env`` file and restart the container setup.
+
+Oxigraph becomes available on port ``8878`` or any other port you specify in
+``.env``.
+
+..  _add-nocodb:
+
+Add a tablar database
+=====================
+
+You can create a NoCoDB container along with the regular containers by adding
+the ``table`` profile name to the ``COMPOSE_PROFILES`` variable of your
+``.env`` file and restart the container setup.
+
+To install an exisiting NoCoDB database from a file, run:
+
+..  code-block::
+
+    podman exec -i chf_tablebase mariadb -uroot -ppassword chf_nc < tablebase.sql
+
+NoCoDB becomes available on port ``8090`` or any other port you specify in
+``.env``.
+
 ..  _add-phpmyadmin:
 
-Add phpMyAdmin
-==============
+Add a database inspection tool
+==============================
 
 On a development system (not in production), you may want to be able to inspect
-the database. You can create a phpMyAdmin container along with the regular
-containers using the ``debug`` profile. Use this command instead of the one
-listed in step 3:
-
-..  code-block:: shell
-
-    podman compose --profile=debug up -d
+the TYPO3 database. You can create a phpMyAdmin container along with the
+regular containers by adding the ``inspect`` profile name to the
+``COMPOSE_PROFILES`` variable of your ``.env`` file and restart the container
+setup.
 
 When the installation is done, phpMyAdmin is available on port ``8081`` or any
-other port you specified in your ``.env`` file.
+other port you specify in ``.env``.

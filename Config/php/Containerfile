@@ -37,9 +37,8 @@ RUN chmod +x /usr/local/bin/install-php-extensions \
 # Use production-ready default PHP config
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
-# Create empty config folder for PHP Composer owned by user www-data
-RUN mkdir -p /var/www/.composer && \
-    chown 33:33 /var/www/.composer
+# Set permissions so PHP Composer can create folders as user www-data
+RUN chown 33:33 /var/www
 
 # Add ImageMagick config for user www-data to handle PDF and Illustrator files
 RUN mkdir -p /var/www/.config && \
