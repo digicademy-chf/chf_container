@@ -6,9 +6,9 @@
     :alt: Docker
     :target: https://docker.io
 
-..  image:: https://img.shields.io/badge/TYPO3-13-orange.svg
-    :alt: TYPO3 13
-    :target: https://get.typo3.org/version/13
+..  image:: https://img.shields.io/badge/TYPO3-14-orange.svg
+    :alt: TYPO3 14
+    :target: https://get.typo3.org/version/14
 
 ..  image:: https://img.shields.io/badge/License-MIT-blue.svg
     :alt: License: MIT
