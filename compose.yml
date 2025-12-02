@@ -8,7 +8,7 @@ services:
   server:
     build:
       context: .
-      dockerfile: ./Config/apache/Containerfile
+      dockerfile: ./Config/httpd/Containerfile
     image: localhost/digicademy/chf_server
     environment:
       PROJECT_NAME: ${COMPOSE_PROJECT_NAME}
@@ -29,8 +29,8 @@ services:
     extra_hosts:
       - ${HOSTNAME}:127.0.0.1
     volumes:
-      - ./Config/apache/apache.vhost.conf:/usr/local/apache2/conf/extra/apache.vhost.conf:ro,Z
-      - ./Config/apache/ssl:/usr/local/apache2/ssl:ro,Z
+      - ./Config/httpd/httpd.vhost.conf:/usr/local/apache2/conf/extra/httpd.vhost.conf:ro,Z
+      - ./Config/httpd/ssl:/usr/local/apache2/ssl:ro,Z
       - ./App:/usr/local/apache2/htdocs:rw,z
     networks:
       - app
@@ -75,6 +75,7 @@ services:
     volumes:
       - ./Config/php/php.ini:/usr/local/etc/php/conf.d/x-php-custom-chf.ini:ro,Z
       - ./App:/var/www/html:rw,z
+      - ./Files:/mnt/files:rw,z
     networks:
       - app
       - graph
@@ -221,8 +222,36 @@ services:
     networks:
       - table
 
+  files:
+    build:
+      context: .
+      dockerfile: ./Config/httpd-dav/Containerfile
+    image: localhost/digicademy/chf_files
+    environment:
+      PROJECT_NAME: ${COMPOSE_PROJECT_NAME}
+      TZ: ${TIMEZONE}
+      HOSTNAME: ${HOSTNAME}
+      ADMIN_EMAIL: ${ADMIN_EMAIL}
+    container_name: ${COMPOSE_PROJECT_NAME}_files
+    restart: always
+    ports:
+      - ${FILES_HTTP_PORT}:80
+      - ${FILES_HTTPS_PORT}:443
+    extra_hosts:
+      - ${HOSTNAME}:127.0.0.1
+    volumes:
+      - ./Config/httpd-dav/httpd-dav.vhost.conf:/usr/local/apache2/conf/extra/httpd-dav.vhost.conf:ro,Z
+      - ./Config/httpd-dav/ssl:/usr/local/apache2/ssl:ro,Z
+      - ./Config/httpd-dav/auth/.htpasswd:/usr/local/apache2/htdocs/.htpasswd:ro,Z
+      - ./Files:/usr/local/apache2/htdocs/files:rw,z
+    profiles:
+      - files
+    networks:
+      - files
+
 networks:
   app:
   graph:
   inspect:
   table:
+  files:

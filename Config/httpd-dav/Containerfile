@@ -25,15 +25,23 @@ RUN sed -i \
     -e '/#LoadModule headers_module/s/^#//g' \
     # Enable assigning mime types
     -e '/#LoadModule mime_module/s/^#//g' \
-    # Enable proxying capabilities
-    -e '/#LoadModule proxy_module/s/^#//g' \
-    # Enable FastCGI proxying
-    -e '/#LoadModule proxy_fcgi_module/s/^#//g' \
-    # Enable URL rewrites
-    -e '/#LoadModule rewrite_module/s/^#//g' \
     # Enable SSL capabilities
     -e '/#LoadModule ssl_module/s/^#//g' \
+    # Enable WebDAV capabilities
+    -e '/#LoadModule dav_module/s/^#//g' \
+    # Enable WebDAV filesystem capabilities
+    -e '/#LoadModule dav_fs_module/s/^#//g' \
+    # Enable WebDAV lock capabilities
+    -e '/#LoadModule dav_lock_module/s/^#//g' \
     /usr/local/apache2/conf/httpd.conf
 
+# Create WebDAV folder and file lock database
+RUN mkdir /usr/local/apache2/htdocs/files && \
+    chown -R www-data:www-data /usr/local/apache2/htdocs/files && \
+    chmod -R 755 /usr/local/apache2/htdocs/files && \
+    touch /usr/local/apache2/htdocs/DavLockDB && \
+    chown -R www-data:www-data /usr/local/apache2/htdocs/DavLockDB && \
+    chmod -R 755 /usr/local/apache2/htdocs/DavLockDB
+
 # Include custom virtual host configuration file in main Apache config
-RUN echo "Include /usr/local/apache2/conf/extra/apache.vhost.conf" >> /usr/local/apache2/conf/httpd.conf
+RUN echo "Include /usr/local/apache2/conf/extra/httpd-dav.vhost.conf" >> /usr/local/apache2/conf/httpd.conf
