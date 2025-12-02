@@ -34,8 +34,12 @@ inside the server and PHP containers. Adjust ``chf`` as required:
 
 ..  code-block:: shell
 
-    podman exec -i chf_server apt-get update && \
-    podman exec -i chf_app apt-get update && \
+    podman exec -i chf_server apt update && \
+    podman exec -i chf_server apt upgrade && \
+    podman exec -i chf_files apt update && \
+    podman exec -i chf_files apt upgrade && \
+    podman exec -i chf_app apt update && \
+    podman exec -i chf_app apt upgrade && \
     podman exec -i chf_app composer update
 
 ..  _update-all-containers:
@@ -56,4 +60,4 @@ Enter the container folder and execute the following command:
     podman compose up -d
 
 Leaving out the prune command means that your container management software may
-use an existing container as is instead of updating it.
+use a previously downloaded container as is instead of updating it.

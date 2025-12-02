@@ -12,12 +12,13 @@ whether you have a container-ready host with a solid firewall and a routine to
 back up your data, the set-up may also serve as a production environment.
 
 The **subfolder** ``Config`` contains set-up information while ``App``,
-``Database``, ``Graph``, ``Search``, ``Table``, and ``Tablebase`` keep the
-runtime content of containers available (persistent) on the host as you start,
-stop, destroy, or re-create them. Please note that the environment ignores
-project-specific files such as an :file:`.env` file and a :file:`composer.json`:
-these should be stored in a separate location as files that you add to the
-content of this repo to set up your environment on a new host.
+``Database``, ``Files``, ``Graph``, ``Search``, ``Table``, and ``Tablebase``
+keep the runtime content of containers available (persistent) on the host as
+you start, stop, destroy, or re-create them. Please note that the environment
+ignores project-specific files such as an :file:`.env` file and a
+:file:`composer.json`: these should be stored in a separate location as files
+that you add to the content of this repo to set up your environment on a new
+host.
 
 If you want to set up a CHF-capable environment with a hoster that does not
 allow further containerisation but provides PHP-capable web space and a

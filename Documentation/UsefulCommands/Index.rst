@@ -100,8 +100,8 @@ actual commands. Adjust ``chf`` and ``password`` as required.
 
 - Require a new PHP Composer package; if it is in a non-standard repository
   like your own git instance, you first need to add the repo to your
-  ``project/composer.json``. The following command also works for custom
-  packages placed in the ``packages`` folder:
+  :file:`composer.json`. The following command also works for custom packages
+  placed in the ``packages`` folder:
 
   ..  code-block:: shell
 

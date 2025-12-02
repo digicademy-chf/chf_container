@@ -18,8 +18,6 @@
 CHF Container
 =============
 
-**This version is designed for use with TYPO3 13.**
-
 This is a container set-up for development and production environments of
 projects based on the Cultural Heritage Framework (CHF). It is designed to be
 usable across projects to either produce a fresh installation or to use a set

@@ -46,16 +46,15 @@ Updating a local installation
 
 **Export your database and back up the ``App`` folder** before you update your
 local installation to a new version, just to be safe. Then execute the
-following command in your container folder to update, but replace ``v1.0.0``
-with the release tag you want to update to:
+following command in your container folder to update:
 
 ..  code-block:: shell
 
     podman compose down && \
-    git checkout v1.0.0 && \
+    git pull && \
     podman compose up -d
 
 If you **installed the environment without Git**, you can replace the ``git``
-step with replacing the old folder by a new download. Remeber that the runtime
-content of your containers is persisted in the subfolders and needs to be added
-back to the newly created folder.
+step with replacing the old folder by a new download. Remeber, however, that
+the runtime content of your containers is persisted in the subfolders and needs
+to be added back to the newly created folder.

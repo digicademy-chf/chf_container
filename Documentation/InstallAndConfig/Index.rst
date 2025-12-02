@@ -32,32 +32,35 @@ Step by step
 
 1.  Clone repository
 
-    Clone this repo using the command below and, optionally, the actual release
-    tag you need instead of ``v1.0.0``.
+    Clone this repo using the command below.
 
     ..  code-block:: shell
 
-        git clone https://github.com/digicademy-chf/chf_container.git --branch v1.0.0 && \
+        git clone https://github.com/digicademy-chf/chf_container.git && \
         cd chf_container
 
-2.  Prepare custom content or fresh install
+2.  Set up a fresh install
 
-    If you want to set up a fresh install, execute the following command to use
-    template files for the environment file and :file:`composer.json`:
+    If you want to set up a fresh install, execute the following command to
+    produce an environment file and a :file:`composer.json` from templates:
 
     ..  code-block:: shell
 
         cp template.development.env .env && \
         cp App/composer.development.json App/composer.json
 
-    If you want to use custom, projects-specific files instead, copy them into
-    the :file:`chf_container` folder. See
-    :ref:`custom file overview <custom-file-overview>` for further details.
-
     For production environments, replace ``development`` with ``production`` in
     the two commands listed above.
 
-3.  Create and start containers
+3.  Optionally add custom content
+
+    If you want to apply custom, project-specific files, copy them into the
+    :file:`chf_container` folder now. See a
+    :ref:`custom file overview <custom-file-overview>` for a list of common
+    files. This includes SSL certificates stored at :file:`Config/httpd/ssl`
+    for use in production environments.
+
+4.  Create and start containers
 
     Run this command to create all containers specified in the Compose file:
 
@@ -65,7 +68,7 @@ Step by step
 
         podman compose up -d
 
-4.  Install PHP packages
+5.  Install PHP packages
 
     The last required step is to install the PHP packages via PHP Composer.
     The following commands set up a fresh environment:
@@ -75,16 +78,16 @@ Step by step
         podman exec -i chf_app composer install && \
         podman exec -i chf_app ./vendor/bin/typo3 setup --force
 
-    To set up an environment using existing data, retrieve the PHP packages
-    and import an existing database instead. Replace ``chf`` and ``password``
-    with the actual data of your customised set-up:
+    To set up an environment using existing data, only retrieve the PHP
+    packages and import an existing database as outlined below. Replace ``chf``
+    and ``password`` with the actual data of your customised set-up:
 
     ..  code-block::
 
         podman exec -i chf_app composer update && \
         podman exec -i chf_database mariadb -uroot -ppassword chf_t3 < database.sql
 
-5.  Optionally set an alias for ``localhost``
+6.  Optionally set an alias for ``localhost``
 
     For a development environment, you may want to set up an alias as a local
     domain in the host operating system to help access the web app. On Linux
@@ -123,9 +126,8 @@ following content:
 * * * * * www-data podman exec -i chf_app /var/www/html/vendor/bin/typo3 scheduler:run
 
 You may need to replace ``www-data`` with the user running the container,
-``podman`` with ``docker``, and ``chf_app`` with the actual name of your
-project's PHP container. In Kubernetes environments, the command may be adapted
-for use with ``CronJob``.
+``podman`` with ``docker``, and ``chf`` with the actual name of your project.
+In Kubernetes environments, the command may be adapted for use with ``CronJob``.
 
 ..  _add-oxigraph:
 
@@ -134,10 +136,10 @@ Add a SPARQL endpoint
 
 You can create an Oxigraph container along with the regular containers by
 adding the ``graph`` profile name to the ``COMPOSE_PROFILES`` variable of your
-``.env`` file and restart the container setup.
+:file:`.env` file and restart the container setup.
 
 Oxigraph becomes available on port ``8878`` or any other port you specify in
-``.env``.
+:file:`.env`.
 
 ..  _add-nocodb:
 
@@ -146,7 +148,7 @@ Add a tablar database
 
 You can create a NoCoDB container along with the regular containers by adding
 the ``table`` profile name to the ``COMPOSE_PROFILES`` variable of your
-``.env`` file and restart the container setup.
+:file:`.env` file and restart the container setup.
 
 To install an exisiting NoCoDB database from a file, run:
 
@@ -155,7 +157,22 @@ To install an exisiting NoCoDB database from a file, run:
     podman exec -i chf_tablebase mariadb -uroot -ppassword chf_nc < tablebase.sql
 
 NoCoDB becomes available on port ``8090`` or any other port you specify in
-``.env``.
+:file:`.env`.
+
+..  _add-webdav:
+
+Add a WebDAV file storage
+=========================
+
+You can create a WebDAV file storage container along with the regular
+containers by adding the ``files`` profile name to the ``COMPOSE_PROFILES``
+variable of your :file:`.env` file and restart the container setup.
+
+User names and hashed passwords need to be provided in a custom file at
+:file:`Config/httpd-dav/auth/.htpasswd`, SSL certificates go into
+:file:`Config/httpd-dav/ssl`. The WebDAV endpoint becomes available on port
+``8463`` for production environments with SSL, ``8100`` for development
+environments, or any other port you specify in :file:`.env`.
 
 ..  _add-phpmyadmin:
 
@@ -165,8 +182,8 @@ Add a database inspection tool
 On a development system (not in production), you may want to be able to inspect
 the TYPO3 database. You can create a phpMyAdmin container along with the
 regular containers by adding the ``inspect`` profile name to the
-``COMPOSE_PROFILES`` variable of your ``.env`` file and restart the container
-setup.
+``COMPOSE_PROFILES`` variable of your :file:`.env` file and restart the
+container setup.
 
 When the installation is done, phpMyAdmin is available on port ``8081`` or any
-other port you specify in ``.env``.
+other port you specify in :file:`.env`.
