@@ -35,13 +35,11 @@ RUN sed -i \
     -e '/#LoadModule dav_lock_module/s/^#//g' \
     /usr/local/apache2/conf/httpd.conf
 
-# Create WebDAV folder and file lock database
-RUN mkdir /usr/local/apache2/htdocs/files && \
-    chown -R www-data:www-data /usr/local/apache2/htdocs/files && \
-    chmod -R 755 /usr/local/apache2/htdocs/files && \
-    touch /usr/local/apache2/htdocs/DavLockDB && \
-    chown -R www-data:www-data /usr/local/apache2/htdocs/DavLockDB && \
-    chmod -R 755 /usr/local/apache2/htdocs/DavLockDB
+# Create WebDAV folder
+RUN mkdir /usr/local/apache2/uploads && \
+    chown -R www-data:www-data /usr/local/apache2/uploads && \
+    mkdir /usr/local/apache2/var && \
+    chown -R www-data:www-data /usr/local/apache2/var
 
 # Include custom virtual host configuration file in main Apache config
 RUN echo "Include /usr/local/apache2/conf/extra/httpd-dav.vhost.conf" >> /usr/local/apache2/conf/httpd.conf

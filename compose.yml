@@ -242,8 +242,8 @@ services:
     volumes:
       - ./Config/httpd-dav/httpd-dav.vhost.conf:/usr/local/apache2/conf/extra/httpd-dav.vhost.conf:ro,Z
       - ./Config/httpd-dav/ssl:/usr/local/apache2/ssl:ro,Z
-      - ./Config/httpd-dav/auth/.htpasswd:/usr/local/apache2/htdocs/.htpasswd:ro,Z
-      - ./Files:/usr/local/apache2/htdocs/files:rw,z
+      - ./Config/httpd-dav/auth/.htpasswd:/usr/local/apache2/.htpasswd:ro,Z
+      - ./Files:/usr/local/apache2/uploads:rw,z
     profiles:
       - files
     networks:
