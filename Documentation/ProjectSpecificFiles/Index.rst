@@ -6,12 +6,12 @@
 Project-specific files
 ======================
 
-This container set-up may be **adapted to custom projects** via a set of
-additional files that should be stored and regularly updated in an independent
-location. You can re-create your custom container environment by dropping them
-into a local clone of this repo and creating the containers. Please make sure
-that you do not store files containing secret credentials or user data in
-public or semi-public repositories.
+This container can be **adapted to custom projects** via a set of additional
+files that should be stored and regularly updated in an independent location.
+You then re-create your customised container environment by dropping them
+into a local clone of this repo and starting the containers. Please make sure
+that you do not store files with secret credentials or user data in public or
+semi-public repositories.
 
 ..  _database-file:
 
@@ -79,5 +79,5 @@ to produce the two files :file:`cert.crt` and :file:`cert.key` via
 The files validate secure connections to your public website and need to be
 renewed periodically.
 
-If you use the ``files`` profile, you need to two additional credential files
-for the WebDAV endpoint.
+If you use the ``files`` profile, you also need credential files for the WebDAV
+endpoint.

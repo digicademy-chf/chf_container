@@ -12,8 +12,8 @@ Useful commands
     ``docker``. In some configurations you may need to hyphenate
     ``podman-compose`` or ``docker-compose``.
 
-All Podman (or Docker) commands listed here work when accessing them from the
-container folder.
+All Podman (or Docker) commands listed here work only from within the container
+folder.
 
 ..  _container-lifecycle:
 
@@ -21,11 +21,11 @@ Container lifecycle
 ===================
 
 Containers are used to provide certain functionality that is relatively
-isolated from the host system. As such, they may be created or destroyed and
+isolated from the host system. As such, they may be created or destroyed, and
 existing containers may be started or stopped. The set-up provided here
-persists all relevant data (configuration, server files, database, and search
-index) in subfolders on the host system to make sure that the entire container
-pod (or network) can be **safely destroyed and re-created**.
+persists all relevant data (configuration, server files, database, search
+index, etc.) in subfolders on the host system to make sure that the entire
+container network can be **safely destroyed and re-created**.
 
 - Create and start containers:
 
@@ -56,12 +56,11 @@ pod (or network) can be **safely destroyed and re-created**.
 Accessing containers
 ====================
 
-While **files can be edited on the host system** if you follow the
-:ref:`installation instructions <install-and-config>`, certain tasks may
-require you to enter a specific container and perform a command-line action.
-You can either access the command line inside the container and enter your
-commands there, or use Podman (or Docker) to pass the command on to the
-container for execution. Adjust ``chf`` as required.
+While **files can be edited on the host system**, certain tasks may require
+you to enter a specific container and perform a command-line action. You can
+either access the command line inside the container and enter your commands
+there, or use Podman (or Docker) to pass the command on to the container for
+execution. Adjust ``chf`` as required.
 
 - Access the command line to run any command you need:
 
@@ -118,6 +117,12 @@ actual commands. Adjust ``chf`` and ``password`` as required.
   ..  code-block:: shell
 
       podman exec -i chf_app ./vendor/bin/typo3 referenceindex:update
+
+- Clear the TYPO3 cache:
+
+  ..  code-block:: shell
+
+      podman exec -i chf_app ./vendor/bin/typo3 cache:flush
 
 - Restart the Apache server:
 

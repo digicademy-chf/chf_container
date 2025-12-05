@@ -6,10 +6,11 @@
 Usage
 =====
 
-On a production system, the frontend is available from your browser at the URL
+On a production system, the frontend is available in your browser at the URL
 provided by the host. In a development environment, enter ``127.0.0.1:8080``,
-``localhost:8080``, or any other **host alias** such as ``chf.internal:8080``
-to see the frontend. Add ``/typo3`` to the URL to access the TYPO3 backend.
+``localhost:8080``, or any other **host alias and port** such as
+``chf.internal:8080`` to see the frontend. Add ``/typo3`` to the URL to access
+the TYPO3 backend.
 
 The optional components become available via these URLs:
 
@@ -60,4 +61,4 @@ Enter the container folder and execute the following command:
     podman compose up -d
 
 Leaving out the prune command means that your container management software may
-use a previously downloaded container as is instead of updating it.
+use a previously downloaded container instead of updating it.

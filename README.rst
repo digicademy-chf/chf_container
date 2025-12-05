@@ -20,8 +20,8 @@ CHF Container
 
 This is a container set-up for development and production environments of
 projects based on the Cultural Heritage Framework (CHF). It is designed to be
-usable across projects to either produce a fresh installation or to use a set
-of project-specific files, which should be stored separately. The set-up
+usable across projects to either produce a fresh installation or to be enhanced
+by a set of project-specific files that are stored separately. The set-up
 revolves around a file in accordance with the
 `Compose specification <https://compose-spec.io/>`__ for container-based
 applications that should allow you to set up your environment(s) on Linux,
@@ -30,10 +30,9 @@ Compose file orchestrates a network consisting of an Apache webserver, a PHP-
 and Composer-capable Debian image that runs TYPO3, a MariaDB database, a
 Meilisearch search engine, and a Postfix container for email jobs. The optional
 ``graph`` profile adds an Oxigraph SPARQL endpoint. The ``table`` profile adds
-a NoCoDB tabular database with a dedicated data container. And the ``inspect``
-profile adds a phpMyAdmin to inspect the TYPO3 database. The documentation
-provides install instructions as well as a few pointers towards how to use the
-container-based environment.
+a NoCoDB tabular database with a dedicated data container. The ``files``
+profile adds a WebDAV-capable storage. And the ``inspect`` profile adds a
+phpMyAdmin to inspect the TYPO3 database in a local environment.
 
 :Repository:  https://github.com/digicademy-chf/chf_container
 :Read online: https://digicademy-chf.github.io/chf_container

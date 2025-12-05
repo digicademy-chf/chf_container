@@ -13,7 +13,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         locales-all \
         ssh-client \
         vim \
-        wget
+        wget\
+        git
 
 # Enable required Apache modules by uncommenting them
 RUN sed -i \
