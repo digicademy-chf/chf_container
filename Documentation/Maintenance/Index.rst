@@ -58,5 +58,5 @@ Creating a new release
 ======================
 
 1. Commit all changes to the repo's main branch.
-2. Add the new version number and release date to ``CITATION.cff``.
+2. Add the new version number and release date to :file:`guides.xml` and :file:`CITATION.cff`.
 3. Create a new release with the new version number, e.g. `v1.0.0`.
