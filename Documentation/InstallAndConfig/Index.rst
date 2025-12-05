@@ -50,8 +50,8 @@ Step by step
         cp template.development.env .env && \
         cp App/composer.development.json App/composer.json
 
-    If you want to apply existing project-specific files, copy them into the
-    :file:`chf_container` folder now. See the
+    Alternatively, if you want to apply existing project-specific files, copy
+    them into the :file:`chf_container` folder now. See the
     :ref:`custom file overview <custom-file-overview>` for a list of common
     files.
 
@@ -103,9 +103,9 @@ depending on whether and how you executed the last step.
 
 In a fresh install, you may first want to log in to TYPO3 as admin, navigate to
 :guilabel:`Settings`, :guilabel:`Configure Installation-Wide Options`, and
-:guilabel:`[SYS][systemLocale]`. Here you may set the locale for system-wide
-actions such as setting file names by entering the name of a Linux locale to
-use, such as ``en_US.UTF-8`` or ``de_DE.UTF-8``.
+:guilabel:`[SYS][systemLocale]`. Here you may set the **locale** for
+system-wide actions such as setting file names by entering the name of a Linux
+locale to use, such as ``en_US.UTF-8`` or ``de_DE.UTF-8``.
 
 ..  _add-cron:
 

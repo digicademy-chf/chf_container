@@ -22,10 +22,8 @@ version is to check that all images listed in :file:`compose.yml` and the
 as per the official system requirements**.
 
 In the next step, update the version numbers in all :file:`composer.json`
-variants according to the required TYPO3 version.
-
-When you produce an update, also remember to indicate the new TYPO3 version in
-the file :file:`README.rst`.
+variants according to the required TYPO3 version. When you produce an update,
+also remember to indicate the new TYPO3 version in the file :file:`README.rst`.
 
 ..  _updating-a-local-installation:
 
@@ -38,7 +36,7 @@ Updating a local installation
     ``docker``. In some configurations you may need to hyphenate
     ``podman-compose`` or ``docker-compose``.
 
-**Export your database and back up at least the ``App`` folder** before you
+**Export your database** and back up at least the ``App`` folder before you
 update your local installation to a new version, just to be safe. Then execute
 the following command in your container folder to update:
 

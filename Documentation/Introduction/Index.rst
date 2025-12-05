@@ -32,7 +32,7 @@ manages its ports, features more robust firewall settings, and performs regular
 backups of, at least, the ``App`` folder and the database.
 
 If you want to set up a CHF-capable environment with a hoster that does not
-allow further containerisation but provides PHP-capable web space and a
+allow further containerisation but provides **PHP-capable web space** and a
 database, the most relevant file you need is :file:`composer.json`. Check the
 `TYPO3 system requirements <https://get.typo3.org/version/13#system-requirements>`__
 to see if your hoster ticks all required boxes.
