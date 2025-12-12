@@ -1,0 +1,1 @@
+**Moved to https://gitlab.rlp.net/adwmainz/digicademy/chf/chf_container, please switch to the new URL**
